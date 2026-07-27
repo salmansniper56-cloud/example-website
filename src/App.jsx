@@ -7,6 +7,8 @@ import Footer from './components/Footer';
 import CartDrawer from './components/CartDrawer';
 import ReservationModal from './components/ReservationModal';
 import AIChatbot from './components/AIChatbot';
+import SpinWheelModal from './components/SpinWheelModal';
+import LiveOrdersToast from './components/LiveOrdersToast';
 import HomePage from './pages/HomePage';
 import MenuPage from './pages/MenuPage';
 import ComboBuilderPage from './pages/ComboBuilderPage';
@@ -28,6 +30,7 @@ export default function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isReserveOpen, setIsReserveOpen] = useState(false);
   const [isAIChatOpen, setIsAIChatOpen] = useState(false);
+  const [isSpinWheelOpen, setIsSpinWheelOpen] = useState(false);
   const [aiQuery, setAiQuery] = useState('');
 
   const handleAddToCart = (dish) => {
@@ -62,6 +65,18 @@ export default function App() {
     setIsAIChatOpen(true);
   };
 
+  const handleClaimSpinPrize = (prize) => {
+    const couponItem = {
+      id: 'prize-' + Date.now(),
+      name: `Coupon Reward: ${prize.text}`,
+      price: 0.00,
+      image: "https://images.pexels.com/photos/1639557/pexels-photo-1639557.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      description: `Claimed via Spin Wheel using code ${prize.code}`
+    };
+    handleAddToCart(couponItem);
+    setIsCartOpen(true);
+  };
+
   const totalCartCount = cart.reduce((total, item) => total + item.quantity, 0);
 
   return (
@@ -71,7 +86,10 @@ export default function App() {
         {/* Custom Follow Cursor */}
         <CustomCursor />
 
-        {/* Door Entrance Loading Screen */}
+        {/* Live Social Proof Order Popups */}
+        <LiveOrdersToast />
+
+        {/* Entrance Door Screen */}
         {isLoading && (
           <DoorLoadingScreen onLoadingComplete={() => setIsLoading(false)} />
         )}
@@ -84,9 +102,10 @@ export default function App() {
               onOpenCart={() => setIsCartOpen(true)}
               onOpenReserve={() => setIsReserveOpen(true)}
               onToggleAIChat={() => setIsAIChatOpen(!isAIChatOpen)}
+              onOpenSpinWheel={() => setIsSpinWheelOpen(true)}
             />
 
-            {/* Routes */}
+            {/* Main Routes */}
             <Routes>
               <Route
                 path="/"
@@ -125,7 +144,7 @@ export default function App() {
             {/* Global Footer */}
             <Footer />
 
-            {/* Slide-over Order Cart */}
+            {/* Slide-over Cart */}
             <CartDrawer
               isOpen={isCartOpen}
               onClose={() => setIsCartOpen(false)}
@@ -139,6 +158,13 @@ export default function App() {
             <ReservationModal
               isOpen={isReserveOpen}
               onClose={() => setIsReserveOpen(false)}
+            />
+
+            {/* Spin Wheel Coupon Modal */}
+            <SpinWheelModal
+              isOpen={isSpinWheelOpen}
+              onClose={() => setIsSpinWheelOpen(false)}
+              onClaimPrize={handleClaimSpinPrize}
             />
 
             {/* Crunchy AI Crave Assistant */}
@@ -178,7 +204,7 @@ export default function App() {
                 }}
               >
                 <Flame size={18} fill="#ffffff" />
-                <span>AI Crave Assistant</span>
+                <span>AI Assistant</span>
               </button>
             )}
           </>
