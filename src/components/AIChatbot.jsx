@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Sparkles, Send, X, Bot, User, Wine, Brain } from 'lucide-react';
+import { Sparkles, Send, X, Wine, Brain } from 'lucide-react';
 import { sendChatMessage, cleanMarkdownFormatting } from '../services/aiService';
 
 export default function AIChatbot({ isOpen, onClose, initialQuery, onOpenReserve }) {
@@ -71,27 +71,27 @@ export default function AIChatbot({ isOpen, onClose, initialQuery, onOpenReserve
   if (!isOpen) return null;
 
   return (
-    <div style={{
+    <div className="mobile-ai-chat" style={{
       position: 'fixed',
       bottom: '24px',
       right: '24px',
       zIndex: 1000,
-      width: 'calc(100vw - 48px)',
+      width: 'calc(100vw - 32px)',
       maxWidth: '440px',
       height: '620px',
-      maxHeight: 'calc(100vh - 100px)',
+      maxHeight: 'calc(100vh - 80px)',
       background: 'var(--bg-secondary)',
       border: '1px solid var(--gold-primary)',
       borderRadius: 'var(--radius-lg)',
-      boxShadow: '0 20px 60px rgba(0,0,0,0.9)',
+      boxShadow: '0 20px 60px rgba(0,0,0,0.95)',
       display: 'flex',
       flexDirection: 'column',
       overflow: 'hidden'
     }}>
       {/* Header */}
       <div style={{
-        padding: '16px 20px',
-        background: 'linear-gradient(135deg, rgba(139, 21, 56, 0.4), rgba(11, 13, 16, 0.95))',
+        padding: '14px 18px',
+        background: 'linear-gradient(135deg, rgba(139, 21, 56, 0.45), rgba(11, 13, 16, 0.95))',
         borderBottom: '1px solid var(--border-gold)',
         display: 'flex',
         alignItems: 'center',
@@ -99,8 +99,8 @@ export default function AIChatbot({ isOpen, onClose, initialQuery, onOpenReserve
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <div style={{
-            width: '36px',
-            height: '36px',
+            width: '34px',
+            height: '34px',
             borderRadius: '50%',
             background: 'rgba(212, 175, 55, 0.2)',
             border: '1px solid var(--gold-primary)',
@@ -108,13 +108,13 @@ export default function AIChatbot({ isOpen, onClose, initialQuery, onOpenReserve
             alignItems: 'center',
             justifyContent: 'center'
           }}>
-            <Sparkles size={18} color="var(--gold-primary)" />
+            <Sparkles size={16} color="var(--gold-primary)" />
           </div>
           <div>
-            <h4 className="font-serif text-gold-gradient" style={{ fontSize: '1.05rem', fontWeight: '700', margin: 0 }}>
+            <h4 className="font-serif text-gold-gradient" style={{ fontSize: '1rem', fontWeight: '700', margin: 0 }}>
               Étoile Sommelier & Concierge
             </h4>
-            <span style={{ fontSize: '0.68rem', color: 'var(--text-gold)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <span style={{ fontSize: '0.65rem', color: 'var(--text-gold)', display: 'flex', alignItems: 'center', gap: '4px' }}>
               <Wine size={10} /> Michelin Gastronomy Concierge
             </span>
           </div>
@@ -122,21 +122,23 @@ export default function AIChatbot({ isOpen, onClose, initialQuery, onOpenReserve
 
         <button
           onClick={onClose}
-          style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer' }}
+          aria-label="Close Chat"
+          style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', padding: '4px' }}
         >
-          <X size={20} />
+          <X size={22} />
         </button>
       </div>
 
-      {/* Messages List */}
+      {/* Messages Feed */}
       <div style={{
         flex: '1',
         overflowY: 'auto',
         padding: '16px',
         display: 'flex',
         flexDirection: 'column',
-        gap: '14px',
-        background: 'rgba(11, 13, 16, 0.6)'
+        gap: '12px',
+        background: 'rgba(11, 13, 16, 0.75)',
+        WebkitOverflowScrolling: 'touch'
       }}>
         {messages.map((msg, index) => (
           <div
@@ -147,17 +149,16 @@ export default function AIChatbot({ isOpen, onClose, initialQuery, onOpenReserve
               alignItems: msg.role === 'user' ? 'flex-end' : 'flex-start'
             }}
           >
-            {/* Reasoning block */}
             {msg.reasoning && (
               <details style={{
                 marginBottom: '6px',
-                fontSize: '0.72rem',
+                fontSize: '0.7rem',
                 color: 'var(--text-muted)',
                 background: 'rgba(212, 175, 55, 0.08)',
                 border: '1px dashed var(--border-gold)',
                 borderRadius: '8px',
                 padding: '6px 10px',
-                maxWidth: '90%'
+                maxWidth: '92%'
               }}>
                 <summary style={{ cursor: 'pointer', color: 'var(--gold-light)', fontWeight: '600' }}>
                   🧠 Sommelier Analysis
@@ -167,10 +168,10 @@ export default function AIChatbot({ isOpen, onClose, initialQuery, onOpenReserve
             )}
 
             <div style={{
-              maxWidth: '85%',
+              maxWidth: '88%',
               padding: '12px 16px',
               borderRadius: msg.role === 'user' ? '18px 18px 2px 18px' : '18px 18px 18px 2px',
-              background: msg.role === 'user' ? 'linear-gradient(135deg, #d4af37, #aa8624)' : 'rgba(22, 27, 38, 0.9)',
+              background: msg.role === 'user' ? 'linear-gradient(135deg, #d4af37, #aa8624)' : 'rgba(22, 27, 38, 0.92)',
               color: msg.role === 'user' ? '#000' : '#fff',
               fontWeight: msg.role === 'user' ? '600' : '400',
               border: msg.role === 'assistant' ? '1px solid var(--border-subtle)' : 'none',
@@ -183,12 +184,12 @@ export default function AIChatbot({ isOpen, onClose, initialQuery, onOpenReserve
           </div>
         ))}
 
-        {/* Live Streaming Response Indicator */}
+        {/* Live Streaming Indicator */}
         {isGenerating && (
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
             {currentReasoning && (
               <div style={{
-                fontSize: '0.72rem',
+                fontSize: '0.7rem',
                 color: 'var(--gold-primary)',
                 background: 'rgba(212, 175, 55, 0.1)',
                 border: '1px solid var(--border-gold)',
@@ -207,10 +208,10 @@ export default function AIChatbot({ isOpen, onClose, initialQuery, onOpenReserve
 
             {currentStreamContent ? (
               <div style={{
-                maxWidth: '85%',
+                maxWidth: '88%',
                 padding: '12px 16px',
                 borderRadius: '18px 18px 18px 2px',
-                background: 'rgba(22, 27, 38, 0.9)',
+                background: 'rgba(22, 27, 38, 0.92)',
                 color: '#fff',
                 border: '1px solid var(--border-subtle)',
                 fontSize: '0.88rem',
@@ -240,7 +241,7 @@ export default function AIChatbot({ isOpen, onClose, initialQuery, onOpenReserve
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Quick Prompts Carousel */}
+      {/* Touch Swipable Quick Prompts */}
       <div style={{
         padding: '8px 12px',
         background: 'rgba(11, 13, 16, 0.95)',
@@ -248,6 +249,7 @@ export default function AIChatbot({ isOpen, onClose, initialQuery, onOpenReserve
         display: 'flex',
         gap: '6px',
         overflowX: 'auto',
+        WebkitOverflowScrolling: 'touch',
         scrollbarWidth: 'none'
       }}>
         {quickPrompts.map((prompt, idx) => (
@@ -260,8 +262,8 @@ export default function AIChatbot({ isOpen, onClose, initialQuery, onOpenReserve
               border: '1px solid var(--border-gold)',
               color: 'var(--text-gold)',
               fontSize: '0.73rem',
-              padding: '4px 10px',
-              borderRadius: '14px',
+              padding: '6px 12px',
+              borderRadius: '16px',
               cursor: 'pointer'
             }}
           >
@@ -272,26 +274,26 @@ export default function AIChatbot({ isOpen, onClose, initialQuery, onOpenReserve
 
       {/* Input Row */}
       <div style={{
-        padding: '12px 16px',
+        padding: '12px 14px',
         background: 'var(--bg-secondary)',
         borderTop: '1px solid var(--border-subtle)',
         display: 'flex',
-        gap: '10px'
+        gap: '8px'
       }}>
         <input
           type="text"
-          placeholder="Ask about wine, dishes, or table bookings..."
+          placeholder="Ask about wine, dishes, or bookings..."
           value={inputQuery}
           onChange={(e) => setInputQuery(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
           style={{
             flex: '1',
-            background: 'rgba(11, 13, 16, 0.8)',
+            background: 'rgba(11, 13, 16, 0.88)',
             border: '1px solid var(--border-gold)',
             borderRadius: '24px',
-            padding: '10px 16px',
+            padding: '10px 14px',
             color: '#fff',
-            fontSize: '0.88rem',
+            fontSize: '0.9rem',
             outline: 'none'
           }}
         />
@@ -309,7 +311,7 @@ export default function AIChatbot({ isOpen, onClose, initialQuery, onOpenReserve
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            opacity: !inputQuery.trim() ? 0.6 : 1
+            flexShrink: 0
           }}
         >
           <Send size={16} />
