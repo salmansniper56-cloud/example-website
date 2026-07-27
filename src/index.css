@@ -1,0 +1,360 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg-primary: #0b0d10;
+  --bg-secondary: #12161f;
+  --bg-card: rgba(22, 27, 38, 0.75);
+  --bg-glass: rgba(18, 22, 31, 0.65);
+  --gold-primary: #d4af37;
+  --gold-light: #f5d77f;
+  --gold-dark: #aa8624;
+  --gold-glow: rgba(212, 175, 55, 0.35);
+  --crimson-accent: #8b1538;
+  --text-main: #f8f9fa;
+  --text-muted: #94a3b8;
+  --text-gold: #e2c069;
+  --border-gold: rgba(212, 175, 55, 0.25);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-gold);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-primary);
+}
+
+/* Hide default cursor when custom cursor active */
+@media (min-width: 1024px) {
+  body.custom-cursor-active,
+  body.custom-cursor-active a,
+  body.custom-cursor-active button,
+  body.custom-cursor-active input,
+  body.custom-cursor-active textarea,
+  body.custom-cursor-active [role="button"] {
+    cursor: none !important;
+  }
+}
+
+.font-serif {
+  font-family: var(--font-heading);
+}
+
+.text-gold-gradient {
+  background: linear-gradient(135deg, #fff 0%, #f3d483 50%, #d4af37 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Custom Cursor */
+.custom-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border: 1.5px solid var(--gold-primary);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease-out, width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
+  box-shadow: 0 0 15px var(--gold-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background-color: var(--gold-primary);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 100000;
+  transform: translate(-50%, -50%);
+  transition: transform 0.05s ease-out;
+}
+
+.custom-cursor-ring.hovered {
+  width: 70px;
+  height: 70px;
+  background-color: rgba(212, 175, 55, 0.15);
+  border-color: #fff;
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
+}
+
+.cursor-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #fff;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Door Loading Screen */
+.door-container {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  perspective: 1400px;
+  background: #000;
+  overflow: hidden;
+}
+
+.door-panel {
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(135deg, #181412 0%, #0d0b0a 100%);
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.06) 0%, transparent 60%),
+    repeating-linear-gradient(90deg, transparent, transparent 45px, rgba(0, 0, 0, 0.35) 45px, rgba(0, 0, 0, 0.35) 46px);
+  position: relative;
+  transition: transform 1.6s cubic-bezier(0.77, 0, 0.175, 1);
+  box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.95);
+  display: flex;
+  align-items: center;
+}
+
+/* Left Door - Clean edge without distracting seam line */
+.door-left {
+  transform-origin: left center;
+  border-right: none;
+}
+
+/* Right Door - Clean edge without distracting seam line */
+.door-right {
+  transform-origin: right center;
+  border-left: none;
+}
+
+.door-container.open .door-left {
+  transform: rotateY(-110deg);
+}
+
+.door-container.open .door-right {
+  transform: rotateY(110deg);
+}
+
+.door-handle-left,
+.door-handle-right {
+  position: absolute;
+  top: 50%;
+  width: 26px;
+  height: 95px;
+  background: linear-gradient(180deg, #f5d77f 0%, #d4af37 50%, #aa8624 100%);
+  border-radius: 14px;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.6), inset 0 0 6px rgba(255, 255, 255, 0.7);
+  z-index: 5;
+}
+
+.door-handle-left {
+  right: 25px;
+  transform: translateY(-50%);
+}
+
+.door-handle-right {
+  left: 25px;
+  transform: translateY(-50%);
+}
+
+/* Waiter Hands overlay on doors */
+.waiter-hand-left {
+  position: absolute;
+  top: 48%;
+  right: 15px;
+  transform: translateY(-50%);
+  z-index: 10;
+  transition: transform 1.6s ease;
+}
+
+.waiter-hand-right {
+  position: absolute;
+  top: 48%;
+  left: 15px;
+  transform: translateY(-50%) scaleX(-1);
+  z-index: 10;
+  transition: transform 1.6s ease;
+}
+
+.door-container.open .waiter-hand-left {
+  transform: translateY(-50%) translateX(-120px) rotate(-15deg);
+  opacity: 0;
+}
+
+.door-container.open .waiter-hand-right {
+  transform: translateY(-50%) scaleX(-1) translateX(-120px) rotate(-15deg);
+  opacity: 0;
+}
+
+/* Center Text Seal Area with generous spacing so doors don't overlap text */
+.door-center-seal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  text-align: center;
+  padding: 40px 60px;
+  background: rgba(11, 13, 16, 0.88);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.9), 0 0 30px var(--gold-glow);
+  backdrop-filter: blur(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  max-width: 480px;
+  width: 90%;
+}
+
+.door-container.open .door-center-seal {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(1.25);
+}
+
+.door-crest {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 2px solid var(--gold-primary);
+  background: rgba(11, 13, 16, 0.95);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  box-shadow: 0 0 30px var(--gold-glow);
+  animation: pulseGold 2s infinite ease-in-out;
+}
+
+/* Glassmorphism Card Utility */
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  transition: var(--transition-smooth);
+}
+
+.glass-card:hover {
+  border-color: rgba(212, 175, 55, 0.5);
+  box-shadow: 0 15px 40px rgba(212, 175, 55, 0.15);
+  transform: translateY(-4px);
+}
+
+.glass-nav {
+  background: rgba(11, 13, 16, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-gold);
+}
+
+/* Buttons */
+.btn-gold {
+  background: linear-gradient(135deg, #f5d77f 0%, #d4af37 50%, #b89128 100%);
+  color: #0b0d10;
+  font-weight: 700;
+  padding: 12px 28px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: var(--transition-smooth);
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.btn-gold:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(212, 175, 55, 0.5);
+  background: linear-gradient(135deg, #fff 0%, #f5d77f 50%, #d4af37 100%);
+}
+
+.btn-outline-gold {
+  background: transparent;
+  color: var(--gold-primary);
+  border: 1.5px solid var(--gold-primary);
+  font-weight: 600;
+  padding: 12px 28px;
+  border-radius: 50px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: var(--transition-smooth);
+  text-decoration: none;
+}
+
+.btn-outline-gold:hover {
+  background: rgba(212, 175, 55, 0.12);
+  color: #fff;
+  border-color: #fff;
+}
+
+/* Page transitions */
+.page-fade-enter {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: pageFadeIn 0.4s ease forwards;
+}
+
+@keyframes pageFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseGold {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(212, 175, 55, 0.7);
+  }
+}
