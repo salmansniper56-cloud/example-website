@@ -39,8 +39,8 @@ export const MENU_ITEMS = [
     calories: "780 kcal",
     description: "Two 100% Angus beef smashed patties, triple melted American cheddar, caramelized onions, crispy bacon strips, and house secret Crave Sauce on toasted brioche.",
     dietary: ["Bestseller", "Double Beef"],
-    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-cheeseburger-with-french-fries-41562-large.mp4",
-    image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80",
+    videoUrl: "https://videos.pexels.com/video-files/8879803/8879803-sd_640_338_25fps.mp4",
+    image: "https://images.pexels.com/photos/1639557/pexels-photo-1639557.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
     ingredients: ["Angus Smash Beef", "Triple Cheddar", "Smoked Bacon", "Caramelized Onions", "Brioche Bun", "Secret Crave Sauce"]
   },
   {
@@ -54,8 +54,8 @@ export const MENU_ITEMS = [
     calories: "690 kcal",
     description: "Jumbo crispy chicken breast dipped in Nashville hot oil, topped with cool creamy coleslaw, tangy dill pickles, and honey habanero mayo.",
     dietary: ["Spicy Crave", "Crispy Chicken"],
-    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-hands-holding-a-hamburger-42908-large.mp4",
-    image: "https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?auto=format&fit=crop&w=800&q=80",
+    videoUrl: "https://videos.pexels.com/video-files/19537505/19537505-sd_960_540_24fps.mp4",
+    image: "https://images.pexels.com/photos/33254639/pexels-photo-33254639.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
     ingredients: ["11-Spice Crispy Chicken Breast", "Nashville Hot Glaze", "Creamy Coleslaw", "Dill Pickles", "Honey Habanero Mayo"]
   },
   {
@@ -69,8 +69,8 @@ export const MENU_ITEMS = [
     calories: "1450 kcal",
     description: "12 pieces of ultra-crispy, golden fried chicken marinated in 11 secret herbs & spices. Served with 2 large sides of garlic dip & honey mustard.",
     dietary: ["Family Bucket", "Super Crunch"],
-    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-fried-chicken-wings-in-a-plate-41564-large.mp4",
-    image: "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?auto=format&fit=crop&w=800&q=80",
+    videoUrl: "https://videos.pexels.com/video-files/20416794/20416794-hd_720_1280_24fps.mp4",
+    image: "https://images.pexels.com/photos/33037756/pexels-photo-33037756.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
     ingredients: ["Fresh Chicken Drumsticks & Thighs", "11 Secret Spice Breading", "Garlic Crave Dip", "Honey Mustard"]
   },
   {
@@ -84,8 +84,8 @@ export const MENU_ITEMS = [
     calories: "1100 kcal",
     description: "Fresh dough hand-tossed with mozzarella stuffed crust, rich San Marzano tomato sauce, double smoked pepperoni slices, Italian herbs, and garlic butter drizzle.",
     dietary: ["Stuffed Crust", "Chef Recommendation"],
-    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-pulling-a-slice-of-pizza-with-cheese-41563-large.mp4",
-    image: "https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?auto=format&fit=crop&w=800&q=80",
+    videoUrl: "https://videos.pexels.com/video-files/4929488/4929488-hd_1280_720_30fps.mp4",
+    image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
     ingredients: ["Mozzarella Stuffed Crust", "Double Pepperoni", "San Marzano Tomato Sauce", "Oregano & Garlic Butter"]
   },
   {
@@ -99,8 +99,8 @@ export const MENU_ITEMS = [
     calories: "980 kcal",
     description: "Creamy white garlic base, fresh mozzarella, gorgonzola, parmesan, roasted wild porcini mushrooms, finished with black truffle oil drizzle.",
     dietary: ["Vegetarian", "Gourmet Pizza"],
-    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-slice-of-pizza-with-melted-cheese-42907-large.mp4",
-    image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80",
+    videoUrl: "https://videos.pexels.com/video-files/30627970/13111089_1440_2560_25fps.mp4",
+    image: "https://images.pexels.com/photos/1566837/pexels-photo-1566837.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
     ingredients: ["Mozzarella", "Gorgonzola", "Parmesan", "Porcini Mushrooms", "Black Truffle Oil"]
   },
   {
@@ -114,8 +114,8 @@ export const MENU_ITEMS = [
     calories: "520 kcal",
     description: "Crispy skin-on french fries smothered in warm liquid cheddar cheese, caramelized grilled onions, smoky bacon bits, and signature Crave drizzle.",
     dietary: ["Loaded Sides"],
-    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-french-fries-in-a-basket-41561-large.mp4",
-    image: "https://images.unsplash.com/photo-1576107232684-1279f3908594?auto=format&fit=crop&w=800&q=80",
+    videoUrl: "https://videos.pexels.com/video-files/7653233/7653233-uhd_4096_2160_25fps.mp4",
+    image: "https://images.pexels.com/photos/5779487/pexels-photo-5779487.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
     ingredients: ["Golden Seasoned Fries", "Warm Cheddar Sauce", "Smoky Bacon Bits", "Caramelized Onions"]
   },
   {
@@ -129,8 +129,8 @@ export const MENU_ITEMS = [
     calories: "610 kcal",
     description: "Thick vanilla bean gelato blended with crushed Oreo cookies, salted caramel swirl, topped with whipped cream, Oreo crumbles, and caramel drizzle.",
     dietary: ["Sweet Crave"],
-    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-pouring-chocolate-syrup-on-an-ice-cream-41565-large.mp4",
-    image: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=80",
+    videoUrl: "https://videos.pexels.com/video-files/7334409/7334409-hd_1280_720_25fps.mp4",
+    image: "https://images.pexels.com/photos/34711204/pexels-photo-34711204.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
     ingredients: ["Vanilla Gelato", "Oreo Cookie Crumbles", "Salted Caramel Swirl", "Whipped Cream"]
   }
 ];
@@ -143,7 +143,7 @@ export const HOT_DEALS = [
     price: "$16.99",
     originalPrice: "$24.50",
     discount: "SAVE 30%",
-    image: "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.pexels.com/photos/1639557/pexels-photo-1639557.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
   },
   {
     id: 'deal2',
@@ -152,31 +152,38 @@ export const HOT_DEALS = [
     price: "$34.99",
     originalPrice: "$48.00",
     discount: "SAVE $13",
-    image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
   }
 ];
 
 export const BROLL_VIDEOS = [
   {
     id: 1,
-    title: "Flame-Broiling Double Smash Patties",
+    title: "Flame-Broiling 100% Angus Double Smash Patties",
     category: "Burgers",
-    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-cheeseburger-with-french-fries-41562-large.mp4",
-    poster: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80"
+    videoUrl: "https://videos.pexels.com/video-files/4929488/4929488-hd_1280_720_30fps.mp4",
+    poster: "https://images.pexels.com/photos/1639557/pexels-photo-1639557.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
   },
   {
     id: 2,
-    title: "Hand-Tossed Cheese Stretch Pizza",
+    title: "Mozzarella Cheese Stretch Hand-Tossed Pizza",
     category: "Pizzas",
-    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-pulling-a-slice-of-pizza-with-cheese-41563-large.mp4",
-    poster: "https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?auto=format&fit=crop&w=800&q=80"
+    videoUrl: "https://videos.pexels.com/video-files/30627970/13111089_1440_2560_25fps.mp4",
+    poster: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
   },
   {
     id: 3,
-    title: "Golden 11-Spice Crispy Chicken Crunch",
+    title: "11-Spice Golden Crispy Fried Chicken",
     category: "Chicken",
-    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-fried-chicken-wings-in-a-plate-41564-large.mp4",
-    poster: "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?auto=format&fit=crop&w=800&q=80"
+    videoUrl: "https://videos.pexels.com/video-files/19537505/19537505-hd_1920_1080_24fps.mp4",
+    poster: "https://images.pexels.com/photos/33254639/pexels-photo-33254639.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+  },
+  {
+    id: 4,
+    title: "Sizzling Golden French Fries & Cheese Drizzle",
+    category: "Sides",
+    videoUrl: "https://videos.pexels.com/video-files/7653233/7653233-uhd_4096_2160_25fps.mp4",
+    poster: "https://images.pexels.com/photos/5779487/pexels-photo-5779487.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
   }
 ];
 
