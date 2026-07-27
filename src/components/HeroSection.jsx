@@ -15,7 +15,7 @@ export default function HeroSection({ onOpenReserve, onToggleAIChat }) {
       padding: '120px 24px 80px',
       overflow: 'hidden',
       width: '100%',
-      background: '#090a0f'
+      background: '#121418'
     }}>
       {/* Pexels HD Video Background */}
       <video
@@ -37,15 +37,15 @@ export default function HeroSection({ onOpenReserve, onToggleAIChat }) {
         <source src="https://videos.pexels.com/video-files/4929488/4929488-hd_1280_720_30fps.mp4" type="video/mp4" />
       </video>
 
-      {/* Dark Backdrop Gradient */}
+      {/* Dark Overlay Gradient */}
       <div style={{
         position: 'absolute',
         inset: 0,
-        background: 'radial-gradient(circle at center, rgba(9, 10, 15, 0.4) 0%, rgba(9, 10, 15, 0.92) 85%, #090a0f 100%)',
+        background: 'radial-gradient(circle at center, rgba(18, 20, 24, 0.4) 0%, rgba(18, 20, 24, 0.92) 85%, #121418 100%)',
         zIndex: 2
       }}></div>
 
-      {/* Hero Video Audio Toggle */}
+      {/* Hero Audio Toggle */}
       <button
         onClick={() => setIsVideoMuted(!isVideoMuted)}
         style={{
@@ -53,9 +53,9 @@ export default function HeroSection({ onOpenReserve, onToggleAIChat }) {
           top: '95px',
           right: '28px',
           zIndex: 20,
-          background: 'rgba(15, 17, 23, 0.85)',
-          border: '1px solid var(--border-gold)',
-          color: 'var(--gold-light)',
+          background: 'rgba(24, 27, 32, 0.85)',
+          border: '1px solid var(--border-subtle)',
+          color: 'var(--brand-yellow)',
           padding: '8px 16px',
           borderRadius: '30px',
           cursor: 'pointer',
@@ -63,12 +63,12 @@ export default function HeroSection({ onOpenReserve, onToggleAIChat }) {
           alignItems: 'center',
           gap: '6px',
           fontSize: '0.78rem',
-          fontWeight: '600',
+          fontWeight: '700',
           backdropFilter: 'blur(12px)'
         }}
       >
         {isVideoMuted ? <VolumeX size={15} /> : <Volume2 size={15} />}
-        <span>{isVideoMuted ? 'UNMUTE B-ROLL' : 'SOUND ON'}</span>
+        <span>{isVideoMuted ? 'UNMUTE B-ROLL' : 'AUDIO ON'}</span>
       </button>
 
       {/* Hero Content */}
@@ -85,44 +85,45 @@ export default function HeroSection({ onOpenReserve, onToggleAIChat }) {
           display: 'inline-flex',
           alignItems: 'center',
           gap: '8px',
-          background: 'rgba(212, 175, 55, 0.1)',
-          border: '1px solid var(--border-gold)',
+          background: 'rgba(230, 57, 70, 0.2)',
+          border: '1px solid var(--brand-red)',
           padding: '6px 20px',
           borderRadius: '30px',
           marginBottom: '24px',
           backdropFilter: 'blur(12px)'
         }}>
-          <Sparkles size={14} color="var(--gold-primary)" />
-          <span style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--gold-light)', letterSpacing: '2px', textTransform: 'uppercase' }}>
-            HAUTE FAST-CASUAL GASTRONOMY
+          <Flame size={15} color="var(--brand-yellow)" />
+          <span style={{ fontSize: '0.75rem', fontWeight: '800', color: '#fff', letterSpacing: '1.5px', textTransform: 'uppercase' }}>
+            VOTED #1 FAST-CASUAL SPOT IN NEW YORK
           </span>
         </div>
 
-        {/* Big Editorial Headline */}
-        <h1 className="font-serif text-gold-gradient" style={{
+        {/* Big Crisp Headline */}
+        <h1 className="font-serif" style={{
           fontSize: 'clamp(2.4rem, 6.5vw, 5.4rem)',
           fontWeight: '900',
           lineHeight: 1.08,
           marginBottom: '20px',
-          letterSpacing: '-1px'
+          color: '#ffffff',
+          letterSpacing: '-0.5px'
         }}>
-          THE ART OF <br />
-          <span className="text-ember-gradient">SMASH & CRUNCH</span>
+          UNBEATABLE CRUNCH. <br />
+          <span style={{ color: 'var(--brand-yellow)' }}>SUPREME BURGERS & PIZZAS.</span>
         </h1>
 
         {/* Subtitle */}
         <p style={{
           fontSize: 'clamp(0.98rem, 2vw, 1.18rem)',
-          color: '#cbd5e1',
+          color: '#a0aec0',
           maxWidth: '640px',
           margin: '0 auto 36px',
           fontWeight: '400',
           lineHeight: 1.65
         }}>
-          100% Angus smash patties, 11-spice mega crispy chicken, and hand-tossed mozzarella cheese crust pizzas. Crafted fresh daily.
+          100% Angus smash beef, 11-spice mega crispy chicken buckets, and hand-tossed cheese crust pizzas. Delivered hot & fast.
         </p>
 
-        {/* CTA Button Group */}
+        {/* CTA Group */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
@@ -133,19 +134,29 @@ export default function HeroSection({ onOpenReserve, onToggleAIChat }) {
         }}>
           <a
             href="#menu"
-            className="btn-gold"
+            className="btn-red"
             style={{ fontSize: '0.95rem', padding: '14px 34px' }}
           >
-            <span>EXPLORE MENU</span>
-            <ArrowRight size={16} />
+            <Flame size={18} />
+            <span>ORDER MENU NOW</span>
           </a>
 
           <button
             onClick={onOpenReserve}
-            className="btn-outline-gold"
+            className="btn-yellow"
             style={{ fontSize: '0.95rem', padding: '14px 34px' }}
           >
             <span>EXPRESS DELIVERY</span>
+            <ArrowRight size={18} />
+          </button>
+
+          <button
+            onClick={onToggleAIChat}
+            className="btn-outline-clean"
+            style={{ fontSize: '0.95rem', padding: '14px 28px' }}
+          >
+            <Sparkles size={16} color="var(--brand-yellow)" />
+            <span>AI ASSISTANT</span>
           </button>
         </div>
 
@@ -157,17 +168,17 @@ export default function HeroSection({ onOpenReserve, onToggleAIChat }) {
           maxWidth: '840px',
           margin: '0 auto',
           padding: '20px 24px',
-          background: 'rgba(17, 20, 29, 0.75)',
+          background: 'rgba(30, 34, 41, 0.85)',
           border: '1px solid var(--border-subtle)',
           borderRadius: 'var(--radius-md)',
           backdropFilter: 'blur(16px)'
         }}>
           {RESTAURANT_INFO.stats.map((stat, idx) => (
             <div key={idx} style={{ textAlign: 'center' }}>
-              <div className="font-serif text-gold-gradient" style={{ fontSize: '1.7rem', fontWeight: '800' }}>
+              <div className="font-serif" style={{ fontSize: '1.7rem', fontWeight: '900', color: 'var(--brand-yellow)' }}>
                 {stat.value}
               </div>
-              <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: '600', marginTop: '2px' }}>
+              <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: '700', marginTop: '2px' }}>
                 {stat.label}
               </div>
             </div>
@@ -175,7 +186,7 @@ export default function HeroSection({ onOpenReserve, onToggleAIChat }) {
         </div>
       </div>
 
-      {/* Scroll Down Hint */}
+      {/* Scroll Down */}
       <a
         href="#menu"
         style={{
@@ -193,7 +204,7 @@ export default function HeroSection({ onOpenReserve, onToggleAIChat }) {
           fontSize: '0.68rem',
           letterSpacing: '2px',
           textTransform: 'uppercase',
-          fontWeight: '600'
+          fontWeight: '700'
         }}
       >
         <span>SCROLL DOWN</span>
