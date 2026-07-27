@@ -8,7 +8,6 @@ import CartDrawer from './components/CartDrawer';
 import ReservationModal from './components/ReservationModal';
 import AIChatbot from './components/AIChatbot';
 import SpinWheelModal from './components/SpinWheelModal';
-import LiveOrdersToast from './components/LiveOrdersToast';
 import HomePage from './pages/HomePage';
 import MenuPage from './pages/MenuPage';
 import ComboBuilderPage from './pages/ComboBuilderPage';
@@ -85,9 +84,6 @@ export default function App() {
       <div style={{ position: 'relative', minHeight: '100vh', background: 'var(--bg-primary)' }}>
         {/* Custom Follow Cursor */}
         <CustomCursor />
-
-        {/* Live Social Proof Order Popups */}
-        <LiveOrdersToast />
 
         {/* Entrance Door Screen */}
         {isLoading && (
@@ -188,22 +184,22 @@ export default function App() {
                   bottom: '28px',
                   right: '28px',
                   zIndex: 90,
-                  background: 'linear-gradient(135deg, #ff758f 0%, #e63946 100%)',
-                  color: '#ffffff',
+                  background: 'linear-gradient(135deg, #f3e5ab 0%, #d4af37 100%)',
+                  color: '#000000',
                   border: 'none',
                   padding: '12px 22px',
                   borderRadius: '50px',
                   fontWeight: '800',
-                  fontSize: '0.9rem',
+                  fontSize: '0.88rem',
                   cursor: 'pointer',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '8px',
-                  boxShadow: '0 8px 30px rgba(230,57,70,0.5)',
+                  boxShadow: '0 8px 30px rgba(212,175,55,0.4)',
                   transition: 'var(--transition-smooth)'
                 }}
               >
-                <Flame size={18} fill="#ffffff" />
+                <Flame size={18} fill="#000000" />
                 <span>AI Assistant</span>
               </button>
             )}

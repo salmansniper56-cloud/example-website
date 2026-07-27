@@ -4,7 +4,7 @@
   --bg-primary: #090a0f;
   --bg-secondary: #11141d;
   --bg-card: #151924;
-  --bg-glass: rgba(17, 20, 29, 0.82);
+  --bg-glass: rgba(17, 20, 29, 0.88);
   --gold-primary: #d4af37;
   --gold-light: #f3e5ab;
   --ember-accent: #d9534f;
@@ -221,7 +221,7 @@ img, video, svg {
   margin: 0 auto 16px;
 }
 
-/* Premium Ultra Cards */
+/* Premium Cards */
 .glass-card {
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
@@ -236,7 +236,7 @@ img, video, svg {
   transform: translateY(-3px);
 }
 
-/* Ultra Buttons */
+/* Buttons */
 .btn-gold {
   background: linear-gradient(135deg, #f3e5ab 0%, #d4af37 100%);
   color: #090a0f;
@@ -320,7 +320,7 @@ img, video, svg {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive Rules */
+/* Comprehensive Mobile Responsiveness */
 @media (max-width: 1023px) {
   .desktop-only { display: none !important; }
 }
@@ -330,8 +330,35 @@ img, video, svg {
     width: 100vw;
     overflow-x: hidden;
   }
+
   section {
     padding-left: 16px !important;
     padding-right: 16px !important;
+  }
+
+  .door-center-seal {
+    padding: 20px 16px !important;
+    width: 92vw !important;
+  }
+
+  .mobile-ai-chat {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100dvh !important;
+    border-radius: 0 !important;
+    border: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+  h1 { font-size: 2.1rem !important; }
+  h2 { font-size: 1.7rem !important; }
+  .btn-gold, .btn-crimson, .btn-outline-gold {
+    width: 100% !important;
+    min-height: 48px;
   }
 }

@@ -1,12 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Sparkles, Send, X, Wine, Brain } from 'lucide-react';
+import { Sparkles, Send, X, Flame, Brain } from 'lucide-react';
 import { sendChatMessage, cleanMarkdownFormatting } from '../services/aiService';
 
 export default function AIChatbot({ isOpen, onClose, initialQuery, onOpenReserve }) {
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: "Bonsoir! I am Étoile Master Sommelier & Concierge. How may I curate your culinary journey today?",
+      content: "Welcome to CRAVE & CO.! I am your AI Crave Assistant. Ask me about custom Smash Burger combos, spicy Nashville chicken crunch levels, family pizza deals, or 19-minute express delivery!",
       reasoning: null
     }
   ]);
@@ -17,10 +17,10 @@ export default function AIChatbot({ isOpen, onClose, initialQuery, onOpenReserve
   const messagesEndRef = useRef(null);
 
   const quickPrompts = [
-    "🍷 Recommend wine for Wagyu A5",
-    "🥂 Plan a romantic 3-course dinner",
-    "🌿 Any gluten-free & vegan options?",
-    "📅 How do I reserve a private cellar?"
+    "🔥 What is your best Smash Burger?",
+    "🌶️ Recommend a Spicy Chicken combo",
+    "🍕 Which Pizza has stuffed cheese crust?",
+    "📦 What deals are in the Ultimate Crave Box?"
   ];
 
   useEffect(() => {
@@ -81,7 +81,7 @@ export default function AIChatbot({ isOpen, onClose, initialQuery, onOpenReserve
       height: '620px',
       maxHeight: 'calc(100vh - 80px)',
       background: 'var(--bg-secondary)',
-      border: '1px solid var(--gold-primary)',
+      border: '1px solid var(--border-gold)',
       borderRadius: 'var(--radius-lg)',
       boxShadow: '0 20px 60px rgba(0,0,0,0.95)',
       display: 'flex',
@@ -91,148 +91,145 @@ export default function AIChatbot({ isOpen, onClose, initialQuery, onOpenReserve
       {/* Header */}
       <div style={{
         padding: '14px 18px',
-        background: 'linear-gradient(135deg, rgba(139, 21, 56, 0.45), rgba(11, 13, 16, 0.95))',
-        borderBottom: '1px solid var(--border-gold)',
+        background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(17, 20, 29, 0.95))',
+        borderBottom: '1px solid var(--border-subtle)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <div style={{
-            width: '34px',
-            height: '34px',
+            width: '32px',
+            height: '32px',
             borderRadius: '50%',
-            background: 'rgba(212, 175, 55, 0.2)',
-            border: '1px solid var(--gold-primary)',
+            background: 'var(--gold-primary)',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
+            color: '#000'
           }}>
-            <Sparkles size={16} color="var(--gold-primary)" />
+            <Flame size={18} />
           </div>
           <div>
-            <h4 className="font-serif text-gold-gradient" style={{ fontSize: '1rem', fontWeight: '700', margin: 0 }}>
-              Étoile Sommelier & Concierge
-            </h4>
-            <span style={{ fontSize: '0.65rem', color: 'var(--text-gold)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-              <Wine size={10} /> Michelin Gastronomy Concierge
+            <h3 style={{ fontSize: '0.95rem', fontWeight: '800', color: '#fff', margin: 0 }}>
+              AI Crave Assistant
+            </h3>
+            <span style={{ fontSize: '0.68rem', color: 'var(--gold-light)', display: 'block' }}>
+              CRAVE & CO. Smart Concierge
             </span>
           </div>
         </div>
 
         <button
           onClick={onClose}
-          aria-label="Close Chat"
-          style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', padding: '4px' }}
+          aria-label="Close Assistant"
+          style={{
+            background: 'none',
+            border: 'none',
+            color: 'var(--text-muted)',
+            cursor: 'pointer',
+            padding: '4px'
+          }}
         >
-          <X size={22} />
+          <X size={20} />
         </button>
       </div>
 
-      {/* Messages Feed */}
+      {/* Messages Scroll Body */}
       <div style={{
-        flex: '1',
-        overflowY: 'auto',
+        flex: 1,
         padding: '16px',
+        overflowY: 'auto',
         display: 'flex',
         flexDirection: 'column',
-        gap: '12px',
-        background: 'rgba(11, 13, 16, 0.75)',
-        WebkitOverflowScrolling: 'touch'
+        gap: '14px',
+        background: 'rgba(9, 10, 15, 0.6)'
       }}>
-        {messages.map((msg, index) => (
+        {messages.map((msg, idx) => (
           <div
-            key={index}
+            key={idx}
             style={{
+              alignSelf: msg.role === 'user' ? 'flex-end' : 'flex-start',
+              maxWidth: '85%',
               display: 'flex',
               flexDirection: 'column',
-              alignItems: msg.role === 'user' ? 'flex-end' : 'flex-start'
+              gap: '4px'
             }}
           >
-            {msg.reasoning && (
-              <details style={{
-                marginBottom: '6px',
-                fontSize: '0.7rem',
-                color: 'var(--text-muted)',
+            {/* Thinking / Reasoning Box if assistant message */}
+            {msg.role === 'assistant' && msg.reasoning && (
+              <div style={{
                 background: 'rgba(212, 175, 55, 0.08)',
-                border: '1px dashed var(--border-gold)',
-                borderRadius: '8px',
-                padding: '6px 10px',
-                maxWidth: '92%'
+                border: '1px solid var(--border-gold)',
+                borderRadius: 'var(--radius-sm)',
+                padding: '8px 12px',
+                fontSize: '0.75rem',
+                color: 'var(--gold-light)',
+                marginBottom: '4px',
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: '6px'
               }}>
-                <summary style={{ cursor: 'pointer', color: 'var(--gold-light)', fontWeight: '600' }}>
-                  🧠 Sommelier Analysis
-                </summary>
-                <div style={{ marginTop: '4px', fontStyle: 'italic' }}>{msg.reasoning}</div>
-              </details>
+                <Brain size={14} style={{ flexShrink: 0, marginTop: '2px' }} />
+                <div>
+                  <strong style={{ display: 'block', fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                    Crave Analysis:
+                  </strong>
+                  {msg.reasoning}
+                </div>
+              </div>
             )}
 
+            {/* Main Message Bubble */}
             <div style={{
-              maxWidth: '88%',
+              background: msg.role === 'user' ? 'linear-gradient(135deg, #f3e5ab, #d4af37)' : 'rgba(21, 25, 36, 0.95)',
+              color: msg.role === 'user' ? '#000' : '#ffffff',
+              fontWeight: msg.role === 'user' ? '700' : '400',
               padding: '12px 16px',
               borderRadius: msg.role === 'user' ? '18px 18px 2px 18px' : '18px 18px 18px 2px',
-              background: msg.role === 'user' ? 'linear-gradient(135deg, #d4af37, #aa8624)' : 'rgba(22, 27, 38, 0.92)',
-              color: msg.role === 'user' ? '#000' : '#fff',
-              fontWeight: msg.role === 'user' ? '600' : '400',
               border: msg.role === 'assistant' ? '1px solid var(--border-subtle)' : 'none',
               fontSize: '0.88rem',
               lineHeight: 1.5,
               whiteSpace: 'pre-line'
             }}>
-              {cleanMarkdownFormatting(msg.content)}
+              {msg.content}
             </div>
           </div>
         ))}
 
-        {/* Live Streaming Indicator */}
+        {/* Live Streaming Content */}
         {isGenerating && (
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+          <div style={{ alignSelf: 'flex-start', maxWidth: '85%' }}>
             {currentReasoning && (
               <div style={{
-                fontSize: '0.7rem',
-                color: 'var(--gold-primary)',
-                background: 'rgba(212, 175, 55, 0.1)',
+                background: 'rgba(212, 175, 55, 0.08)',
                 border: '1px solid var(--border-gold)',
-                padding: '6px 10px',
-                borderRadius: '8px',
+                borderRadius: 'var(--radius-sm)',
+                padding: '8px 12px',
+                fontSize: '0.75rem',
+                color: 'var(--gold-light)',
                 marginBottom: '6px',
-                maxWidth: '90%',
                 display: 'flex',
-                alignItems: 'center',
+                alignItems: 'flex-start',
                 gap: '6px'
               }}>
-                <Brain size={12} />
-                <span>Analyzing cellar pairings...</span>
+                <Brain size={14} className="animate-spin" style={{ flexShrink: 0 }} />
+                <span>{currentReasoning}</span>
               </div>
             )}
 
-            {currentStreamContent ? (
+            {currentStreamContent && (
               <div style={{
-                maxWidth: '88%',
+                background: 'rgba(21, 25, 36, 0.95)',
+                color: '#fff',
                 padding: '12px 16px',
                 borderRadius: '18px 18px 18px 2px',
-                background: 'rgba(22, 27, 38, 0.92)',
-                color: '#fff',
                 border: '1px solid var(--border-subtle)',
                 fontSize: '0.88rem',
                 lineHeight: 1.5,
                 whiteSpace: 'pre-line'
               }}>
                 {currentStreamContent}
-              </div>
-            ) : (
-              <div style={{
-                padding: '8px 14px',
-                borderRadius: '16px',
-                background: 'rgba(255,255,255,0.05)',
-                color: 'var(--text-muted)',
-                fontSize: '0.8rem',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px'
-              }}>
-                <Sparkles size={14} color="var(--gold-primary)" />
-                <span>Consulting Sommelier archives...</span>
               </div>
             )}
           </div>
@@ -241,10 +238,10 @@ export default function AIChatbot({ isOpen, onClose, initialQuery, onOpenReserve
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Touch Swipable Quick Prompts */}
+      {/* Quick Prompt Pills */}
       <div style={{
         padding: '8px 12px',
-        background: 'rgba(11, 13, 16, 0.95)',
+        background: 'rgba(17, 20, 29, 0.95)',
         borderTop: '1px solid var(--border-subtle)',
         display: 'flex',
         gap: '6px',
@@ -256,15 +253,17 @@ export default function AIChatbot({ isOpen, onClose, initialQuery, onOpenReserve
           <button
             key={idx}
             onClick={() => handleSendMessage(prompt)}
+            disabled={isGenerating}
             style={{
               whiteSpace: 'nowrap',
-              background: 'rgba(212, 175, 55, 0.08)',
-              border: '1px solid var(--border-gold)',
-              color: 'var(--text-gold)',
-              fontSize: '0.73rem',
+              background: 'rgba(255, 255, 255, 0.05)',
+              border: '1px solid var(--border-subtle)',
+              color: 'var(--text-main)',
               padding: '6px 12px',
               borderRadius: '16px',
-              cursor: 'pointer'
+              fontSize: '0.74rem',
+              cursor: 'pointer',
+              fontWeight: '500'
             }}
           >
             {prompt}
@@ -272,51 +271,54 @@ export default function AIChatbot({ isOpen, onClose, initialQuery, onOpenReserve
         ))}
       </div>
 
-      {/* Input Row */}
-      <div style={{
-        padding: '12px 14px',
-        background: 'var(--bg-secondary)',
-        borderTop: '1px solid var(--border-subtle)',
-        display: 'flex',
-        gap: '8px'
-      }}>
+      {/* Input Bar */}
+      <form
+        onSubmit={(e) => { e.preventDefault(); handleSendMessage(); }}
+        style={{
+          padding: '12px',
+          background: 'rgba(17, 20, 29, 0.98)',
+          borderTop: '1px solid var(--border-subtle)',
+          display: 'flex',
+          gap: '8px'
+        }}
+      >
         <input
           type="text"
-          placeholder="Ask about wine, dishes, or bookings..."
+          placeholder="Ask AI about Smash Burgers, Combos, or Pizzas..."
           value={inputQuery}
           onChange={(e) => setInputQuery(e.target.value)}
-          onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
+          disabled={isGenerating}
           style={{
-            flex: '1',
-            background: 'rgba(11, 13, 16, 0.88)',
-            border: '1px solid var(--border-gold)',
+            flex: 1,
+            background: 'rgba(9, 10, 15, 0.8)',
+            border: '1px solid var(--border-subtle)',
             borderRadius: '24px',
-            padding: '10px 14px',
+            padding: '10px 16px',
             color: '#fff',
-            fontSize: '0.9rem',
+            fontSize: '0.85rem',
             outline: 'none'
           }}
         />
         <button
-          onClick={() => handleSendMessage()}
-          disabled={isGenerating || !inputQuery.trim()}
+          type="submit"
+          disabled={!inputQuery.trim() || isGenerating}
           style={{
-            width: '40px',
-            height: '40px',
-            borderRadius: '50%',
-            background: 'linear-gradient(135deg, #f5d77f, #d4af37)',
-            border: 'none',
+            background: 'linear-gradient(135deg, #f3e5ab, #d4af37)',
             color: '#000',
-            cursor: isGenerating ? 'not-allowed' : 'pointer',
+            border: 'none',
+            width: '38px',
+            height: '38px',
+            borderRadius: '50%',
+            cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            flexShrink: 0
+            opacity: (!inputQuery.trim() || isGenerating) ? 0.5 : 1
           }}
         >
           <Send size={16} />
         </button>
-      </div>
+      </form>
     </div>
   );
 }
