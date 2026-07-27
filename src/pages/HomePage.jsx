@@ -1,103 +1,89 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import HeroSection from '../components/HeroSection';
-import TestimonialsSection from '../components/TestimonialsSection';
-import { MENU_ITEMS, CHEF_PROFILE } from '../data/restaurantData';
-import { Utensils, Calendar, Sparkles, ArrowRight, Award, Wine, Star } from 'lucide-react';
+import VideoBRollSection from '../components/VideoBRollSection';
+import { MENU_ITEMS, HOT_DEALS } from '../data/restaurantData';
+import { Flame, Sparkles, ArrowRight, ShoppingBag, Truck, Clock, ShieldCheck } from 'lucide-react';
 
 export default function HomePage({ onAddToCart, onOpenReserve, onToggleAIChat, onReplayDoors }) {
-  const featuredDishes = MENU_ITEMS.slice(0, 3);
+  const featuredBurgers = MENU_ITEMS.filter(i => i.category === 'burgers' || i.category === 'pizzas').slice(0, 3);
 
   return (
     <div className="page-fade-enter">
       {/* Hero Section */}
       <HeroSection onOpenReserve={onOpenReserve} onToggleAIChat={onToggleAIChat} />
 
-      {/* Door Entrance Replay Feature */}
-      <div style={{ textAlign: 'center', margin: '-40px 0 60px', position: 'relative', zIndex: 20 }}>
-        <button
-          onClick={onReplayDoors}
-          className="btn-outline-gold"
-          style={{ fontSize: '0.85rem', padding: '10px 24px', backdropFilter: 'blur(10px)', background: 'rgba(11, 13, 16, 0.85)' }}
-        >
-          <Sparkles size={16} />
-          <span>Replay Waiter Hands Door Entrance</span>
-        </button>
-      </div>
-
-      {/* Welcome & Philosophy Preview Section */}
-      <section style={{ padding: '60px 4%', maxWidth: '1200px', margin: '0 auto' }}>
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '40px',
-          alignItems: 'center'
-        }}>
-          <div>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--gold-primary)', fontSize: '0.85rem', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '12px' }}>
-              <Award size={16} />
-              <span>Three Michelin Stars</span>
-            </div>
-            <h2 className="font-serif text-gold-gradient" style={{ fontSize: 'clamp(2.2rem, 3.5vw, 3.2rem)', fontWeight: '700', marginBottom: '20px', lineHeight: 1.2 }}>
-              A Legacy of Culinary Innovation
-            </h2>
-            <p style={{ color: 'var(--text-muted)', fontSize: '1rem', lineHeight: 1.7, marginBottom: '24px' }}>
-              At L'Étoile D'Or, every menu creation is a harmonious dialogue between Japanese precision, French heritage, and molecular gastronomy. Guided by Chef Antoine Laurent, our kitchen elevates rare seasonal ingredients into unforgettable dining moments.
-            </p>
-            <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-              <Link to="/philosophy" className="btn-gold">
-                <span>Meet Chef Antoine</span>
-                <ArrowRight size={16} />
-              </Link>
-              <Link to="/gallery" className="btn-outline-gold">
-                <span>Explore Ambiance</span>
-              </Link>
-            </div>
+      {/* Express Delivery Banner */}
+      <section style={{ padding: '20px 4%', background: 'var(--crimson-accent)', color: '#fff' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'space-around', alignItems: 'center', flexWrap: 'wrap', gap: '16px', textTransform: 'uppercase', fontWeight: '800', fontSize: '0.85rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <Truck size={20} />
+            <span>19-MIN EXPRESS DELIVERY</span>
           </div>
-
-          <div style={{ position: 'relative' }}>
-            <img
-              src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80"
-              alt="Plating perfection"
-              style={{ width: '100%', height: '420px', objectFit: 'cover', borderRadius: 'var(--radius-md)', border: '1px solid var(--gold-primary)' }}
-            />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <Flame size={20} />
+            <span>100% ANGUS FRESH SMASH BEEF</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <Clock size={20} />
+            <span>24/7 DRIVE-THRU OPEN</span>
           </div>
         </div>
       </section>
 
-      {/* Featured Chef Specials Section */}
-      <section style={{ padding: '80px 4%', background: 'rgba(18, 22, 31, 0.4)', borderTop: '1px solid var(--border-subtle)', borderBottom: '1px solid var(--border-subtle)' }}>
+      {/* Replay Door Entrance Button */}
+      <div style={{ textAlign: 'center', margin: '30px 0 20px' }}>
+        <button
+          onClick={onReplayDoors}
+          className="btn-outline-gold"
+          style={{ fontSize: '0.82rem', padding: '8px 20px' }}
+        >
+          <Sparkles size={14} />
+          <span>Replay Waiter Hands Entrance</span>
+        </button>
+      </div>
+
+      {/* Video B-Roll Showcase Section */}
+      <VideoBRollSection onAddToCart={onAddToCart} />
+
+      {/* Sizzling Craves Preview */}
+      <section style={{ padding: '60px 4%', background: 'rgba(22, 26, 36, 0.5)', borderTop: '1px solid var(--border-subtle)', borderBottom: '1px solid var(--border-subtle)' }}>
         <div style={{ maxWidth: '1300px', margin: '0 auto' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '40px', flexWrap: 'wrap', gap: '20px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '32px', flexWrap: 'wrap', gap: '16px' }}>
             <div>
-              <div style={{ color: 'var(--gold-primary)', fontSize: '0.85rem', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '8px' }}>
-                Chef's Handpicked Highlights
+              <div style={{ color: 'var(--crimson-accent)', fontSize: '0.8rem', fontWeight: '800', textTransform: 'uppercase', letterSpacing: '2px', marginBottom: '6px' }}>
+                🔥 Most Loved Craves
               </div>
-              <h2 className="font-serif text-gold-gradient" style={{ fontSize: '2.5rem', fontWeight: '700' }}>
-                Signature Tasting Dishes
+              <h2 className="font-serif text-gold-gradient" style={{ fontSize: 'clamp(2rem, 3.5vw, 3.2rem)', fontWeight: '800' }}>
+                Featured Burgers & Pizzas
               </h2>
             </div>
             <Link to="/menu" className="btn-outline-gold">
-              <span>View Full Menu ({MENU_ITEMS.length} Dishes)</span>
+              <span>View Full Menu</span>
               <ArrowRight size={16} />
             </Link>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '30px' }}>
-            {featuredDishes.map((item) => (
-              <div key={item.id} className="glass-card" style={{ padding: '24px', borderRadius: 'var(--radius-md)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
+            {featuredBurgers.map((item) => (
+              <div key={item.id} className="glass-card" style={{ padding: '20px', borderRadius: 'var(--radius-md)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <div>
-                  <img src={item.image} alt={item.name} style={{ width: '100%', height: '220px', objectFit: 'cover', borderRadius: '12px', marginBottom: '16px' }} />
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                    <h3 className="font-serif" style={{ color: '#fff', fontSize: '1.2rem', fontWeight: '700' }}>{item.name}</h3>
-                    <span style={{ color: 'var(--gold-light)', fontWeight: '800', fontSize: '1.1rem' }}>${item.price}</span>
+                  <div style={{ height: '200px', borderRadius: '12px', overflow: 'hidden', marginBottom: '14px', position: 'relative' }}>
+                    <img src={item.image} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <span style={{ position: 'absolute', top: '10px', right: '10px', background: 'rgba(15,17,23,0.9)', color: 'var(--gold-primary)', fontWeight: '900', fontSize: '1rem', padding: '4px 12px', borderRadius: '14px', border: '1px solid var(--gold-primary)' }}>
+                      ${item.price}
+                    </span>
                   </div>
-                  <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', marginBottom: '16px', lineHeight: 1.5 }}>
+                  <h3 className="font-serif" style={{ color: '#fff', fontSize: '1.2rem', fontWeight: '800', marginBottom: '6px' }}>
+                    {item.name}
+                  </h3>
+                  <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '16px', lineHeight: 1.5 }}>
                     {item.description}
                   </p>
                 </div>
 
-                <button onClick={() => onAddToCart(item)} className="btn-gold" style={{ width: '100%', padding: '10px' }}>
+                <button onClick={() => onAddToCart(item)} className="btn-crimson" style={{ width: '100%', padding: '10px' }}>
+                  <ShoppingBag size={16} />
                   <span>Add To Order</span>
                 </button>
               </div>
@@ -106,22 +92,19 @@ export default function HomePage({ onAddToCart, onOpenReserve, onToggleAIChat, o
         </div>
       </section>
 
-      {/* Guest Reviews Section */}
-      <TestimonialsSection />
-
-      {/* Table Booking Banner */}
-      <section style={{ padding: '80px 4%', textAlign: 'center', background: 'linear-gradient(180deg, #0b0d10 0%, #12161f 100%)' }}>
-        <div style={{ maxWidth: '800px', margin: '0 auto', background: 'rgba(22, 27, 38, 0.8)', padding: '50px 30px', borderRadius: 'var(--radius-lg)', border: '1px solid var(--gold-primary)', boxShadow: '0 20px 50px rgba(0,0,0,0.8)' }}>
-          <Sparkles size={36} color="var(--gold-primary)" style={{ marginBottom: '16px' }} />
-          <h2 className="font-serif text-gold-gradient" style={{ fontSize: '2.4rem', fontWeight: '700', marginBottom: '16px' }}>
-            Reserve Your Evening at L'Étoile D'Or
+      {/* Build Your Own Crave Box Promo Banner */}
+      <section style={{ padding: '80px 4%', textAlign: 'center' }}>
+        <div style={{ maxWidth: '850px', margin: '0 auto', background: 'linear-gradient(135deg, rgba(230, 57, 70, 0.2), rgba(15, 17, 23, 0.95))', padding: '40px 24px', borderRadius: 'var(--radius-lg)', border: '2px solid var(--gold-primary)', boxShadow: '0 20px 50px rgba(0,0,0,0.8)' }}>
+          <Flame size={42} color="var(--crimson-accent)" style={{ marginBottom: '12px' }} />
+          <h2 className="font-serif text-gold-gradient" style={{ fontSize: 'clamp(2.2rem, 4vw, 3.5rem)', fontWeight: '900', marginBottom: '12px' }}>
+            Build Your Own Custom Crave Box
           </h2>
-          <p style={{ color: 'var(--text-muted)', fontSize: '1rem', marginBottom: '30px' }}>
-            Table reservations open 60 days in advance. Select your seating area in our Main Hall, Private Salt-Cave Vault, or Moonlight Terrace.
+          <p style={{ color: 'var(--text-muted)', fontSize: '1rem', marginBottom: '28px', maxWidth: '600px', margin: '0 auto 28px' }}>
+            Pick your favorite Smash Burger, Crispy Wings or Loaded Fries, and Thick Oreo Shake. Save 18% automatically on all Crave Boxes!
           </p>
-          <Link to="/reservations" className="btn-gold" style={{ fontSize: '1.05rem', padding: '14px 36px' }}>
-            <Calendar size={18} />
-            <span>Book Table Now</span>
+          <Link to="/combos" className="btn-gold" style={{ fontSize: '1rem', padding: '14px 32px' }}>
+            <Sparkles size={18} />
+            <span>Build Combo Box Now</span>
           </Link>
         </div>
       </section>

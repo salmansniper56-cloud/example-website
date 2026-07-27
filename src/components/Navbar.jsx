@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Utensils, ShoppingBag, Calendar, Sparkles, Menu, X, ArrowRight } from 'lucide-react';
+import { Flame, ShoppingBag, Sparkles, Menu, X, ArrowRight } from 'lucide-react';
 import { RESTAURANT_INFO } from '../data/restaurantData';
 
 export default function Navbar({ cartCount, onOpenCart, onOpenReserve, onToggleAIChat }) {
@@ -16,18 +16,16 @@ export default function Navbar({ cartCount, onOpenCart, onOpenReserve, onToggleA
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile drawer on route navigation
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [location]);
 
   const navLinks = [
     { label: 'Home Entrance', path: '/' },
-    { label: 'Gourmet Menu', path: '/menu' },
-    { label: 'Reservations', path: '/reservations' },
-    { label: 'Chef Philosophy', path: '/philosophy' },
-    { label: 'Ambiance Gallery', path: '/gallery' },
-    { label: 'Location & Contact', path: '/contact' },
+    { label: 'Menu & Food', path: '/menu' },
+    { label: 'Build Combo Box', path: '/combos' },
+    { label: 'Hot Deals', path: '/deals' },
+    { label: 'Express Locations', path: '/contact' },
   ];
 
   return (
@@ -39,9 +37,9 @@ export default function Navbar({ cartCount, onOpenCart, onOpenReserve, onToggleA
       zIndex: 100,
       padding: isScrolled ? '12px 4%' : '18px 4%',
       transition: 'all 0.3s ease',
-      background: isScrolled ? 'rgba(11, 13, 16, 0.95)' : 'linear-gradient(180deg, rgba(0,0,0,0.9) 0%, transparent 100%)',
+      background: isScrolled ? 'rgba(15, 17, 23, 0.96)' : 'linear-gradient(180deg, rgba(0,0,0,0.95) 0%, transparent 100%)',
       backdropFilter: isScrolled ? 'blur(20px)' : 'none',
-      borderBottom: isScrolled ? '1px solid var(--border-gold)' : 'none'
+      borderBottom: isScrolled ? '2px solid var(--crimson-accent)' : 'none'
     }}>
       <div style={{
         maxWidth: '1300px',
@@ -53,29 +51,30 @@ export default function Navbar({ cartCount, onOpenCart, onOpenReserve, onToggleA
         {/* Brand Logo */}
         <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px' }}>
           <div style={{
-            width: '38px',
-            height: '38px',
+            width: '40px',
+            height: '40px',
             borderRadius: '50%',
-            border: '1.5px solid var(--gold-primary)',
+            background: 'var(--crimson-accent)',
+            border: '2px solid var(--gold-primary)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            background: 'rgba(212, 175, 55, 0.12)',
-            flexShrink: 0
+            flexShrink: 0,
+            boxShadow: '0 0 15px var(--crimson-glow)'
           }}>
-            <Utensils size={19} color="var(--gold-primary)" />
+            <Flame size={22} color="#fff" />
           </div>
           <div>
-            <span className="font-serif text-gold-gradient" style={{ fontSize: '1.25rem', fontWeight: '700', letterSpacing: '0.5px', display: 'block', lineHeight: 1.1 }}>
+            <span className="font-serif text-gold-gradient" style={{ fontSize: '1.3rem', fontWeight: '900', letterSpacing: '0.5px', display: 'block', lineHeight: 1.1 }}>
               {RESTAURANT_INFO.name}
             </span>
-            <span style={{ fontSize: '0.6rem', color: 'var(--text-muted)', letterSpacing: '1.5px', textTransform: 'uppercase' }}>
-              Michelin ★★★ Gastronomy
+            <span style={{ fontSize: '0.62rem', color: 'var(--crimson-accent)', letterSpacing: '1.5px', textTransform: 'uppercase', fontWeight: '800' }}>
+              BURGERS • CHICKEN • PIZZAS
             </span>
           </div>
         </Link>
 
-        {/* Desktop Links */}
+        {/* Desktop Router Links */}
         <nav style={{ display: 'flex', alignItems: 'center', gap: '22px' }} className="desktop-only">
           {navLinks.map((link) => {
             const isActive = location.pathname === link.path;
@@ -88,10 +87,10 @@ export default function Navbar({ cartCount, onOpenCart, onOpenReserve, onToggleA
                   color: isActive ? 'var(--gold-primary)' : 'var(--text-main)',
                   textDecoration: 'none',
                   fontSize: '0.88rem',
-                  fontWeight: isActive ? '700' : '500',
+                  fontWeight: isActive ? '800' : '600',
                   letterSpacing: '0.5px',
                   transition: 'color 0.2s ease',
-                  borderBottom: isActive ? '2px solid var(--gold-primary)' : '2px solid transparent',
+                  borderBottom: isActive ? '2px solid var(--crimson-accent)' : '2px solid transparent',
                   paddingBottom: '4px'
                 }}
               >
@@ -103,26 +102,26 @@ export default function Navbar({ cartCount, onOpenCart, onOpenReserve, onToggleA
 
         {/* Actions Row */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          {/* AI Concierge Trigger */}
+          {/* AI Concierge */}
           <button
             onClick={onToggleAIChat}
-            data-cursor="AI SOMMELIER"
+            data-cursor="AI CRAVE"
             style={{
-              background: 'rgba(212, 175, 55, 0.12)',
-              border: '1px solid var(--gold-primary)',
-              color: 'var(--gold-primary)',
+              background: 'rgba(230, 57, 70, 0.15)',
+              border: '1.5px solid var(--crimson-accent)',
+              color: '#fff',
               padding: '8px 14px',
               borderRadius: '30px',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
               gap: '6px',
-              fontWeight: '600',
+              fontWeight: '700',
               fontSize: '0.8rem'
             }}
           >
             <Sparkles size={14} color="var(--gold-primary)" />
-            <span className="desktop-only">AI Sommelier</span>
+            <span className="desktop-only">AI Crave Assistant</span>
           </button>
 
           {/* Cart Icon */}
@@ -153,7 +152,7 @@ export default function Navbar({ cartCount, onOpenCart, onOpenReserve, onToggleA
                 background: 'var(--crimson-accent)',
                 color: '#fff',
                 fontSize: '0.68rem',
-                fontWeight: '700',
+                fontWeight: '800',
                 width: '18px',
                 height: '18px',
                 borderRadius: '50%',
@@ -167,21 +166,21 @@ export default function Navbar({ cartCount, onOpenCart, onOpenReserve, onToggleA
             )}
           </button>
 
-          {/* Reserve Table Link (Desktop) */}
+          {/* Combo Builder Link (Desktop) */}
           <Link
-            to="/reservations"
+            to="/combos"
             className="btn-gold desktop-only"
-            data-cursor="RESERVE"
+            data-cursor="COMBO"
             style={{ padding: '8px 18px', fontSize: '0.85rem' }}
           >
-            <Calendar size={14} />
-            <span>Book Table</span>
+            <Flame size={14} />
+            <span>Build Combo</span>
           </Link>
 
-          {/* Mobile Menu Toggle Button */}
+          {/* Mobile Toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle Navigation Menu"
+            aria-label="Toggle Menu"
             style={{
               background: 'rgba(255,255,255,0.06)',
               border: '1px solid var(--border-gold)',
@@ -201,7 +200,7 @@ export default function Navbar({ cartCount, onOpenCart, onOpenReserve, onToggleA
         </div>
       </div>
 
-      {/* Mobile Drawer Menu Overlay */}
+      {/* Mobile Drawer */}
       {mobileMenuOpen && (
         <div style={{
           position: 'fixed',
@@ -209,9 +208,9 @@ export default function Navbar({ cartCount, onOpenCart, onOpenReserve, onToggleA
           left: 0,
           right: 0,
           height: 'calc(100vh - 60px)',
-          background: 'rgba(11, 13, 16, 0.98)',
+          background: 'rgba(15, 17, 23, 0.98)',
           backdropFilter: 'blur(25px)',
-          borderBottom: '1px solid var(--border-gold)',
+          borderBottom: '2px solid var(--crimson-accent)',
           padding: '24px 20px 40px',
           display: 'flex',
           flexDirection: 'column',
@@ -219,8 +218,8 @@ export default function Navbar({ cartCount, onOpenCart, onOpenReserve, onToggleA
           overflowY: 'auto'
         }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            <div style={{ fontSize: '0.72rem', color: 'var(--gold-primary)', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '8px', fontWeight: '700' }}>
-              Navigation Menu
+            <div style={{ fontSize: '0.72rem', color: 'var(--gold-primary)', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '8px', fontWeight: '800' }}>
+              BURGER & CRUNCH CO. MENU
             </div>
             {navLinks.map((link) => {
               const isActive = location.pathname === link.path;
@@ -232,12 +231,12 @@ export default function Navbar({ cartCount, onOpenCart, onOpenReserve, onToggleA
                   style={{
                     color: isActive ? 'var(--gold-primary)' : '#fff',
                     textDecoration: 'none',
-                    fontSize: '1.2rem',
-                    fontWeight: isActive ? '700' : '500',
+                    fontSize: '1.15rem',
+                    fontWeight: isActive ? '800' : '600',
                     padding: '12px 16px',
                     borderRadius: '12px',
-                    background: isActive ? 'rgba(212, 175, 55, 0.12)' : 'rgba(255,255,255,0.02)',
-                    border: '1px solid ' + (isActive ? 'var(--gold-primary)' : 'var(--border-subtle)'),
+                    background: isActive ? 'rgba(230, 57, 70, 0.15)' : 'rgba(255,255,255,0.02)',
+                    border: '1px solid ' + (isActive ? 'var(--crimson-accent)' : 'var(--border-subtle)'),
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between'
@@ -250,16 +249,15 @@ export default function Navbar({ cartCount, onOpenCart, onOpenReserve, onToggleA
             })}
           </div>
 
-          {/* Quick Mobile Action CTA */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '24px' }}>
             <Link
-              to="/reservations"
+              to="/combos"
               onClick={() => setMobileMenuOpen(false)}
               className="btn-gold"
               style={{ width: '100%', padding: '14px', fontSize: '1rem' }}
             >
-              <Calendar size={18} />
-              <span>Book A Table</span>
+              <Flame size={18} />
+              <span>Build Custom Crave Box</span>
             </Link>
 
             <button
@@ -267,11 +265,11 @@ export default function Navbar({ cartCount, onOpenCart, onOpenReserve, onToggleA
                 setMobileMenuOpen(false);
                 onToggleAIChat();
               }}
-              className="btn-outline-gold"
+              className="btn-crimson"
               style={{ width: '100%', padding: '14px', fontSize: '0.95rem' }}
             >
               <Sparkles size={18} />
-              <span>Ask AI Sommelier</span>
+              <span>Ask AI Crave Assistant</span>
             </button>
           </div>
         </div>

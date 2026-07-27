@@ -1,276 +1,196 @@
 export const RESTAURANT_INFO = {
-  name: "L'Étoile D'Or",
-  tagline: "Where Haute Cuisine Meets Culinary Artistry",
-  motto: "Michelin 3-Star Dining Experience & Modern Gastronomy",
-  phone: "+1 (555) 839-2041",
-  email: "concierge@letoiledor.com",
-  address: "742 Evergreen Avenue, Manhattan, NY 10021",
+  name: "BURGER & CRUNCH CO.",
+  tagline: "Sizzle, Crunch & Supreme Artisanal Pizzas",
+  motto: "Freshly Grilled Smash Burgers, 11-Spice Crispy Chicken & Hand-Tossed Pizzas",
+  phone: "+1 (800) 555-CRAVE",
+  email: "orders@burgerandcrunch.com",
+  address: "450 Broadway, Times Square, New York, NY 10036",
   hours: {
-    dinner: "Mon - Sun: 5:00 PM - 11:30 PM",
-    lunch: "Fri - Sun: 12:00 PM - 3:00 PM",
-    bar: "Mon - Sun: 4:30 PM - 1:00 AM"
+    delivery: "Mon - Sun: 10:00 AM - 2:00 AM",
+    dineIn: "Mon - Sun: 10:30 AM - 12:00 AM",
+    driveThru: "24/7 Express Drive-Thru Available"
   },
   stats: [
-    { label: "Michelin Stars", value: "3" },
-    { label: "Years of Excellence", value: "18" },
-    { label: "Sommelier Selections", value: "1,200+" },
-    { label: "Satisfied Guests", value: "50k+" }
+    { label: "Stores Nationwide", value: "250+" },
+    { label: "Avg Delivery Time", value: "19 Min" },
+    { label: "Crunchy Chicken Buckets Sold", value: "5M+" },
+    { label: "Customer Satisfaction", value: "99.4%" }
   ]
 };
 
 export const MENU_CATEGORIES = [
-  { id: 'all', name: 'Full Menu', icon: 'Utensils' },
-  { id: 'starters', name: 'Amuse & Starters', icon: 'Soup' },
-  { id: 'mains', name: 'Signature Mains', icon: 'Beef' },
-  { id: 'steaks', name: 'Dry-Aged Cuts', icon: 'Flame' },
-  { id: 'seafood', name: 'Ocean Treasures', icon: 'Fish' },
-  { id: 'desserts', name: 'Artisan Desserts', icon: 'Cake' },
-  { id: 'wines', name: 'Sommelier Wines', icon: 'Wine' }
+  { id: 'all', name: 'All Craves', icon: 'Flame' },
+  { id: 'burgers', name: 'Smash Burgers', icon: 'Beef' },
+  { id: 'chicken', name: 'Crispy Chicken & Buckets', icon: 'Drumstick' },
+  { id: 'pizzas', name: 'Hand-Tossed Pizzas', icon: 'Pizza' },
+  { id: 'sides', name: 'Loaded Sides & Fries', icon: 'Fries' },
+  { id: 'shakes', name: 'Thick Shakes & Drinks', icon: 'Cup' }
 ];
 
 export const MENU_ITEMS = [
   {
     id: 1,
-    name: "Truffled Wagyu A5 Carpaccio",
-    category: "starters",
-    price: 48,
+    name: "The Monster Double Smash Burger",
+    category: "burgers",
+    price: 12.99,
     rating: 4.9,
-    reviewsCount: 124,
-    prepTime: "15 min",
-    calories: "380 kcal",
-    description: "Miyazaki A5 Wagyu beef thinly sliced, shaved black Périgord truffle, aged balsamic pearls, 36-month Parmigiano-Reggiano foam, micro greens.",
-    dietary: ["Gluten-Free", "Chef Special"],
-    winePairing: "Château Margaux Premier Grand Cru 2015",
-    image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80",
-    ingredients: ["Miyazaki A5 Wagyu", "Black Périgord Truffle", "Balsamic Caviar", "Parmigiano Crisp", "Extra Virgin Olive Oil"]
+    reviewsCount: 480,
+    prepTime: "8 min",
+    calories: "780 kcal",
+    description: "Two 100% Angus beef smashed patties, triple melted American cheddar, caramelized onions, crispy bacon strips, and house secret Crave Sauce on toasted brioche.",
+    dietary: ["Bestseller", "Double Beef"],
+    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-cheeseburger-with-french-fries-41562-large.mp4",
+    image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80",
+    ingredients: ["Angus Smash Beef", "Triple Cheddar", "Smoked Bacon", "Caramelized Onions", "Brioche Bun", "Secret Crave Sauce"]
   },
   {
     id: 2,
-    name: "Seared Pan-Fried Foie Gras",
-    category: "starters",
-    price: 42,
-    rating: 4.8,
-    reviewsCount: 98,
-    prepTime: "18 min",
-    calories: "450 kcal",
-    description: "Pan-seared French duck foie gras served over caramelized mission fig compote, warm artisanal brioche, finished with Sauternes glaze reduction.",
-    dietary: ["Chef Special"],
-    winePairing: "Château d'Yquem Sauternes 2011",
-    image: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?auto=format&fit=crop&w=800&q=80",
-    ingredients: ["Duck Foie Gras", "Mission Figs", "French Brioche", "Sauternes Wine", "Pink Himalayan Salt"]
+    name: "Fiery Nashville Spicy Crispy Chicken Burger",
+    category: "burgers",
+    price: 11.49,
+    rating: 4.9,
+    reviewsCount: 390,
+    prepTime: "7 min",
+    calories: "690 kcal",
+    description: "Jumbo crispy chicken breast dipped in Nashville hot oil, topped with cool creamy coleslaw, tangy dill pickles, and honey habanero mayo.",
+    dietary: ["Spicy Crave", "Crispy Chicken"],
+    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-hands-holding-a-hamburger-42908-large.mp4",
+    image: "https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?auto=format&fit=crop&w=800&q=80",
+    ingredients: ["11-Spice Crispy Chicken Breast", "Nashville Hot Glaze", "Creamy Coleslaw", "Dill Pickles", "Honey Habanero Mayo"]
   },
   {
     id: 3,
-    name: "Wild Brittany Lobster Bisque",
-    category: "starters",
-    price: 36,
-    rating: 4.9,
-    reviewsCount: 156,
+    name: "Mega Crunch Chicken Bucket (12 Pcs)",
+    category: "chicken",
+    price: 24.99,
+    rating: 5.0,
+    reviewsCount: 620,
     prepTime: "12 min",
-    calories: "310 kcal",
-    description: "Velvety sea lobster broth infused with cognac, saffron, fennel cream, and butter-poached lobster tail medallion.",
-    dietary: ["Gluten-Free Option"],
-    winePairing: "Domaine Leflaive Puligny-Montrachet 2019",
-    image: "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80",
-    ingredients: ["Brittany Blue Lobster", "Hennessy Cognac", "Spanish Saffron", "Crème Fraîche", "Fresh Tarragon"]
+    calories: "1450 kcal",
+    description: "12 pieces of ultra-crispy, golden fried chicken marinated in 11 secret herbs & spices. Served with 2 large sides of garlic dip & honey mustard.",
+    dietary: ["Family Bucket", "Super Crunch"],
+    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-fried-chicken-wings-in-a-plate-41564-large.mp4",
+    image: "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?auto=format&fit=crop&w=800&q=80",
+    ingredients: ["Fresh Chicken Drumsticks & Thighs", "11 Secret Spice Breading", "Garlic Crave Dip", "Honey Mustard"]
   },
   {
     id: 4,
-    name: "Dry-Aged Tomahawk Ribeye (32oz)",
-    category: "steaks",
-    price: 165,
-    rating: 5.0,
-    reviewsCount: 210,
-    prepTime: "35 min",
-    calories: "1150 kcal",
-    description: "45-day Himalayan salt-cave aged prime Angus Tomahawk, charbroiled over binchotan white charcoal. Served with smoked bone marrow butter and truffle jus.",
-    dietary: ["Gluten-Free", "Chef Special"],
-    winePairing: "Opus One Napa Valley Cabernet Sauvignon 2018",
-    image: "https://images.unsplash.com/photo-1558030006-450675393462?auto=format&fit=crop&w=800&q=80",
-    ingredients: ["Prime Angus Beef", "Smoked Marrow Butter", "Binchotan Charcoal", "Black Truffle Jus", "Rosemary"]
+    name: "Supreme Loaded Pepperoni & Cheese Crust Pizza",
+    category: "pizzas",
+    price: 18.99,
+    rating: 4.9,
+    reviewsCount: 510,
+    prepTime: "15 min",
+    calories: "1100 kcal",
+    description: "Fresh dough hand-tossed with mozzarella stuffed crust, rich San Marzano tomato sauce, double smoked pepperoni slices, Italian herbs, and garlic butter drizzle.",
+    dietary: ["Stuffed Crust", "Chef Recommendation"],
+    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-pulling-a-slice-of-pizza-with-cheese-41563-large.mp4",
+    image: "https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?auto=format&fit=crop&w=800&q=80",
+    ingredients: ["Mozzarella Stuffed Crust", "Double Pepperoni", "San Marzano Tomato Sauce", "Oregano & Garlic Butter"]
   },
   {
     id: 5,
-    name: "Pan-Roasted Chilean Sea Bass",
-    category: "seafood",
-    price: 58,
-    rating: 4.9,
-    reviewsCount: 142,
-    prepTime: "25 min",
-    calories: "520 kcal",
-    description: "Sustainably caught wild sea bass with crispy skin, lemongrass-infused champagne velouté, caviar pearls, and baby leek fondue.",
-    dietary: ["Gluten-Free", "Pescatarian"],
-    winePairing: "Cloudy Bay Sauvignon Blanc 2022",
-    image: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=800&q=80",
-    ingredients: ["Chilean Sea Bass", "Osetra Caviar", "Champagne Velouté", "Baby Leeks", "Lemongrass"]
+    name: "Truffle Mushroom & 4-Cheese Pizza",
+    category: "pizzas",
+    price: 19.99,
+    rating: 4.8,
+    reviewsCount: 230,
+    prepTime: "14 min",
+    calories: "980 kcal",
+    description: "Creamy white garlic base, fresh mozzarella, gorgonzola, parmesan, roasted wild porcini mushrooms, finished with black truffle oil drizzle.",
+    dietary: ["Vegetarian", "Gourmet Pizza"],
+    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-slice-of-pizza-with-melted-cheese-42907-large.mp4",
+    image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80",
+    ingredients: ["Mozzarella", "Gorgonzola", "Parmesan", "Porcini Mushrooms", "Black Truffle Oil"]
   },
   {
     id: 6,
-    name: "Sous-Vide Duck Breast à l'Orange",
-    category: "mains",
-    price: 52,
-    rating: 4.8,
-    reviewsCount: 88,
-    prepTime: "22 min",
-    calories: "640 kcal",
-    description: "Crispy skin Moulard duck breast, blood orange Grand Marnier reduction, roasted heritage carrots, spiced parsnip mousseline.",
-    dietary: ["Gluten-Free"],
-    winePairing: "Domaine de la Romanée-Conti Échezeaux 2017",
-    image: "https://images.unsplash.com/photo-1514944288352-fffac99f0bdf?auto=format&fit=crop&w=800&q=80",
-    ingredients: ["Moulard Duck", "Blood Orange", "Grand Marnier", "Parsnip Purée", "Star Anise"]
+    name: "Loaded Animal Fries & Melted Cheese",
+    category: "sides",
+    price: 6.99,
+    rating: 4.9,
+    reviewsCount: 410,
+    prepTime: "5 min",
+    calories: "520 kcal",
+    description: "Crispy skin-on french fries smothered in warm liquid cheddar cheese, caramelized grilled onions, smoky bacon bits, and signature Crave drizzle.",
+    dietary: ["Loaded Sides"],
+    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-french-fries-in-a-basket-41561-large.mp4",
+    image: "https://images.unsplash.com/photo-1576107232684-1279f3908594?auto=format&fit=crop&w=800&q=80",
+    ingredients: ["Golden Seasoned Fries", "Warm Cheddar Sauce", "Smoky Bacon Bits", "Caramelized Onions"]
   },
   {
     id: 7,
-    name: "Black Truffle Risotto (V)",
-    category: "mains",
-    price: 46,
-    rating: 4.9,
-    reviewsCount: 175,
-    prepTime: "20 min",
-    calories: "490 kcal",
-    description: "Acquerello Carnaroli rice slow-cooked in wild mushroom broth, mantecato with cultured butter, fresh Norcia black truffle shavings.",
-    dietary: ["Vegetarian", "Gluten-Free"],
-    winePairing: "Barolo Monfortino Riserva Giacomo Conterno 2013",
-    image: "https://images.unsplash.com/photo-1633964913295-ceb43826e7c9?auto=format&fit=crop&w=800&q=80",
-    ingredients: ["Acquerello Rice", "Norcia Black Truffle", "Porcini Broth", "24-Month Parmigiano", "Chervil"]
-  },
-  {
-    id: 8,
-    name: "L'Étoile Golden Sphere Dessert",
-    category: "desserts",
-    price: 32,
+    name: "Salted Caramel Oreo Monster Shake",
+    category: "shakes",
+    price: 6.49,
     rating: 5.0,
-    reviewsCount: 310,
-    prepTime: "15 min",
-    calories: "420 kcal",
-    description: "24-Karat edible gold leaf chocolate sphere melted table-side with warm Valrhona dark chocolate ganache, passion fruit gel, hazelnut praline core.",
-    dietary: ["Vegetarian", "Chef Special"],
-    winePairing: "Taylor Fladgate 40 Year Old Tawny Port",
-    image: "https://images.unsplash.com/photo-1579372786545-d24232daf58c?auto=format&fit=crop&w=800&q=80",
-    ingredients: ["24K Edible Gold", "Valrhona 70% Dark Chocolate", "Piedmont Hazelnut", "Passion Fruit", "Vanilla Bean Gelato"]
-  },
-  {
-    id: 9,
-    name: "Grand Marnier Soufflé",
-    category: "desserts",
-    price: 28,
-    rating: 4.8,
-    reviewsCount: 115,
-    prepTime: "25 min",
-    calories: "360 kcal",
-    description: "Light-as-air baked soufflé infused with orange liquor, served with creme anglaise and Madagascar vanilla bean ice cream.",
-    dietary: ["Vegetarian"],
-    winePairing: "Château Raymond-Lafon Sauternes 2016",
-    image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80",
-    ingredients: ["Grand Marnier", "Organic Eggs", "Tahitian Vanilla", "Canoe Creme Anglaise"]
-  },
-  {
-    id: 10,
-    name: "Dom Pérignon Vintage 2013 Champagne",
-    category: "wines",
-    price: 380,
-    rating: 5.0,
-    reviewsCount: 65,
-    prepTime: "Chilled",
-    calories: "120 kcal/glass",
-    description: "Crisp notes of white peach, candied citrus, brioche, and smoky minerality. The pinnacle of French Champagne craftsmanship.",
-    dietary: ["Vegan", "Gluten-Free"],
-    winePairing: "Osetra Caviar & Fresh Oysters",
-    image: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80",
-    ingredients: ["Pinot Noir", "Chardonnay", "Épernay France Region"]
+    reviewsCount: 380,
+    prepTime: "4 min",
+    calories: "610 kcal",
+    description: "Thick vanilla bean gelato blended with crushed Oreo cookies, salted caramel swirl, topped with whipped cream, Oreo crumbles, and caramel drizzle.",
+    dietary: ["Sweet Crave"],
+    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-pouring-chocolate-syrup-on-an-ice-cream-41565-large.mp4",
+    image: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=800&q=80",
+    ingredients: ["Vanilla Gelato", "Oreo Cookie Crumbles", "Salted Caramel Swirl", "Whipped Cream"]
   }
 ];
 
-export const CHEF_PROFILE = {
-  name: "Chef Antoine Laurent",
-  title: "Executive Culinary Director & Founder",
-  bio: "Trained under 3-star Michelin masters in Paris and Tokyo, Chef Antoine reimagines classical French techniques with modern molecular gastronomy. His philosophy centers on hyper-seasonal ingredients, theatrical presentation, and unforgettable flavor harmony.",
-  quote: "Food is not merely sustenance; it is an emotional voyage. Every dish at L'Étoile D'Or tells a story of passion, precision, and place.",
-  image: "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=800&q=80",
-  awards: [
-    "Michelin 3 Stars (2020 - 2026)",
-    "World's 50 Best Restaurants Top 10",
-    "James Beard Outstanding Chef Award"
-  ]
-};
-
-export const GALLERY_ITEMS = [
+export const HOT_DEALS = [
   {
-    id: 1,
-    title: "Grand Dining Hall",
-    category: "Interior",
-    image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80"
+    id: 'deal1',
+    title: "THE ULTIMATE CRAVE BOX",
+    items: "1 Double Smash Burger + 2 Crispy Wings + Loaded Fries + Thick Shake",
+    price: "$16.99",
+    originalPrice: "$24.50",
+    discount: "SAVE 30%",
+    image: "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=80"
   },
   {
-    id: 2,
-    title: "Private Salt-Cave Wine Cellar",
-    category: "Cellar",
-    image: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: 3,
-    title: "Open Culinary Lab Kitchen",
-    category: "Kitchen",
-    image: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: 4,
-    title: "Plating Perfection",
-    category: "Dishes",
-    image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: 5,
-    title: "Moonlight Terrace Lounge",
-    category: "Interior",
-    image: "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=800&q=80"
-  },
-  {
-    id: 6,
-    title: "Mixology & Craft Cocktails",
-    category: "Bar",
-    image: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=800&q=80"
+    id: 'deal2',
+    title: "FAMILY PIZZA & CHICKEN FEAST",
+    items: "1 Supreme Pepperoni Stuffed Crust + 8 Pcs Crispy Chicken + 2 Shakes",
+    price: "$34.99",
+    originalPrice: "$48.00",
+    discount: "SAVE $13",
+    image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80"
   }
 ];
 
-export const TESTIMONIALS = [
+export const BROLL_VIDEOS = [
   {
     id: 1,
-    name: "Lord Julian Sterling",
-    role: "Michelin Guide Reviewer",
-    comment: "An extraordinary culinary symphony. The Truffled Wagyu Carpaccio and Golden Sphere dessert are triumphs of contemporary dining.",
-    rating: 5,
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80"
+    title: "Flame-Broiling Double Smash Patties",
+    category: "Burgers",
+    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-cheeseburger-with-french-fries-41562-large.mp4",
+    poster: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80"
   },
   {
     id: 2,
-    name: "Elena Rostova",
-    role: "Food & Wine Magazine",
-    comment: "L'Étoile D'Or sets a new global benchmark. The AI Sommelier matched our 7-course tasting menu with breathtaking precision.",
-    rating: 5,
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80"
+    title: "Hand-Tossed Cheese Stretch Pizza",
+    category: "Pizzas",
+    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-pulling-a-slice-of-pizza-with-cheese-41563-large.mp4",
+    poster: "https://images.unsplash.com/photo-1534308983496-4fabb1a015ee?auto=format&fit=crop&w=800&q=80"
   },
   {
     id: 3,
-    name: "Marcus Vance",
-    role: "Culinary Critic, NY Times",
-    comment: "From the moment the golden doors open to the final sip of vintage port, every detail exudes uncompromised luxury.",
-    rating: 5,
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80"
+    title: "Golden 11-Spice Crispy Chicken Crunch",
+    category: "Chicken",
+    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-fried-chicken-wings-in-a-plate-41564-large.mp4",
+    poster: "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?auto=format&fit=crop&w=800&q=80"
   }
 ];
 
 export const FAQS = [
   {
-    question: "What is the dress code at L'Étoile D'Or?",
-    answer: "We mandate Elegant Formal Attire. Jackets are required for gentlemen; sneakers, sportswear, and casual sandals are strictly prohibited."
+    question: "What is your average delivery time?",
+    answer: "Our average express delivery time is 19 minutes! We use insulated hot-bags to keep your burgers sizzling and pizzas piping hot."
   },
   {
-    question: "Do you accommodate severe allergies or dietary restrictions?",
-    answer: "Yes! Our culinary team crafts custom multi-course tasting menus for Vegan, Gluten-Free, Halal, and Kosher-style requirements upon 24-hour advance request."
+    question: "How are your Smash Burgers prepared?",
+    answer: "We use 100% Angus beef smashed onto 500°F cast iron grills to lock in natural juices with crispy caramelized edges."
   },
   {
-    question: "How far in advance can I make a table reservation?",
-    answer: "Reservations open 60 days in advance on the 1st of every month at 9:00 AM EST. Private Vault bookings can be arranged up to 6 months prior."
+    question: "Do you have Halal, Vegetarian, or Gluten-Free options?",
+    answer: "Yes! All chicken items are 100% Halal certified, and we offer Beyond Meat burgers, vegetarian pizzas, and gluten-free buns."
   }
 ];

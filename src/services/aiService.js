@@ -3,7 +3,6 @@ import { MENU_ITEMS, RESTAURANT_INFO } from '../data/restaurantData';
 const API_KEY = import.meta.env.VITE_NVIDIA_API_KEY || "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";
 const MODEL_NAME = "nvidia/nemotron-3-ultra-550b-a55b";
 
-// Clean all markdown asterisks (***, **, *) from text
 export function cleanMarkdownFormatting(text) {
   if (!text) return "";
   return text
@@ -14,20 +13,19 @@ export function cleanMarkdownFormatting(text) {
     .trim();
 }
 
-const SYSTEM_PROMPT = `You are "Étoile Master Sommelier & Concierge" for ${RESTAURANT_INFO.name}, a premier 3 Michelin-Star fine dining restaurant.
-Your persona is sophisticated, warm, deeply knowledgeable about gastronomy, wine pairings, and dining etiquette.
+const SYSTEM_PROMPT = `You are "Crunchy AI Crave Assistant" for ${RESTAURANT_INFO.name}, a high-energy, top-tier fast-casual burger, crispy chicken & artisan pizza restaurant!
+Your persona is energetic, friendly, helpful, and passionate about delicious food, hot deals, and custom combo builds.
 
 CRITICAL INSTRUCTIONS:
-1. NEVER mention any technical AI model names, company names, or internal software details. You are simply the Master Sommelier & Concierge of ${RESTAURANT_INFO.name}.
-2. DO NOT use markdown bold asterisks (like ** or ***) in your answers. Output clean text using bullet points (•) and plain headers.
+1. NEVER mention any technical AI model names or company software names. You are purely the AI Crave Assistant of ${RESTAURANT_INFO.name}.
+2. DO NOT use markdown bold asterisks (like ** or ***) in your answers. Output clean text using bullet points (•) and plain headings.
 
-Menu & Dining info:
-- Address: ${RESTAURANT_INFO.address}
-- Hours: Dinner (5PM-11:30PM), Lunch (Fri-Sun 12PM-3PM), Bar (4:30PM-1AM)
-- Menu Highlights:
-${MENU_ITEMS.map(i => `- ${i.name} ($${i.price}): ${i.description} (Wine Pairing: ${i.winePairing})`).join('\n')}
+Menu Highlights:
+${MENU_ITEMS.map(i => `- ${i.name} ($${i.price}): ${i.description} (Category: ${i.category})`).join('\n')}
 
-Always provide unique, detailed answers specifically tailored to the user's question.`;
+Guidelines:
+- Recommend burger custom combos, pizza crust options, spicy chicken crunch levels, and dessert milkshakes.
+- Answer order, delivery, and combo deal questions cleanly.`;
 
 export async function sendChatMessage(messages, onChunk, onReasoning) {
   const formattedMessages = [
@@ -44,7 +42,6 @@ export async function sendChatMessage(messages, onChunk, onReasoning) {
     stream: true
   };
 
-  // List of endpoints to try (Vite proxy endpoint first, direct endpoint second)
   const endpoints = [
     "/api/nvidia/chat/completions",
     "https://integrate.api.nvidia.com/v1/chat/completions"
@@ -53,7 +50,7 @@ export async function sendChatMessage(messages, onChunk, onReasoning) {
   for (const endpoint of endpoints) {
     try {
       if (onReasoning) {
-        onReasoning("Analyzing guest prompt... consulting cellar archives and culinary flavor profiles...");
+        onReasoning("Sizzling prompt... matching custom combos and crave deals...");
       }
 
       const response = await fetch(endpoint, {
@@ -91,19 +88,17 @@ export async function sendChatMessage(messages, onChunk, onReasoning) {
               const delta = parsed.choices?.[0]?.delta;
               if (!delta) continue;
 
-              // Capture live thinking/reasoning if present
               if (delta.reasoning_content) {
                 fullReasoning += delta.reasoning_content;
                 if (onReasoning) onReasoning(cleanMarkdownFormatting(fullReasoning));
               }
 
-              // Capture text answer stream
               if (delta.content !== null && delta.content !== undefined) {
                 fullContent += delta.content;
                 if (onChunk) onChunk(cleanMarkdownFormatting(fullContent));
               }
             } catch (e) {
-              // Ignore partial JSON line errors
+              // Ignore partial JSON parse errors
             }
           }
         }
@@ -116,56 +111,48 @@ export async function sendChatMessage(messages, onChunk, onReasoning) {
         };
       }
     } catch (err) {
-      console.warn(`Endpoint ${endpoint} failed, trying next option...`, err);
+      console.warn(`Endpoint ${endpoint} failed, generating dynamic Crave Assistant response...`, err);
     }
   }
 
-  // Fallback engine: generates dynamic, intelligent answers for any user input
   const lastUserPrompt = messages[messages.length - 1]?.content || "";
-  return await generateIntelligentCustomResponse(lastUserPrompt, onChunk, onReasoning);
+  return await generateDynamicCraveResponse(lastUserPrompt, onChunk, onReasoning);
 }
 
-async function generateIntelligentCustomResponse(prompt, onChunk, onReasoning) {
+async function generateDynamicCraveResponse(prompt, onChunk, onReasoning) {
   if (onReasoning) {
-    onReasoning(`Analyzing guest prompt: "${prompt}"... matching palate profiles with Master Sommelier cellars...`);
-    await new Promise(r => setTimeout(r, 500));
+    onReasoning(`Analyzing crave request for: "${prompt}"... selecting top combos...`);
+    await new Promise(r => setTimeout(r, 400));
   }
 
   const promptLower = prompt.toLowerCase();
   let text = "";
 
-  // Dynamic intelligent answer construction based on prompt content
-  if (promptLower.includes("dessert") || promptLower.includes("sweet") || promptLower.includes("cake") || promptLower.includes("chocolate")) {
-    text = `🍰 Master Sommelier Dessert & Digestif Curation\n\n` +
-           `Regarding your question on "${prompt}":\n\n` +
-           `• L'Étoile Golden Sphere ($32): Our signature 24-Karat edible gold sphere filled with Valrhona 70% dark chocolate ganache, passion fruit gel, and hazelnut praline core. Melted table-side with warm chocolate reduction.\n` +
-           `• Grand Marnier Soufflé ($28): Light-as-air baked soufflé infused with Grand Marnier liqueur, served with Madagascar vanilla bean ice cream.\n\n` +
-           `Pairing Recommendation: Taylor Fladgate 40 Year Old Tawny Port or Château Raymond-Lafon Sauternes.`;
-  } else if (promptLower.includes("steak") || promptLower.includes("wagyu") || promptLower.includes("meat") || promptLower.includes("beef") || promptLower.includes("ribeye")) {
-    text = `🥩 Dry-Aged Beef & Wagyu Selection\n\n` +
-           `Regarding your inquiry about "${prompt}":\n\n` +
-           `• Dry-Aged Tomahawk Ribeye 32oz ($165): 45-day Himalayan salt-cave aged Angus prime ribeye, charbroiled over binchotan white charcoal with smoked marrow butter and black truffle jus.\n` +
-           `• Truffled Wagyu A5 Carpaccio ($48): Miyazaki A5 Wagyu thinly sliced with shaved Périgord truffle and 36-month Parmigiano foam.\n\n` +
-           `Sommelier Pairing: Opus One Napa Valley Cabernet Sauvignon 2018.`;
-  } else if (promptLower.includes("seafood") || promptLower.includes("fish") || promptLower.includes("lobster") || promptLower.includes("sea bass")) {
-    text = `🌊 Ocean Treasures & Seafood Curation\n\n` +
-           `Regarding your request for "${prompt}":\n\n` +
-           `• Pan-Roasted Chilean Sea Bass ($58): Wild sea bass with crispy skin, lemongrass champagne velouté, and Osetra caviar pearls.\n` +
-           `• Wild Brittany Lobster Bisque ($36): Velvety broth infused with Hennessy cognac, Spanish saffron, and butter-poached lobster medallion.\n\n` +
-           `Sommelier Pairing: Cloudy Bay Sauvignon Blanc 2022 or Domaine Leflaive Puligny-Montrachet.`;
-  } else if (promptLower.includes("hi") || promptLower.includes("hello") || promptLower.includes("hey") || promptLower.includes("who are you")) {
-    text = `Bonsoir! Welcome to L'Étoile D'Or.\n\n` +
-           `I am your Master Sommelier & Concierge. Whether you require a wine pairing for Miyazaki Wagyu, table reservations in our private Salt-Cave Vault, or plant-based tasting menus, I am at your service.\n\n` +
-           `How may I assist your palate tonight?`;
+  if (promptLower.includes("burger") || promptLower.includes("smash") || promptLower.includes("beef") || promptLower.includes("cheese")) {
+    text = `🍔 Crunchy Crave Burger Curation\n\n` +
+           `For the ultimate burger craving:\n\n` +
+           `• The Monster Double Smash Burger ($12.99): Two Angus smashed patties with triple melted cheddar, bacon, and secret Crave sauce.\n` +
+           `• Fiery Nashville Spicy Chicken Burger ($11.49): Jumbo 11-spice crispy chicken in Nashville hot glaze with honey habanero mayo.\n\n` +
+           `Pro Tip: Upgrade to the Ultimate Crave Box ($16.99) to get loaded animal fries and an Oreo shake!`;
+  } else if (promptLower.includes("pizza") || promptLower.includes("pepperoni") || promptLower.includes("crust")) {
+    text = `🍕 Hand-Tossed Pizza Highlights\n\n` +
+           `Regarding your pizza request:\n\n` +
+           `• Supreme Loaded Pepperoni ($18.99): Mozzarella stuffed crust, double smoked pepperoni, San Marzano sauce.\n` +
+           `• Truffle Mushroom & 4-Cheese ($19.99): Creamy white base, porcini mushrooms, black truffle drizzle.\n\n` +
+           `Would you like to customize your crust or add a 12-Piece Crispy Chicken Bucket?`;
+  } else if (promptLower.includes("deal") || promptLower.includes("combo") || promptLower.includes("box") || promptLower.includes("save")) {
+    text = `🔥 Hot Crave Deals Right Now\n\n` +
+           `1. THE ULTIMATE CRAVE BOX ($16.99 - Save 30%):\n` +
+           `Includes 1 Double Smash Burger + 2 Crispy Wings + Loaded Animal Fries + Thick Shake.\n\n` +
+           `2. FAMILY PIZZA & CHICKEN FEAST ($34.99 - Save $13):\n` +
+           `Includes 1 Supreme Pepperoni Stuffed Crust + 8 Pcs Crispy Chicken + 2 Shakes.\n\n` +
+           `Head over to our Build Combo page to construct your custom box!`;
   } else {
-    // Dynamic tailored answer for any open question
-    text = `✨ Sommelier Concierge Insights\n\n` +
-           `Thank you for asking: "${prompt}".\n\n` +
-           `At L'Étoile D'Or, Chef Antoine Laurent curates every dish with seasonal precision.\n\n` +
-           `• Signature Dish: Dry-Aged Tomahawk Ribeye with smoked marrow butter & Périgord black truffle.\n` +
-           `• Featured Vintage: Château Margaux Premier Grand Cru 2015.\n` +
-           `• Seating Experience: Main Dining Hall with live grand piano or private Salt-Cave Vault.\n\n` +
-           `Would you like to reserve a table or view our full menu options for your visit?`;
+    text = `Welcome to Burger & Crunch Co.!\n\n` +
+           `Regarding "${prompt}":\n\n` +
+           `• We serve 100% Angus smash burgers, 11-spice mega crispy chicken, and stuffed crust artisan pizzas.\n` +
+           `• Average express delivery time is under 19 minutes.\n\n` +
+           `How may I help you pick your combo or order today?`;
   }
 
   const cleaned = cleanMarkdownFormatting(text);
@@ -173,9 +160,9 @@ async function generateIntelligentCustomResponse(prompt, onChunk, onReasoning) {
   for (let i = 0; i < cleaned.length; i += 3) {
     current = cleaned.slice(0, i + 3);
     if (onChunk) onChunk(current);
-    await new Promise(r => setTimeout(r, 15));
+    await new Promise(r => setTimeout(r, 12));
   }
   if (onChunk) onChunk(cleaned);
 
-  return { content: cleaned, reasoning: `Analyzed guest query on ${prompt}` };
+  return { content: cleaned, reasoning: `Analyzed craving for: ${prompt}` };
 }
