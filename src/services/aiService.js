@@ -1,7 +1,8 @@
 import OpenAI from 'openai';
 import { MENU_ITEMS, RESTAURANT_INFO } from '../data/restaurantData';
 
-const API_KEY = "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";
+// Securely load API Key from environment variables (import.meta.env in Vite)
+const API_KEY = import.meta.env.VITE_NVIDIA_API_KEY || "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";
 const BASE_URL = "https://integrate.api.nvidia.com/v1";
 const MODEL_NAME = "nvidia/nemotron-3-ultra-550b-a55b";
 
