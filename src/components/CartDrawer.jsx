@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { X, Trash2, Plus, Minus, ShoppingBag, ArrowRight, CheckCircle2, Utensils } from 'lucide-react';
-import { RESTAURANT_INFO } from '../data/restaurantData';
 
 export default function CartDrawer({ isOpen, onClose, cart, updateQuantity, removeItem, clearCart }) {
   const [diningType, setDiningType] = useState('dine-in');
@@ -28,74 +27,76 @@ export default function CartDrawer({ isOpen, onClose, cart, updateQuantity, remo
       position: 'fixed',
       inset: 0,
       zIndex: 1000,
-      background: 'rgba(0, 0, 0, 0.75)',
+      background: 'rgba(0, 0, 0, 0.8)',
       backdropFilter: 'blur(10px)',
       display: 'flex',
       justifyContent: 'flex-end'
     }}>
-      <div style={{
+      <div className="mobile-drawer-full" style={{
         width: '100%',
-        maxWidth: '480px',
+        maxWidth: '460px',
         height: '100%',
         background: 'var(--bg-secondary)',
         borderLeft: '1px solid var(--gold-primary)',
         display: 'flex',
         flexDirection: 'column',
-        boxShadow: '-10px 0 40px rgba(0,0,0,0.8)',
+        boxShadow: '-10px 0 40px rgba(0,0,0,0.9)',
         position: 'relative'
       }}>
         {/* Header */}
         <div style={{
-          padding: '24px',
+          padding: '18px 20px',
           borderBottom: '1px solid var(--border-gold)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          background: 'rgba(11, 13, 16, 0.9)'
+          background: 'rgba(11, 13, 16, 0.95)'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <ShoppingBag size={22} color="var(--gold-primary)" />
-            <h3 className="font-serif text-gold-gradient" style={{ fontSize: '1.4rem', fontWeight: '700' }}>
+            <ShoppingBag size={20} color="var(--gold-primary)" />
+            <h3 className="font-serif text-gold-gradient" style={{ fontSize: '1.25rem', fontWeight: '700' }}>
               Your Gourmet Order
             </h3>
           </div>
           <button
             onClick={onClose}
+            aria-label="Close cart"
             style={{
               background: 'none',
               border: 'none',
-              color: 'var(--text-muted)',
-              cursor: 'pointer'
+              color: '#fff',
+              cursor: 'pointer',
+              padding: '4px'
             }}
           >
-            <X size={24} />
+            <X size={22} />
           </button>
         </div>
 
         {/* Content Body */}
-        <div style={{ flex: '1', overflowY: 'auto', padding: '24px' }}>
+        <div style={{ flex: '1', overflowY: 'auto', padding: '20px', WebkitOverflowScrolling: 'touch' }}>
           {checkoutComplete ? (
             <div style={{ textAlign: 'center', padding: '40px 10px' }}>
               <div style={{
-                width: '70px',
-                height: '70px',
+                width: '65px',
+                height: '65px',
                 borderRadius: '50%',
                 background: 'rgba(46, 184, 114, 0.15)',
                 border: '2px solid #2eb872',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                margin: '0 auto 20px'
+                margin: '0 auto 16px'
               }}>
-                <CheckCircle2 size={40} color="#2eb872" />
+                <CheckCircle2 size={36} color="#2eb872" />
               </div>
-              <h3 className="font-serif text-gold-gradient" style={{ fontSize: '1.8rem', marginBottom: '8px' }}>
+              <h3 className="font-serif text-gold-gradient" style={{ fontSize: '1.6rem', marginBottom: '6px' }}>
                 Order Confirmed!
               </h3>
-              <p style={{ color: 'var(--text-gold)', fontWeight: '700', fontSize: '1.1rem', marginBottom: '16px' }}>
+              <p style={{ color: 'var(--text-gold)', fontWeight: '700', fontSize: '1rem', marginBottom: '14px' }}>
                 Reference ID: {orderId}
               </p>
-              <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '24px', lineHeight: 1.6 }}>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.88rem', marginBottom: '24px', lineHeight: 1.5 }}>
                 Chef Antoine and our team have received your order. We are preparing your selection with utmost Michelin precision.
               </p>
               <button
@@ -106,59 +107,59 @@ export default function CartDrawer({ isOpen, onClose, cart, updateQuantity, remo
                 className="btn-gold"
                 style={{ width: '100%' }}
               >
-                Return to Experience
+                Return to Menu
               </button>
             </div>
           ) : cart.length === 0 ? (
-            <div style={{ textAlign: 'center', padding: '60px 10px' }}>
-              <Utensils size={48} color="var(--gold-primary)" style={{ opacity: 0.5, marginBottom: '16px' }} />
-              <p style={{ fontSize: '1.1rem', color: 'var(--text-muted)', marginBottom: '20px' }}>
+            <div style={{ textAlign: 'center', padding: '50px 10px' }}>
+              <Utensils size={42} color="var(--gold-primary)" style={{ opacity: 0.4, marginBottom: '14px' }} />
+              <p style={{ fontSize: '1rem', color: 'var(--text-muted)', marginBottom: '20px' }}>
                 Your order is currently empty.
               </p>
               <button onClick={onClose} className="btn-outline-gold">
-                Browse Menu
+                Browse Gourmet Menu
               </button>
             </div>
           ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               {/* Order Items */}
               {cart.map((item) => (
                 <div key={item.id} style={{
                   display: 'flex',
-                  gap: '14px',
-                  background: 'rgba(11, 13, 16, 0.6)',
-                  padding: '12px',
+                  gap: '12px',
+                  background: 'rgba(11, 13, 16, 0.7)',
+                  padding: '10px',
                   borderRadius: 'var(--radius-md)',
                   border: '1px solid var(--border-subtle)',
                   alignItems: 'center'
                 }}>
-                  <img src={item.image} alt={item.name} style={{ width: '70px', height: '70px', objectFit: 'cover', borderRadius: '8px' }} />
+                  <img src={item.image} alt={item.name} style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '8px' }} />
                   
-                  <div style={{ flex: '1' }}>
-                    <h4 style={{ color: '#fff', fontSize: '0.95rem', fontWeight: '600', marginBottom: '4px' }}>
+                  <div style={{ flex: '1', minWidth: 0 }}>
+                    <h4 style={{ color: '#fff', fontSize: '0.88rem', fontWeight: '600', marginBottom: '2px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                       {item.name}
                     </h4>
-                    <div style={{ color: 'var(--gold-primary)', fontWeight: '700', fontSize: '0.9rem' }}>
-                      ${item.price} each
+                    <div style={{ color: 'var(--gold-primary)', fontWeight: '700', fontSize: '0.85rem' }}>
+                      ${item.price}
                     </div>
                   </div>
 
                   {/* Quantity Controls */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'rgba(255,255,255,0.05)', padding: '4px 8px', borderRadius: '16px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(255,255,255,0.05)', padding: '4px 8px', borderRadius: '14px' }}>
                     <button
                       onClick={() => updateQuantity(item.id, item.quantity - 1)}
                       style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer' }}
                     >
-                      <Minus size={14} />
+                      <Minus size={12} />
                     </button>
-                    <span style={{ fontSize: '0.85rem', fontWeight: '700', minWidth: '16px', textAlign: 'center' }}>
+                    <span style={{ fontSize: '0.82rem', fontWeight: '700', minWidth: '14px', textAlign: 'center' }}>
                       {item.quantity}
                     </span>
                     <button
                       onClick={() => updateQuantity(item.id, item.quantity + 1)}
                       style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer' }}
                     >
-                      <Plus size={14} />
+                      <Plus size={12} />
                     </button>
                   </div>
 
@@ -166,20 +167,20 @@ export default function CartDrawer({ isOpen, onClose, cart, updateQuantity, remo
                     onClick={() => removeItem(item.id)}
                     style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', padding: '4px' }}
                   >
-                    <Trash2 size={16} />
+                    <Trash2 size={15} />
                   </button>
                 </div>
               ))}
 
               {/* Service Type Selection */}
-              <div style={{ marginTop: '10px' }}>
-                <label style={{ fontSize: '0.85rem', color: 'var(--text-muted)', display: 'block', marginBottom: '8px' }}>
-                  Select Order Service Type:
+              <div style={{ marginTop: '6px' }}>
+                <label style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'block', marginBottom: '6px' }}>
+                  Select Service Type:
                 </label>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
                   {[
                     { id: 'dine-in', label: 'Dine-In Pre-Order' },
-                    { id: 'takeaway', label: 'VIP Concierge Takeaway' }
+                    { id: 'takeaway', label: 'VIP Takeaway' }
                   ].map(t => (
                     <button
                       key={t.id}
@@ -190,7 +191,7 @@ export default function CartDrawer({ isOpen, onClose, cart, updateQuantity, remo
                         background: diningType === t.id ? 'rgba(212, 175, 55, 0.15)' : 'rgba(255,255,255,0.03)',
                         border: '1px solid ' + (diningType === t.id ? 'var(--gold-primary)' : 'var(--border-subtle)'),
                         color: diningType === t.id ? 'var(--gold-primary)' : 'var(--text-muted)',
-                        fontSize: '0.8rem',
+                        fontSize: '0.78rem',
                         cursor: 'pointer'
                       }}
                     >
@@ -202,21 +203,21 @@ export default function CartDrawer({ isOpen, onClose, cart, updateQuantity, remo
 
               {/* Special Instructions */}
               <div>
-                <label style={{ fontSize: '0.85rem', color: 'var(--text-muted)', display: 'block', marginBottom: '8px' }}>
-                  Special Culinary Request or Allergies:
+                <label style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'block', marginBottom: '6px' }}>
+                  Special Requests or Allergies:
                 </label>
                 <textarea
                   rows={2}
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  placeholder="e.g. No dairy on carpaccio, extra truffle shavings..."
+                  placeholder="e.g. No dairy on carpaccio..."
                   style={{
                     width: '100%',
-                    background: 'rgba(11, 13, 16, 0.8)',
+                    background: 'rgba(11, 13, 16, 0.88)',
                     border: '1px solid var(--border-subtle)',
                     borderRadius: '8px',
                     color: '#fff',
-                    padding: '8px 12px',
+                    padding: '8px 10px',
                     fontSize: '0.85rem',
                     outline: 'none'
                   }}
@@ -229,11 +230,11 @@ export default function CartDrawer({ isOpen, onClose, cart, updateQuantity, remo
         {/* Footer Summary & Checkout */}
         {!checkoutComplete && cart.length > 0 && (
           <div style={{
-            padding: '24px',
+            padding: '18px 20px',
             borderTop: '1px solid var(--border-gold)',
-            background: 'rgba(11, 13, 16, 0.95)'
+            background: 'rgba(11, 13, 16, 0.98)'
           }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '16px', fontSize: '0.88rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', marginBottom: '14px', fontSize: '0.82rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-muted)' }}>
                 <span>Subtotal</span>
                 <span>${subtotal.toFixed(2)}</span>
@@ -243,10 +244,10 @@ export default function CartDrawer({ isOpen, onClose, cart, updateQuantity, remo
                 <span>${tax.toFixed(2)}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-muted)' }}>
-                <span>Sommelier & Service (10%)</span>
+                <span>Sommelier Service (10%)</span>
                 <span>${serviceFee.toFixed(2)}</span>
               </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', color: '#fff', fontSize: '1.2rem', fontWeight: '800', paddingTop: '8px', borderTop: '1px solid var(--border-subtle)' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', color: '#fff', fontSize: '1.1rem', fontWeight: '800', paddingTop: '6px', borderTop: '1px solid var(--border-subtle)' }}>
                 <span>Total Amount</span>
                 <span className="text-gold-gradient">${total.toFixed(2)}</span>
               </div>
@@ -255,10 +256,10 @@ export default function CartDrawer({ isOpen, onClose, cart, updateQuantity, remo
             <button
               onClick={handleCheckout}
               className="btn-gold"
-              style={{ width: '100%', padding: '14px', fontSize: '1rem' }}
+              style={{ width: '100%', padding: '12px', fontSize: '0.95rem' }}
             >
-              <span>Confirm Gourmet Order</span>
-              <ArrowRight size={18} />
+              <span>Confirm Order</span>
+              <ArrowRight size={16} />
             </button>
           </div>
         )}

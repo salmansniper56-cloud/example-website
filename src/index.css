@@ -3,8 +3,8 @@
 :root {
   --bg-primary: #0b0d10;
   --bg-secondary: #12161f;
-  --bg-card: rgba(22, 27, 38, 0.75);
-  --bg-glass: rgba(18, 22, 31, 0.65);
+  --bg-card: rgba(22, 27, 38, 0.8);
+  --bg-glass: rgba(18, 22, 31, 0.7);
   --gold-primary: #d4af37;
   --gold-light: #f5d77f;
   --gold-dark: #aa8624;
@@ -20,18 +20,20 @@
   --radius-sm: 8px;
   --radius-md: 16px;
   --radius-lg: 24px;
-  --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-* {
+*, *::before, *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
 }
 
-html {
-  scroll-behavior: smooth;
+html, body {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden !important;
   color-scheme: dark;
 }
 
@@ -39,15 +41,22 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-main);
   font-family: var(--font-body);
-  overflow-x: hidden;
   line-height: 1.6;
   min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Images & Media Responsiveness */
+img, video, svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
   background: var(--bg-primary);
@@ -57,7 +66,7 @@ body {
   border-radius: 4px;
 }
 
-/* Hide default cursor on desktop when custom cursor active */
+/* Desktop Custom Cursor */
 @media (min-width: 1024px) {
   body.custom-cursor-active,
   body.custom-cursor-active a,
@@ -67,9 +76,6 @@ body {
   body.custom-cursor-active [role="button"] {
     cursor: none !important;
   }
-  .mobile-menu-btn {
-    display: none !important;
-  }
 }
 
 .font-serif {
@@ -77,24 +83,24 @@ body {
 }
 
 .text-gold-gradient {
-  background: linear-gradient(135deg, #fff 0%, #f3d483 50%, #d4af37 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #f3d483 50%, #d4af37 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* Custom Cursor */
+/* Custom Cursor Elements */
 .custom-cursor-ring {
   position: fixed;
   top: 0;
   left: 0;
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   border: 1.5px solid var(--gold-primary);
   border-radius: 50%;
   pointer-events: none;
   z-index: 99999;
   transform: translate(-50%, -50%);
-  transition: transform 0.15s ease-out, width 0.3s ease, height 0.3s ease;
+  transition: transform 0.15s ease-out, width 0.25s ease, height 0.25s ease;
   box-shadow: 0 0 15px var(--gold-glow);
   display: flex;
   align-items: center;
@@ -115,14 +121,14 @@ body {
 }
 
 .custom-cursor-ring.hovered {
-  width: 65px;
-  height: 65px;
+  width: 60px;
+  height: 60px;
   background-color: rgba(212, 175, 55, 0.15);
   border-color: #fff;
 }
 
 .cursor-badge {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 1px;
   color: #fff;
@@ -135,9 +141,12 @@ body {
   inset: 0;
   z-index: 99999;
   display: flex;
-  perspective: 1400px;
+  perspective: 1200px;
   background: #000;
   overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
 }
 
 .door-panel {
@@ -146,9 +155,9 @@ body {
   background: linear-gradient(135deg, #181412 0%, #0d0b0a 100%);
   background-image: 
     radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.06) 0%, transparent 60%),
-    repeating-linear-gradient(90deg, transparent, transparent 45px, rgba(0, 0, 0, 0.35) 45px, rgba(0, 0, 0, 0.35) 46px);
+    repeating-linear-gradient(90deg, transparent, transparent 30px, rgba(0, 0, 0, 0.35) 30px, rgba(0, 0, 0, 0.35) 31px);
   position: relative;
-  transition: transform 1.6s cubic-bezier(0.77, 0, 0.175, 1);
+  transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1);
   box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.95);
   display: flex;
   align-items: center;
@@ -174,49 +183,49 @@ body {
 .door-handle-right {
   position: absolute;
   top: 50%;
-  width: 24px;
-  height: 90px;
+  width: 20px;
+  height: 80px;
   background: linear-gradient(180deg, #f5d77f 0%, #d4af37 50%, #aa8624 100%);
-  border-radius: 14px;
-  box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.6);
   z-index: 5;
 }
 
 .door-handle-left {
-  right: 20px;
+  right: 12px;
   transform: translateY(-50%);
 }
 
 .door-handle-right {
-  left: 20px;
+  left: 12px;
   transform: translateY(-50%);
 }
 
 .waiter-hand-left {
   position: absolute;
   top: 48%;
-  right: 10px;
+  right: 2px;
   transform: translateY(-50%);
   z-index: 10;
-  transition: transform 1.6s ease;
+  transition: transform 1.5s ease, opacity 1.5s ease;
 }
 
 .waiter-hand-right {
   position: absolute;
   top: 48%;
-  left: 10px;
+  left: 2px;
   transform: translateY(-50%) scaleX(-1);
   z-index: 10;
-  transition: transform 1.6s ease;
+  transition: transform 1.5s ease, opacity 1.5s ease;
 }
 
 .door-container.open .waiter-hand-left {
-  transform: translateY(-50%) translateX(-120px) rotate(-15deg);
+  transform: translateY(-50%) translateX(-100px) rotate(-15deg);
   opacity: 0;
 }
 
 .door-container.open .waiter-hand-right {
-  transform: translateY(-50%) scaleX(-1) translateX(-120px) rotate(-15deg);
+  transform: translateY(-50%) scaleX(-1) translateX(-100px) rotate(-15deg);
   opacity: 0;
 }
 
@@ -227,25 +236,24 @@ body {
   transform: translate(-50%, -50%);
   z-index: 20;
   text-align: center;
-  padding: 30px 40px;
-  background: rgba(11, 13, 16, 0.92);
+  padding: 24px 28px;
+  background: rgba(11, 13, 16, 0.94);
   border: 1px solid var(--border-gold);
   border-radius: var(--radius-lg);
-  box-shadow: 0 0 60px rgba(0, 0, 0, 0.9);
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.95);
   backdrop-filter: blur(20px);
   transition: opacity 0.8s ease, transform 0.8s ease;
-  max-width: 440px;
-  width: 88%;
+  width: min(88vw, 420px);
 }
 
 .door-container.open .door-center-seal {
   opacity: 0;
-  transform: translate(-50%, -50%) scale(1.2);
+  transform: translate(-50%, -50%) scale(1.15);
 }
 
 .door-crest {
-  width: 90px;
-  height: 90px;
+  width: 76px;
+  height: 76px;
   border-radius: 50%;
   border: 2px solid var(--gold-primary);
   background: rgba(11, 13, 16, 0.95);
@@ -253,12 +261,12 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 14px;
-  box-shadow: 0 0 30px var(--gold-glow);
+  margin: 0 auto 12px;
+  box-shadow: 0 0 25px var(--gold-glow);
   animation: pulseGold 2s infinite ease-in-out;
 }
 
-/* Glassmorphism Card Utility */
+/* Glassmorphism Card */
 .glass-card {
   background: var(--bg-card);
   backdrop-filter: blur(16px);
@@ -269,17 +277,12 @@ body {
   transition: var(--transition-smooth);
 }
 
-.glass-card:hover {
-  border-color: rgba(212, 175, 55, 0.5);
-  box-shadow: 0 15px 40px rgba(212, 175, 55, 0.15);
-}
-
 /* Buttons */
 .btn-gold {
   background: linear-gradient(135deg, #f5d77f 0%, #d4af37 50%, #b89128 100%);
   color: #0b0d10;
   font-weight: 700;
-  padding: 12px 28px;
+  padding: 12px 24px;
   border-radius: 50px;
   border: none;
   cursor: pointer;
@@ -290,7 +293,7 @@ body {
   transition: var(--transition-smooth);
   box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
   text-decoration: none;
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   touch-action: manipulation;
 }
 
@@ -303,7 +306,7 @@ body {
   color: var(--gold-primary);
   border: 1.5px solid var(--gold-primary);
   font-weight: 600;
-  padding: 12px 28px;
+  padding: 12px 24px;
   border-radius: 50px;
   cursor: pointer;
   display: inline-flex;
@@ -312,7 +315,7 @@ body {
   gap: 8px;
   transition: var(--transition-smooth);
   text-decoration: none;
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   touch-action: manipulation;
 }
 
@@ -320,85 +323,118 @@ body {
   transform: scale(0.97);
 }
 
-/* Page Animations */
+/* Page entrance */
 .page-fade-enter {
-  animation: pageFadeIn 0.35s ease forwards;
+  animation: pageFadeIn 0.3s ease forwards;
 }
 
 @keyframes pageFadeIn {
-  from { opacity: 0; transform: translateY(8px); }
+  from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes pulseGold {
   0%, 100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
-  50% { box-shadow: 0 0 40px rgba(212, 175, 55, 0.7); }
+  50% { box-shadow: 0 0 35px rgba(212, 175, 55, 0.6); }
 }
 
 /* -------------------------------------------------------------
-   MOBILE SPECIFIC UI / UX OPTIMIZATIONS (< 1024px & < 640px)
+   RESPONSIVE MEDIA QUERIES FOR TABLETS AND MOBILE PHONES
    ------------------------------------------------------------- */
 @media (max-width: 1023px) {
   .desktop-only {
     display: none !important;
   }
-  .mobile-menu-btn {
-    display: flex !important;
-  }
 }
 
 @media (max-width: 768px) {
-  /* General Spacing */
+  /* Prevent horizontal stretch */
+  body, #root {
+    width: 100vw;
+    overflow-x: hidden;
+  }
+
+  /* Padding adjustments */
   section {
-    padding-left: 5% !important;
-    padding-right: 5% !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
   }
 
-  /* Door seal on mobile */
+  /* Door hands scaling down for mobile */
+  .waiter-hand-left svg,
+  .waiter-hand-right svg {
+    width: 90px !important;
+    height: 70px !important;
+  }
+
+  /* Door seal for mobile */
   .door-center-seal {
-    padding: 24px 20px;
+    padding: 20px 16px !important;
+    width: 92vw !important;
   }
+
   .door-center-seal h1 {
-    font-size: 1.8rem !important;
+    font-size: 1.6rem !important;
   }
 
-  /* Buttons on mobile */
-  .btn-gold, .btn-outline-gold {
-    width: 100%;
-    padding: 12px 20px;
-    font-size: 0.9rem;
+  .door-crest {
+    width: 60px !important;
+    height: 60px !important;
+    margin-bottom: 8px !important;
   }
 
-  /* Full screen modals / drawers on mobile */
-  .mobile-full-modal {
-    max-height: 100vh !important;
-    border-radius: 0 !important;
-    height: 100vh !important;
+  .door-crest svg {
+    width: 24px !important;
+    height: 24px !important;
   }
 
-  /* Full screen mobile AI Chatbot */
-  .mobile-ai-chat {
-    bottom: 0 !important;
-    right: 0 !important;
-    left: 0 !important;
-    top: 0 !important;
+  /* Full Screen Mobile Drawers & Modals */
+  .mobile-drawer-full {
     width: 100vw !important;
-    height: 100vh !important;
     max-width: 100vw !important;
-    max-height: 100vh !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
     border-radius: 0 !important;
     border: none !important;
+  }
+
+  /* Full Screen Mobile AI Chatbot */
+  .mobile-ai-chat {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100dvh !important;
+    max-width: 100vw !important;
+    max-height: 100dvh !important;
+    border-radius: 0 !important;
+    border: none !important;
+    bottom: 0 !important;
+    right: 0 !important;
+  }
+
+  /* Universal 1-Column Responsive Grid utility for mobile */
+  .responsive-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
   }
 }
 
 @media (max-width: 480px) {
-  /* Header adjustment */
-  header {
-    padding: 12px 4% !important;
-  }
-  
-  /* Form field inputs */
+  /* Prevent iOS input auto zoom */
   input, select, textarea {
-    font-size: 16px !important; /* Prevents auto-zoom on iOS Safari */
+    font-size: 16px !important;
+  }
+
+  h1 {
+    font-size: 2.2rem !important;
+  }
+
+  h2 {
+    font-size: 1.8rem !important;
+  }
+
+  .btn-gold, .btn-outline-gold {
+    width: 100% !important;
+    padding: 14px 18px !important;
   }
 }

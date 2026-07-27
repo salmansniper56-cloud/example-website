@@ -22,49 +22,53 @@ export default function ContactSection({ onOpenReserve }) {
   };
 
   return (
-    <section id="contact" style={{ padding: '100px 4%', maxWidth: '1300px', margin: '0 auto' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))', gap: '50px' }}>
-        {/* Left Column: Location & Hours */}
+    <section id="contact" style={{ padding: '80px 4%', maxWidth: '1200px', margin: '0 auto' }}>
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+        gap: '40px'
+      }}>
+        {/* Left Column */}
         <div>
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: 'var(--gold-primary)', fontSize: '0.85rem', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '12px' }}>
-            <Sparkles size={16} />
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'var(--gold-primary)', fontSize: '0.8rem', letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '10px' }}>
+            <Sparkles size={14} />
             <span>Visit L'Étoile D'Or</span>
           </div>
 
-          <h2 className="font-serif text-gold-gradient" style={{ fontSize: 'clamp(2rem, 3.5vw, 3rem)', fontWeight: '700', marginBottom: '24px' }}>
+          <h2 className="font-serif text-gold-gradient" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)', fontWeight: '700', marginBottom: '20px' }}>
             Location & Hours
           </h2>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginBottom: '32px' }}>
-            <div style={{ display: 'flex', gap: '14px' }}>
-              <MapPin size={22} color="var(--gold-primary)" style={{ flexShrink: 0, marginTop: '2px' }} />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '28px' }}>
+            <div style={{ display: 'flex', gap: '12px' }}>
+              <MapPin size={20} color="var(--gold-primary)" style={{ flexShrink: 0, marginTop: '2px' }} />
               <div>
-                <strong style={{ color: '#fff', fontSize: '1rem', display: 'block' }}>Address</strong>
-                <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>{RESTAURANT_INFO.address}</span>
+                <strong style={{ color: '#fff', fontSize: '0.92rem', display: 'block' }}>Address</strong>
+                <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>{RESTAURANT_INFO.address}</span>
               </div>
             </div>
 
-            <div style={{ display: 'flex', gap: '14px' }}>
-              <Phone size={22} color="var(--gold-primary)" style={{ flexShrink: 0, marginTop: '2px' }} />
+            <div style={{ display: 'flex', gap: '12px' }}>
+              <Phone size={20} color="var(--gold-primary)" style={{ flexShrink: 0, marginTop: '2px' }} />
               <div>
-                <strong style={{ color: '#fff', fontSize: '1rem', display: 'block' }}>Reservations & Concierge</strong>
-                <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>{RESTAURANT_INFO.phone}</span>
+                <strong style={{ color: '#fff', fontSize: '0.92rem', display: 'block' }}>Reservations & Concierge</strong>
+                <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>{RESTAURANT_INFO.phone}</span>
               </div>
             </div>
 
-            <div style={{ display: 'flex', gap: '14px' }}>
-              <Mail size={22} color="var(--gold-primary)" style={{ flexShrink: 0, marginTop: '2px' }} />
+            <div style={{ display: 'flex', gap: '12px' }}>
+              <Mail size={20} color="var(--gold-primary)" style={{ flexShrink: 0, marginTop: '2px' }} />
               <div>
-                <strong style={{ color: '#fff', fontSize: '1rem', display: 'block' }}>Email Enquiries</strong>
-                <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>{RESTAURANT_INFO.email}</span>
+                <strong style={{ color: '#fff', fontSize: '0.92rem', display: 'block' }}>Email Enquiries</strong>
+                <span style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>{RESTAURANT_INFO.email}</span>
               </div>
             </div>
 
-            <div style={{ display: 'flex', gap: '14px' }}>
-              <Clock size={22} color="var(--gold-primary)" style={{ flexShrink: 0, marginTop: '2px' }} />
+            <div style={{ display: 'flex', gap: '12px' }}>
+              <Clock size={20} color="var(--gold-primary)" style={{ flexShrink: 0, marginTop: '2px' }} />
               <div>
-                <strong style={{ color: '#fff', fontSize: '1rem', display: 'block' }}>Operating Hours</strong>
-                <div style={{ color: 'var(--text-muted)', fontSize: '0.88rem', marginTop: '4px', lineHeight: 1.6 }}>
+                <strong style={{ color: '#fff', fontSize: '0.92rem', display: 'block' }}>Operating Hours</strong>
+                <div style={{ color: 'var(--text-muted)', fontSize: '0.82rem', marginTop: '2px', lineHeight: 1.5 }}>
                   <div>• {RESTAURANT_INFO.hours.dinner}</div>
                   <div>• {RESTAURANT_INFO.hours.lunch}</div>
                   <div>• {RESTAURANT_INFO.hours.bar}</div>
@@ -73,9 +77,9 @@ export default function ContactSection({ onOpenReserve }) {
             </div>
           </div>
 
-          {/* Interactive Map Visual Placeholder */}
+          {/* Map visual card */}
           <div style={{
-            height: '180px',
+            height: '160px',
             borderRadius: 'var(--radius-md)',
             overflow: 'hidden',
             border: '1px solid var(--border-gold)',
@@ -86,23 +90,25 @@ export default function ContactSection({ onOpenReserve }) {
             alignItems: 'center',
             justifyContent: 'center',
             flexDirection: 'column',
-            gap: '8px'
+            gap: '8px',
+            padding: '16px',
+            textAlign: 'center'
           }}>
-            <MapPin size={32} color="var(--gold-primary)" />
-            <span style={{ color: '#fff', fontWeight: '700', fontSize: '0.95rem' }}>Upper East Side, Manhattan</span>
-            <button onClick={onOpenReserve} className="btn-gold" style={{ padding: '6px 16px', fontSize: '0.8rem' }}>
+            <MapPin size={28} color="var(--gold-primary)" />
+            <span style={{ color: '#fff', fontWeight: '700', fontSize: '0.88rem' }}>Upper East Side, Manhattan</span>
+            <button onClick={onOpenReserve} className="btn-gold" style={{ padding: '6px 14px', fontSize: '0.78rem' }}>
               Directions & Reserve
             </button>
           </div>
         </div>
 
-        {/* Right Column: FAQs Accordion & Direct Inquiry Form */}
+        {/* Right Column: FAQs & Direct Inquiry */}
         <div>
-          <h3 className="font-serif text-gold-gradient" style={{ fontSize: '1.8rem', fontWeight: '700', marginBottom: '20px' }}>
+          <h3 className="font-serif text-gold-gradient" style={{ fontSize: '1.6rem', fontWeight: '700', marginBottom: '16px' }}>
             Frequently Asked Questions
           </h3>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '36px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '28px' }}>
             {FAQS.map((faq, index) => (
               <div
                 key={index}
@@ -117,13 +123,13 @@ export default function ContactSection({ onOpenReserve }) {
                   onClick={() => toggleFaq(index)}
                   style={{
                     width: '100%',
-                    padding: '16px',
+                    padding: '14px',
                     textAlign: 'left',
                     background: 'none',
                     border: 'none',
                     color: '#fff',
                     fontWeight: '600',
-                    fontSize: '0.95rem',
+                    fontSize: '0.88rem',
                     cursor: 'pointer',
                     display: 'flex',
                     justifyContent: 'space-between',
@@ -131,11 +137,11 @@ export default function ContactSection({ onOpenReserve }) {
                   }}
                 >
                   <span>{faq.question}</span>
-                  {openFaqIndex === index ? <ChevronUp size={18} color="var(--gold-primary)" /> : <ChevronDown size={18} />}
+                  {openFaqIndex === index ? <ChevronUp size={16} color="var(--gold-primary)" /> : <ChevronDown size={16} />}
                 </button>
 
                 {openFaqIndex === index && (
-                  <div style={{ padding: '0 16px 16px', color: 'var(--text-muted)', fontSize: '0.88rem', lineHeight: 1.6 }}>
+                  <div style={{ padding: '0 14px 14px', color: 'var(--text-muted)', fontSize: '0.82rem', lineHeight: 1.5 }}>
                     {faq.answer}
                   </div>
                 )}
@@ -143,18 +149,18 @@ export default function ContactSection({ onOpenReserve }) {
             ))}
           </div>
 
-          {/* Quick Direct Message */}
-          <div className="glass-card" style={{ padding: '24px' }}>
-            <h4 style={{ color: '#fff', fontSize: '1.1rem', marginBottom: '14px' }}>Send Direct Message</h4>
+          {/* Direct Message Form */}
+          <div className="glass-card" style={{ padding: '20px' }}>
+            <h4 style={{ color: '#fff', fontSize: '1rem', marginBottom: '12px' }}>Send Direct Message</h4>
             
             {submitted ? (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', color: '#2eb872', fontWeight: '600' }}>
-                <CheckCircle2 size={20} />
-                <span>Thank you! Your message has been sent to our concierge desk.</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#2eb872', fontWeight: '600', fontSize: '0.85rem' }}>
+                <CheckCircle2 size={18} />
+                <span>Message sent to concierge desk!</span>
               </div>
             ) : (
-              <form onSubmit={handleSendMessage} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+              <form onSubmit={handleSendMessage} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '10px' }}>
                   <input
                     type="text"
                     required
@@ -163,7 +169,7 @@ export default function ContactSection({ onOpenReserve }) {
                     onChange={(e) => setFormState({ ...formState, name: e.target.value })}
                     style={{
                       padding: '10px',
-                      background: 'rgba(11, 13, 16, 0.8)',
+                      background: 'rgba(11, 13, 16, 0.88)',
                       border: '1px solid var(--border-subtle)',
                       borderRadius: '6px',
                       color: '#fff',
@@ -179,7 +185,7 @@ export default function ContactSection({ onOpenReserve }) {
                     onChange={(e) => setFormState({ ...formState, email: e.target.value })}
                     style={{
                       padding: '10px',
-                      background: 'rgba(11, 13, 16, 0.8)',
+                      background: 'rgba(11, 13, 16, 0.88)',
                       border: '1px solid var(--border-subtle)',
                       borderRadius: '6px',
                       color: '#fff',
@@ -197,7 +203,7 @@ export default function ContactSection({ onOpenReserve }) {
                   onChange={(e) => setFormState({ ...formState, message: e.target.value })}
                   style={{
                     padding: '10px',
-                    background: 'rgba(11, 13, 16, 0.8)',
+                    background: 'rgba(11, 13, 16, 0.88)',
                     border: '1px solid var(--border-subtle)',
                     borderRadius: '6px',
                     color: '#fff',
@@ -206,8 +212,8 @@ export default function ContactSection({ onOpenReserve }) {
                   }}
                 />
 
-                <button type="submit" className="btn-gold" style={{ padding: '10px 20px', alignSelf: 'flex-start', fontSize: '0.85rem' }}>
-                  <Send size={14} />
+                <button type="submit" className="btn-gold" style={{ padding: '10px 18px', fontSize: '0.82rem', alignSelf: 'flex-start' }}>
+                  <Send size={13} />
                   <span>Submit Inquiry</span>
                 </button>
               </form>

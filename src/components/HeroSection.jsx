@@ -1,78 +1,82 @@
 import React from 'react';
-import { Award, ChevronDown, Sparkles, Utensils, Star, ArrowRight } from 'lucide-react';
+import { ChevronDown, Sparkles, Utensils, Star, ArrowRight } from 'lucide-react';
 import { RESTAURANT_INFO } from '../data/restaurantData';
 
 export default function HeroSection({ onOpenReserve, onToggleAIChat }) {
   return (
     <section style={{
       position: 'relative',
-      minHeight: '100vh',
+      minHeight: '100dvh',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      padding: '120px 20px 60px',
-      overflow: 'hidden'
+      padding: '100px 16px 60px',
+      overflow: 'hidden',
+      width: '100%'
     }}>
-      {/* Background Image Overlay with subtle zoom effect */}
+      {/* Background Overlay */}
       <div style={{
         position: 'absolute',
         inset: 0,
-        backgroundImage: `linear-gradient(180deg, rgba(11, 13, 16, 0.7) 0%, rgba(11, 13, 16, 0.9) 80%, #0b0d10 100%), url('https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1920&q=85')`,
+        backgroundImage: `linear-gradient(180deg, rgba(11, 13, 16, 0.75) 0%, rgba(11, 13, 16, 0.92) 80%, #0b0d10 100%), url('https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1920&q=85')`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         filter: 'brightness(0.85)',
         zIndex: 1
       }}></div>
 
-      {/* Decorative Golden Orbs */}
+      {/* Decorative Glow */}
       <div style={{
         position: 'absolute',
-        top: '20%',
-        left: '10%',
-        width: '350px',
-        height: '350px',
-        background: 'radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 70%)',
+        top: '15%',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        width: 'min(90vw, 400px)',
+        height: 'min(90vw, 400px)',
+        background: 'radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%)',
         borderRadius: '50%',
         zIndex: 2,
         pointerEvents: 'none'
       }}></div>
 
-      {/* Content Container */}
+      {/* Main Hero Card Container */}
       <div style={{
         position: 'relative',
         zIndex: 10,
-        maxWidth: '1000px',
+        maxWidth: '960px',
+        width: '100%',
         textAlign: 'center',
         margin: '0 auto'
       }}>
-        {/* Michelin Star Award Badge */}
+        {/* Michelin Badge */}
         <div style={{
           display: 'inline-flex',
           alignItems: 'center',
-          gap: '10px',
+          gap: '8px',
           background: 'rgba(212, 175, 55, 0.12)',
           border: '1px solid var(--border-gold)',
-          padding: '8px 20px',
+          padding: '6px 16px',
           borderRadius: '30px',
-          marginBottom: '28px',
-          backdropFilter: 'blur(10px)'
+          marginBottom: '20px',
+          backdropFilter: 'blur(10px)',
+          maxWidth: '100%'
         }}>
           <div style={{ display: 'flex', gap: '3px' }}>
-            <Star size={14} fill="var(--gold-primary)" color="var(--gold-primary)" />
-            <Star size={14} fill="var(--gold-primary)" color="var(--gold-primary)" />
-            <Star size={14} fill="var(--gold-primary)" color="var(--gold-primary)" />
+            <Star size={12} fill="var(--gold-primary)" color="var(--gold-primary)" />
+            <Star size={12} fill="var(--gold-primary)" color="var(--gold-primary)" />
+            <Star size={12} fill="var(--gold-primary)" color="var(--gold-primary)" />
           </div>
-          <span style={{ fontSize: '0.85rem', fontWeight: '600', color: 'var(--gold-light)', letterSpacing: '1px', textTransform: 'uppercase' }}>
+          <span style={{ fontSize: '0.75rem', fontWeight: '600', color: 'var(--gold-light)', letterSpacing: '1px', textTransform: 'uppercase' }}>
             Michelin Guide 3-Star Awardee 2026
           </span>
         </div>
 
-        {/* Main Headline */}
+        {/* Headline */}
         <h1 className="font-serif text-gold-gradient" style={{
-          fontSize: 'clamp(2.8rem, 6vw, 5.2rem)',
+          fontSize: 'clamp(2rem, 5.5vw, 4.8rem)',
           fontWeight: '800',
-          lineHeight: 1.1,
-          marginBottom: '24px',
+          lineHeight: 1.15,
+          marginBottom: '18px',
           textShadow: '0 10px 30px rgba(0,0,0,0.8)'
         }}>
           Haute Cuisine & <br />
@@ -81,32 +85,31 @@ export default function HeroSection({ onOpenReserve, onToggleAIChat }) {
 
         {/* Subtitle */}
         <p style={{
-          fontSize: 'clamp(1.05rem, 2vw, 1.25rem)',
+          fontSize: 'clamp(0.92rem, 2vw, 1.15rem)',
           color: 'var(--text-muted)',
-          maxWidth: '720px',
-          margin: '0 auto 40px',
+          maxWidth: '680px',
+          margin: '0 auto 32px',
           fontWeight: '300',
           lineHeight: 1.6
         }}>
-          Step inside Manhattan's most celebrated restaurant. Immerse your senses in French culinary artistry, rare salt-cave vintages, and an AI-driven personal sommelier experience.
+          Step inside Manhattan's most celebrated restaurant. Immerse your senses in French culinary artistry, rare salt-cave vintages, and a personal sommelier experience.
         </p>
 
-        {/* Action Buttons */}
+        {/* CTA Action Buttons */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: '18px',
+          gap: '12px',
           flexWrap: 'wrap',
-          marginBottom: '60px'
+          marginBottom: '40px'
         }}>
           <a
             href="#menu"
             className="btn-gold"
             data-cursor="TASTE"
-            style={{ fontSize: '1rem', padding: '14px 32px' }}
           >
-            <Utensils size={18} />
+            <Utensils size={16} />
             <span>Explore Menu</span>
           </a>
 
@@ -114,10 +117,9 @@ export default function HeroSection({ onOpenReserve, onToggleAIChat }) {
             onClick={onOpenReserve}
             className="btn-outline-gold"
             data-cursor="RESERVE"
-            style={{ fontSize: '1rem', padding: '14px 32px' }}
           >
-            <span>Book A Table</span>
-            <ArrowRight size={18} />
+            <span>Book Table</span>
+            <ArrowRight size={16} />
           </button>
 
           <button
@@ -127,41 +129,42 @@ export default function HeroSection({ onOpenReserve, onToggleAIChat }) {
               background: 'linear-gradient(135deg, rgba(139, 21, 56, 0.4), rgba(212, 175, 55, 0.2))',
               border: '1px solid var(--gold-primary)',
               color: '#fff',
-              padding: '14px 28px',
+              padding: '12px 24px',
               borderRadius: '50px',
               cursor: 'pointer',
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '10px',
+              justifyContent: 'center',
+              gap: '8px',
               fontWeight: '600',
               backdropFilter: 'blur(12px)',
-              transition: 'var(--transition-smooth)'
+              fontSize: '0.9rem'
             }}
           >
-            <Sparkles size={18} color="var(--gold-primary)" />
+            <Sparkles size={16} color="var(--gold-primary)" />
             <span>Ask AI Sommelier</span>
           </button>
         </div>
 
-        {/* Live Statistics Counter Grid */}
+        {/* Statistics Grid */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
-          gap: '20px',
-          maxWidth: '850px',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))',
+          gap: '12px',
+          maxWidth: '800px',
           margin: '0 auto',
-          padding: '24px',
-          background: 'rgba(18, 22, 31, 0.5)',
+          padding: '16px',
+          background: 'rgba(18, 22, 31, 0.6)',
           border: '1px solid var(--border-gold)',
           borderRadius: 'var(--radius-md)',
           backdropFilter: 'blur(16px)'
         }}>
           {RESTAURANT_INFO.stats.map((stat, idx) => (
             <div key={idx} style={{ textAlign: 'center' }}>
-              <div className="font-serif text-gold-gradient" style={{ fontSize: '2rem', fontWeight: '800' }}>
+              <div className="font-serif text-gold-gradient" style={{ fontSize: '1.6rem', fontWeight: '800' }}>
                 {stat.value}
               </div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px' }}>
+              <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                 {stat.label}
               </div>
             </div>
@@ -174,7 +177,7 @@ export default function HeroSection({ onOpenReserve, onToggleAIChat }) {
         href="#menu"
         style={{
           position: 'absolute',
-          bottom: '24px',
+          bottom: '16px',
           left: '50%',
           transform: 'translateX(-50%)',
           zIndex: 10,
@@ -183,14 +186,14 @@ export default function HeroSection({ onOpenReserve, onToggleAIChat }) {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: '6px',
-          fontSize: '0.75rem',
-          letterSpacing: '2px',
+          gap: '4px',
+          fontSize: '0.7rem',
+          letterSpacing: '1px',
           textTransform: 'uppercase'
         }}
       >
-        <span>Scroll to Discover</span>
-        <ChevronDown size={18} style={{ animation: 'bounce 2s infinite' }} />
+        <span>Scroll Down</span>
+        <ChevronDown size={16} />
       </a>
     </section>
   );
