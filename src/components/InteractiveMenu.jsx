@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Flame, Star, Clock, Wine, Plus, Check, Filter, X, Sparkles } from 'lucide-react';
+import { Search, Star, Clock, Wine, Plus, Check, Filter, X, Sparkles } from 'lucide-react';
 import { MENU_CATEGORIES, MENU_ITEMS } from '../data/restaurantData';
 
 export default function InteractiveMenu({ onAddToCart, onOpenAIChatWithQuery }) {
@@ -38,7 +38,7 @@ export default function InteractiveMenu({ onAddToCart, onOpenAIChatWithQuery }) 
 
   return (
     <section id="menu" style={{ padding: '80px 4% 100px', maxWidth: '1300px', margin: '0 auto' }}>
-      {/* Section Title Header */}
+      {/* Section Header */}
       <div style={{ textAlign: 'center', marginBottom: '36px' }}>
         <div style={{
           display: 'inline-flex',
@@ -69,7 +69,7 @@ export default function InteractiveMenu({ onAddToCart, onOpenAIChatWithQuery }) 
           gap: '14px',
           flexDirection: 'column',
           marginBottom: '20px',
-          background: 'rgba(18, 22, 31, 0.7)',
+          background: 'rgba(18, 22, 31, 0.8)',
           border: '1px solid var(--border-gold)',
           padding: '16px',
           borderRadius: 'var(--radius-md)',
@@ -86,7 +86,7 @@ export default function InteractiveMenu({ onAddToCart, onOpenAIChatWithQuery }) 
               style={{
                 width: '100%',
                 padding: '12px 14px 12px 42px',
-                background: 'rgba(11, 13, 16, 0.88)',
+                background: 'rgba(11, 13, 16, 0.92)',
                 border: '1px solid var(--border-subtle)',
                 borderRadius: '30px',
                 color: '#fff',
@@ -113,7 +113,7 @@ export default function InteractiveMenu({ onAddToCart, onOpenAIChatWithQuery }) 
             )}
           </div>
 
-          {/* Touch Dietary Filter Pills */}
+          {/* Dietary Filter Pills */}
           <div style={{
             display: 'flex',
             gap: '8px',
@@ -149,7 +149,7 @@ export default function InteractiveMenu({ onAddToCart, onOpenAIChatWithQuery }) 
           </div>
         </div>
 
-        {/* Touch Swipable Category Tabs */}
+        {/* Category Tabs */}
         <div style={{
           display: 'flex',
           gap: '10px',
@@ -204,7 +204,7 @@ export default function InteractiveMenu({ onAddToCart, onOpenAIChatWithQuery }) 
       ) : (
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
           gap: '24px'
         }}>
           {filteredItems.map((item) => (
@@ -223,7 +223,7 @@ export default function InteractiveMenu({ onAddToCart, onOpenAIChatWithQuery }) 
               }}
             >
               {/* Image Container */}
-              <div style={{ position: 'relative', height: '220px', overflow: 'hidden' }}>
+              <div style={{ position: 'relative', height: '220px', overflow: 'hidden', background: '#12161f' }}>
                 <img
                   src={item.image}
                   alt={item.name}
@@ -275,7 +275,7 @@ export default function InteractiveMenu({ onAddToCart, onOpenAIChatWithQuery }) 
               <div style={{ padding: '20px', flex: '1', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
-                    <h3 className="font-serif" style={{ fontSize: '1.25rem', fontWeight: '700', color: '#fff' }}>
+                    <h3 className="font-serif" style={{ fontSize: '1.2rem', fontWeight: '700', color: '#fff' }}>
                       {item.name}
                     </h3>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: 'var(--gold-primary)', fontSize: '0.82rem', flexShrink: 0 }}>
@@ -353,29 +353,39 @@ export default function InteractiveMenu({ onAddToCart, onOpenAIChatWithQuery }) 
         </div>
       )}
 
-      {/* Dish Detail Modal (Mobile Responsive Full Drawer) */}
+      {/* Dish Detail Modal (Fixed Opaque Centered Overlay) */}
       {selectedDish && (
-        <div style={{
-          position: 'fixed',
-          inset: 0,
-          zIndex: 1000,
-          background: 'rgba(0, 0, 0, 0.88)',
-          backdropFilter: 'blur(16px)',
-          display: 'flex',
-          alignItems: 'flex-end',
-          justifyContent: 'center'
-        }}>
-          <div className="mobile-full-modal" style={{
-            background: 'var(--bg-secondary)',
-            borderTop: '1px solid var(--gold-primary)',
-            borderRadius: 'var(--radius-lg) var(--radius-lg) 0 0',
-            maxWidth: '700px',
-            width: '100%',
-            maxHeight: '92vh',
-            overflowY: 'auto',
-            position: 'relative',
-            boxShadow: '0 -10px 40px rgba(0,0,0,0.9)'
-          }}>
+        <div
+          onClick={() => setSelectedDish(null)}
+          style={{
+            position: 'fixed',
+            inset: 0,
+            zIndex: 99999,
+            background: 'rgba(0, 0, 0, 0.85)',
+            backdropFilter: 'blur(16px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '16px'
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              background: '#12161f',
+              border: '1.5px solid var(--gold-primary)',
+              borderRadius: 'var(--radius-lg)',
+              maxWidth: '640px',
+              width: '100%',
+              maxHeight: '90vh',
+              overflowY: 'auto',
+              position: 'relative',
+              boxShadow: '0 25px 60px rgba(0,0,0,0.95)',
+              color: '#ffffff',
+              WebkitOverflowScrolling: 'touch'
+            }}
+          >
+            {/* Close Button */}
             <button
               onClick={() => setSelectedDish(null)}
               aria-label="Close modal"
@@ -383,8 +393,8 @@ export default function InteractiveMenu({ onAddToCart, onOpenAIChatWithQuery }) 
                 position: 'absolute',
                 top: '16px',
                 right: '16px',
-                zIndex: 20,
-                background: 'rgba(0,0,0,0.75)',
+                zIndex: 30,
+                background: 'rgba(0,0,0,0.8)',
                 border: '1px solid var(--border-gold)',
                 color: '#fff',
                 width: '36px',
@@ -399,18 +409,37 @@ export default function InteractiveMenu({ onAddToCart, onOpenAIChatWithQuery }) 
               <X size={20} />
             </button>
 
-            <img
-              src={selectedDish.image}
-              alt={selectedDish.name}
-              style={{ width: '100%', height: '240px', objectFit: 'cover' }}
-            />
+            {/* Banner Image */}
+            <div style={{ position: 'relative', height: '260px', width: '100%', background: '#0b0d10' }}>
+              <img
+                src={selectedDish.image}
+                alt={selectedDish.name}
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              />
+              <div style={{
+                position: 'absolute',
+                top: '16px',
+                left: '16px',
+                background: 'rgba(11, 13, 16, 0.85)',
+                border: '1px solid var(--gold-primary)',
+                color: 'var(--gold-primary)',
+                padding: '4px 12px',
+                borderRadius: '12px',
+                fontSize: '0.75rem',
+                fontWeight: '700',
+                textTransform: 'uppercase'
+              }}>
+                {selectedDish.category}
+              </div>
+            </div>
 
+            {/* Modal Details Body */}
             <div style={{ padding: '24px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-                <h3 className="font-serif text-gold-gradient" style={{ fontSize: '1.6rem', fontWeight: '700' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '10px', gap: '12px' }}>
+                <h3 className="font-serif text-gold-gradient" style={{ fontSize: '1.6rem', fontWeight: '700', margin: 0, lineHeight: 1.2 }}>
                   {selectedDish.name}
                 </h3>
-                <div style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--gold-light)' }}>
+                <div style={{ fontSize: '1.5rem', fontWeight: '800', color: 'var(--gold-light)', flexShrink: 0 }}>
                   ${selectedDish.price}
                 </div>
               </div>
@@ -419,20 +448,20 @@ export default function InteractiveMenu({ onAddToCart, onOpenAIChatWithQuery }) 
                 {selectedDish.description}
               </p>
 
-              {/* Details grid */}
+              {/* Key Attributes Box */}
               <div style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(3, 1fr)',
-                gap: '10px',
+                gap: '8px',
                 marginBottom: '20px',
-                background: 'rgba(11, 13, 16, 0.7)',
+                background: 'rgba(11, 13, 16, 0.8)',
                 padding: '12px',
                 borderRadius: 'var(--radius-md)',
                 border: '1px solid var(--border-subtle)',
                 textAlign: 'center'
               }}>
                 <div>
-                  <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', display: 'block' }}>Calories</span>
+                  <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', display: 'block' }}>Caloric Count</span>
                   <strong style={{ fontSize: '0.85rem', color: '#fff' }}>{selectedDish.calories}</strong>
                 </div>
                 <div>
@@ -464,18 +493,18 @@ export default function InteractiveMenu({ onAddToCart, onOpenAIChatWithQuery }) 
                 </div>
               </div>
 
-              {/* Pairing */}
+              {/* Sommelier Pairing Box */}
               <div style={{
-                background: 'linear-gradient(135deg, rgba(139, 21, 56, 0.25), rgba(11, 13, 16, 0.8))',
-                border: '1px solid rgba(139, 21, 56, 0.5)',
-                padding: '12px 16px',
+                background: 'linear-gradient(135deg, rgba(139, 21, 56, 0.3), rgba(11, 13, 16, 0.9))',
+                border: '1px solid rgba(139, 21, 56, 0.6)',
+                padding: '14px 16px',
                 borderRadius: 'var(--radius-md)',
                 marginBottom: '24px',
                 display: 'flex',
                 gap: '12px',
                 alignItems: 'center'
               }}>
-                <Wine size={24} color="#e63946" />
+                <Wine size={24} color="#e63946" style={{ flexShrink: 0 }} />
                 <div>
                   <h5 style={{ color: '#f8d7da', fontSize: '0.82rem', margin: 0 }}>Sommelier Curated Pairing</h5>
                   <p style={{ color: '#fff', fontWeight: '600', fontSize: '0.88rem', margin: '2px 0 0' }}>
@@ -484,7 +513,7 @@ export default function InteractiveMenu({ onAddToCart, onOpenAIChatWithQuery }) 
                 </div>
               </div>
 
-              {/* Actions */}
+              {/* Action Buttons */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 <button
                   onClick={() => {
