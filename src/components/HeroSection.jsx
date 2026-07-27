@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDown, Sparkles, Flame, Star, ArrowRight, Volume2, VolumeX } from 'lucide-react';
+import { ChevronDown, Sparkles, Flame, ArrowRight, Volume2, VolumeX } from 'lucide-react';
 import { RESTAURANT_INFO } from '../data/restaurantData';
 
 export default function HeroSection({ onOpenReserve, onToggleAIChat }) {
@@ -12,12 +12,12 @@ export default function HeroSection({ onOpenReserve, onToggleAIChat }) {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      padding: '100px 16px 60px',
+      padding: '120px 24px 80px',
       overflow: 'hidden',
       width: '100%',
-      background: '#000'
+      background: '#090a0f'
     }}>
-      {/* Pexels HD Video Background Loop */}
+      {/* Pexels HD Video Background */}
       <video
         autoPlay
         loop
@@ -30,48 +30,48 @@ export default function HeroSection({ onOpenReserve, onToggleAIChat }) {
           width: '100%',
           height: '100%',
           objectFit: 'cover',
-          filter: 'brightness(0.55) contrast(1.1)',
+          filter: 'brightness(0.35) contrast(1.15)',
           zIndex: 1
         }}
       >
         <source src="https://videos.pexels.com/video-files/4929488/4929488-hd_1280_720_30fps.mp4" type="video/mp4" />
       </video>
 
-      {/* Dark Overlay Gradient */}
+      {/* Dark Backdrop Gradient */}
       <div style={{
         position: 'absolute',
         inset: 0,
-        background: 'radial-gradient(circle at center, rgba(15, 17, 23, 0.4) 0%, rgba(15, 17, 23, 0.85) 80%, #0f1117 100%)',
+        background: 'radial-gradient(circle at center, rgba(9, 10, 15, 0.4) 0%, rgba(9, 10, 15, 0.92) 85%, #090a0f 100%)',
         zIndex: 2
       }}></div>
 
-      {/* Hero Sound Toggle Button */}
+      {/* Hero Video Audio Toggle */}
       <button
         onClick={() => setIsVideoMuted(!isVideoMuted)}
         style={{
           position: 'absolute',
-          top: '90px',
-          right: '24px',
+          top: '95px',
+          right: '28px',
           zIndex: 20,
           background: 'rgba(15, 17, 23, 0.85)',
           border: '1px solid var(--border-gold)',
-          color: 'var(--gold-primary)',
-          padding: '8px 14px',
-          borderRadius: '20px',
+          color: 'var(--gold-light)',
+          padding: '8px 16px',
+          borderRadius: '30px',
           cursor: 'pointer',
           display: 'flex',
           alignItems: 'center',
           gap: '6px',
-          fontSize: '0.8rem',
-          fontWeight: '700',
-          backdropFilter: 'blur(10px)'
+          fontSize: '0.78rem',
+          fontWeight: '600',
+          backdropFilter: 'blur(12px)'
         }}
       >
-        {isVideoMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
-        <span>{isVideoMuted ? 'Unmute Video' : 'Audio On'}</span>
+        {isVideoMuted ? <VolumeX size={15} /> : <Volume2 size={15} />}
+        <span>{isVideoMuted ? 'UNMUTE B-ROLL' : 'SOUND ON'}</span>
       </button>
 
-      {/* Main Hero Content */}
+      {/* Hero Content */}
       <div style={{
         position: 'relative',
         zIndex: 10,
@@ -80,121 +80,94 @@ export default function HeroSection({ onOpenReserve, onToggleAIChat }) {
         textAlign: 'center',
         margin: '0 auto'
       }}>
-        {/* Rating & Badge */}
+        {/* Top Tagline */}
         <div style={{
           display: 'inline-flex',
           alignItems: 'center',
           gap: '8px',
-          background: 'rgba(230, 57, 70, 0.25)',
-          border: '1px solid var(--crimson-accent)',
-          padding: '6px 18px',
+          background: 'rgba(212, 175, 55, 0.1)',
+          border: '1px solid var(--border-gold)',
+          padding: '6px 20px',
           borderRadius: '30px',
-          marginBottom: '20px',
+          marginBottom: '24px',
           backdropFilter: 'blur(12px)'
         }}>
-          <Flame size={16} color="var(--gold-primary)" />
-          <span style={{ fontSize: '0.78rem', fontWeight: '800', color: '#fff', letterSpacing: '1px', textTransform: 'uppercase' }}>
-            Voted #1 Burger & Pizza Spot in NY 2026
+          <Sparkles size={14} color="var(--gold-primary)" />
+          <span style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--gold-light)', letterSpacing: '2px', textTransform: 'uppercase' }}>
+            HAUTE FAST-CASUAL GASTRONOMY
           </span>
         </div>
 
-        {/* Big Headline */}
+        {/* Big Editorial Headline */}
         <h1 className="font-serif text-gold-gradient" style={{
-          fontSize: 'clamp(2.2rem, 6vw, 5.2rem)',
+          fontSize: 'clamp(2.4rem, 6.5vw, 5.4rem)',
           fontWeight: '900',
-          lineHeight: 1.1,
-          marginBottom: '18px',
-          textShadow: '0 10px 40px rgba(0,0,0,0.9)'
+          lineHeight: 1.08,
+          marginBottom: '20px',
+          letterSpacing: '-1px'
         }}>
-          UNBEATABLE CRUNCH. <br />
-          <span className="text-crimson-gradient">SUPREME BURGERS & PIZZAS.</span>
+          THE ART OF <br />
+          <span className="text-ember-gradient">SMASH & CRUNCH</span>
         </h1>
 
         {/* Subtitle */}
         <p style={{
-          fontSize: 'clamp(0.95rem, 2vw, 1.2rem)',
-          color: '#e2e8f0',
-          maxWidth: '680px',
-          margin: '0 auto 32px',
+          fontSize: 'clamp(0.98rem, 2vw, 1.18rem)',
+          color: '#cbd5e1',
+          maxWidth: '640px',
+          margin: '0 auto 36px',
           fontWeight: '400',
-          lineHeight: 1.6,
-          textShadow: '0 4px 15px rgba(0,0,0,0.9)'
+          lineHeight: 1.65
         }}>
-          100% Angus smash beef, 11-spice mega crispy chicken buckets, and hand-tossed cheese stuffed crust pizzas delivered express to your door.
+          100% Angus smash patties, 11-spice mega crispy chicken, and hand-tossed mozzarella cheese crust pizzas. Crafted fresh daily.
         </p>
 
-        {/* CTA Buttons */}
+        {/* CTA Button Group */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: '14px',
+          gap: '16px',
           flexWrap: 'wrap',
-          marginBottom: '40px'
+          marginBottom: '50px'
         }}>
           <a
             href="#menu"
-            className="btn-crimson"
-            data-cursor="ORDER"
-            style={{ fontSize: '1rem', padding: '14px 32px' }}
+            className="btn-gold"
+            style={{ fontSize: '0.95rem', padding: '14px 34px' }}
           >
-            <Flame size={18} />
-            <span>Order Sizzling Menu</span>
+            <span>EXPLORE MENU</span>
+            <ArrowRight size={16} />
           </a>
 
           <button
             onClick={onOpenReserve}
-            className="btn-gold"
-            data-cursor="BUILD"
-            style={{ fontSize: '1rem', padding: '14px 32px' }}
+            className="btn-outline-gold"
+            style={{ fontSize: '0.95rem', padding: '14px 34px' }}
           >
-            <span>Express Delivery</span>
-            <ArrowRight size={18} />
-          </button>
-
-          <button
-            onClick={onToggleAIChat}
-            data-cursor="AI CRAVE"
-            style={{
-              background: 'rgba(15, 17, 23, 0.85)',
-              border: '1.5px solid var(--gold-primary)',
-              color: '#fff',
-              padding: '14px 28px',
-              borderRadius: '50px',
-              cursor: 'pointer',
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '8px',
-              fontWeight: '700',
-              backdropFilter: 'blur(12px)',
-              fontSize: '0.92rem'
-            }}
-          >
-            <Sparkles size={18} color="var(--gold-primary)" />
-            <span>Ask AI Crave Assistant</span>
+            <span>EXPRESS DELIVERY</span>
           </button>
         </div>
 
-        {/* Live Stats Bar */}
+        {/* Stats Row */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(110px, 1fr))',
-          gap: '12px',
-          maxWidth: '820px',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
+          gap: '16px',
+          maxWidth: '840px',
           margin: '0 auto',
-          padding: '16px',
-          background: 'rgba(15, 17, 23, 0.75)',
-          border: '1px solid var(--border-gold)',
+          padding: '20px 24px',
+          background: 'rgba(17, 20, 29, 0.75)',
+          border: '1px solid var(--border-subtle)',
           borderRadius: 'var(--radius-md)',
           backdropFilter: 'blur(16px)'
         }}>
           {RESTAURANT_INFO.stats.map((stat, idx) => (
             <div key={idx} style={{ textAlign: 'center' }}>
-              <div className="font-serif text-gold-gradient" style={{ fontSize: '1.6rem', fontWeight: '900' }}>
+              <div className="font-serif text-gold-gradient" style={{ fontSize: '1.7rem', fontWeight: '800' }}>
                 {stat.value}
               </div>
-              <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px', fontWeight: '700' }}>
+              <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: '600', marginTop: '2px' }}>
                 {stat.label}
               </div>
             </div>
@@ -202,29 +175,29 @@ export default function HeroSection({ onOpenReserve, onToggleAIChat }) {
         </div>
       </div>
 
-      {/* Scroll Down */}
+      {/* Scroll Down Hint */}
       <a
         href="#menu"
         style={{
           position: 'absolute',
-          bottom: '16px',
+          bottom: '20px',
           left: '50%',
           transform: 'translateX(-50%)',
           zIndex: 10,
-          color: 'var(--gold-primary)',
+          color: 'var(--text-muted)',
           textDecoration: 'none',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           gap: '4px',
-          fontSize: '0.7rem',
-          letterSpacing: '1px',
+          fontSize: '0.68rem',
+          letterSpacing: '2px',
           textTransform: 'uppercase',
-          fontWeight: '700'
+          fontWeight: '600'
         }}
       >
-        <span>Scroll for Food B-Rolls</span>
-        <ChevronDown size={16} />
+        <span>SCROLL DOWN</span>
+        <ChevronDown size={15} />
       </a>
     </section>
   );

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Flame, ShoppingBag, Sparkles, Menu, X, ArrowRight, Gift } from 'lucide-react';
+import { ShoppingBag, Sparkles, Menu, X, ArrowRight, Gift } from 'lucide-react';
 import { RESTAURANT_INFO } from '../data/restaurantData';
 
-export default function Navbar({ cartCount, onOpenCart, onOpenReserve, onToggleAIChat, onOpenSpinWheel }) {
+export default function Navbar({ cartCount, onOpenCart, onToggleAIChat, onOpenSpinWheel }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
@@ -21,11 +21,11 @@ export default function Navbar({ cartCount, onOpenCart, onOpenReserve, onToggleA
   }, [location]);
 
   const navLinks = [
-    { label: 'Home Entrance', path: '/' },
-    { label: 'Menu & Food', path: '/menu' },
-    { label: 'Build Combo Box', path: '/combos' },
-    { label: 'Hot Deals', path: '/deals' },
-    { label: 'Express Locations', path: '/contact' },
+    { label: 'HOME', path: '/' },
+    { label: 'MENU', path: '/menu' },
+    { label: 'CRAVE BOX', path: '/combos' },
+    { label: 'OFFERS', path: '/deals' },
+    { label: 'LOCATIONS', path: '/contact' },
   ];
 
   return (
@@ -34,203 +34,174 @@ export default function Navbar({ cartCount, onOpenCart, onOpenReserve, onToggleA
       top: 0,
       left: 0,
       right: 0,
-      zIndex: 100
+      zIndex: 100,
+      padding: isScrolled ? '12px 4%' : '20px 4%',
+      transition: 'all 0.3s ease',
+      background: isScrolled ? 'rgba(9, 10, 15, 0.94)' : 'linear-gradient(180deg, rgba(9, 10, 15, 0.9) 0%, transparent 100%)',
+      backdropFilter: isScrolled ? 'blur(16px)' : 'none',
+      borderBottom: isScrolled ? '1px solid var(--border-subtle)' : 'none'
     }}>
-      {/* Infinite Top Marquee Ticker */}
-      <div className="marquee-container">
-        <div className="marquee-content">
-          <span>🔥 FREE EXPRESS DELIVERY ON ORDERS OVER $20</span>
-          <span>⚡ 19-MIN EXPRESS GUARANTEE</span>
-          <span>🍔 BUY 1 GET 1 FREE SMASH BURGER (CODE: CRAVE2026)</span>
-          <span>🍕 HAND-TOSSED STUFFED CHEESE CRUST PIZZAS DAILY</span>
-          <span>🍗 11-SPICE MEGA CRUNCH CHICKEN BUCKETS</span>
-          <span>🔥 FREE EXPRESS DELIVERY ON ORDERS OVER $20</span>
-          <span>⚡ 19-MIN EXPRESS GUARANTEE</span>
-          <span>🍔 BUY 1 GET 1 FREE SMASH BURGER (CODE: CRAVE2026)</span>
-        </div>
-      </div>
-
-      {/* Main Navbar */}
       <div style={{
-        padding: isScrolled ? '10px 4%' : '14px 4%',
-        transition: 'all 0.3s ease',
-        background: isScrolled ? 'rgba(15, 17, 23, 0.96)' : 'linear-gradient(180deg, rgba(0,0,0,0.95) 0%, transparent 100%)',
-        backdropFilter: isScrolled ? 'blur(20px)' : 'none',
-        borderBottom: isScrolled ? '2px solid var(--crimson-accent)' : 'none'
+        maxWidth: '1280px',
+        margin: '0 auto',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between'
       }}>
-        <div style={{
-          maxWidth: '1300px',
-          margin: '0 auto',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between'
-        }}>
-          {/* Brand Logo */}
-          <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div style={{
-              width: '40px',
-              height: '40px',
+        {/* Brand Logo */}
+        <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div style={{
+            width: '36px',
+            height: '36px',
+            borderRadius: '50%',
+            border: '1px solid var(--gold-primary)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: 'rgba(212, 175, 55, 0.08)'
+          }}>
+            <span style={{ color: 'var(--gold-primary)', fontWeight: '900', fontSize: '0.9rem' }}>C</span>
+          </div>
+          <div>
+            <span className="font-serif text-gold-gradient" style={{ fontSize: '1.25rem', fontWeight: '800', letterSpacing: '1.5px', display: 'block', lineHeight: 1.1 }}>
+              CRAVE & CO.
+            </span>
+            <span style={{ fontSize: '0.6rem', color: 'var(--text-muted)', letterSpacing: '2px', textTransform: 'uppercase', fontWeight: '600' }}>
+              HAUTE FAST CASUAL
+            </span>
+          </div>
+        </Link>
+
+        {/* Desktop Links */}
+        <nav style={{ display: 'flex', alignItems: 'center', gap: '28px' }} className="desktop-only">
+          {navLinks.map((link) => {
+            const isActive = location.pathname === link.path;
+            return (
+              <Link
+                key={link.label}
+                to={link.path}
+                style={{
+                  color: isActive ? 'var(--gold-primary)' : 'var(--text-muted)',
+                  textDecoration: 'none',
+                  fontSize: '0.78rem',
+                  fontWeight: isActive ? '700' : '600',
+                  letterSpacing: '1.5px',
+                  transition: 'color 0.2s ease',
+                  borderBottom: isActive ? '1px solid var(--gold-primary)' : '1px solid transparent',
+                  paddingBottom: '4px'
+                }}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+        </nav>
+
+        {/* Right Actions */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          {/* Spin Wheel */}
+          <button
+            onClick={onOpenSpinWheel}
+            style={{
+              background: 'transparent',
+              border: '1px solid var(--border-gold)',
+              color: 'var(--gold-light)',
+              padding: '8px 16px',
+              borderRadius: '30px',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              fontWeight: '700',
+              fontSize: '0.75rem',
+              letterSpacing: '0.5px'
+            }}
+          >
+            <Gift size={14} color="var(--gold-primary)" />
+            <span>Spin & Win</span>
+          </button>
+
+          {/* AI Crave */}
+          <button
+            onClick={onToggleAIChat}
+            style={{
+              background: 'rgba(255, 255, 255, 0.05)',
+              border: '1px solid var(--border-subtle)',
+              color: '#fff',
+              padding: '8px 16px',
+              borderRadius: '30px',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              fontWeight: '600',
+              fontSize: '0.75rem',
+              letterSpacing: '0.5px'
+            }}
+          >
+            <Sparkles size={14} color="var(--gold-primary)" />
+            <span className="desktop-only">AI Concierge</span>
+          </button>
+
+          {/* Cart Icon */}
+          <button
+            onClick={onOpenCart}
+            style={{
+              position: 'relative',
+              background: 'rgba(255, 255, 255, 0.05)',
+              border: '1px solid var(--border-subtle)',
+              color: '#fff',
+              width: '38px',
+              height: '38px',
               borderRadius: '50%',
-              background: 'var(--crimson-accent)',
-              border: '2px solid var(--gold-primary)',
+              cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              flexShrink: 0,
-              boxShadow: '0 0 15px var(--crimson-glow)'
-            }}>
-              <Flame size={22} color="#fff" />
-            </div>
-            <div>
-              <span className="font-serif text-gold-gradient" style={{ fontSize: '1.3rem', fontWeight: '900', letterSpacing: '0.5px', display: 'block', lineHeight: 1.1 }}>
-                {RESTAURANT_INFO.name}
-              </span>
-              <span style={{ fontSize: '0.6rem', color: 'var(--crimson-accent)', letterSpacing: '1.5px', textTransform: 'uppercase', fontWeight: '800' }}>
-                BURGERS • CHICKEN • PIZZAS
-              </span>
-            </div>
-          </Link>
-
-          {/* Desktop Router Links */}
-          <nav style={{ display: 'flex', alignItems: 'center', gap: '22px' }} className="desktop-only">
-            {navLinks.map((link) => {
-              const isActive = location.pathname === link.path;
-              return (
-                <Link
-                  key={link.label}
-                  to={link.path}
-                  data-cursor="GOTO"
-                  style={{
-                    color: isActive ? 'var(--gold-primary)' : 'var(--text-main)',
-                    textDecoration: 'none',
-                    fontSize: '0.88rem',
-                    fontWeight: isActive ? '800' : '600',
-                    letterSpacing: '0.5px',
-                    transition: 'color 0.2s ease',
-                    borderBottom: isActive ? '2px solid var(--crimson-accent)' : '2px solid transparent',
-                    paddingBottom: '4px'
-                  }}
-                >
-                  {link.label}
-                </Link>
-              );
-            })}
-          </nav>
-
-          {/* Actions Row */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            {/* Spin Wheel Coupon Trigger Button */}
-            <button
-              onClick={onOpenSpinWheel}
-              data-cursor="SPIN & WIN"
-              style={{
-                background: 'linear-gradient(135deg, #ffd166, #ffb703)',
+              flexShrink: 0
+            }}
+          >
+            <ShoppingBag size={17} />
+            {cartCount > 0 && (
+              <span style={{
+                position: 'absolute',
+                top: '-4px',
+                right: '-4px',
+                background: 'var(--gold-primary)',
                 color: '#000',
-                border: 'none',
-                padding: '8px 14px',
-                borderRadius: '30px',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
+                fontSize: '0.65rem',
                 fontWeight: '900',
-                fontSize: '0.8rem',
-                boxShadow: '0 0 15px var(--gold-glow)'
-              }}
-            >
-              <Gift size={15} color="#000" />
-              <span>Spin & Win</span>
-            </button>
-
-            {/* AI Concierge */}
-            <button
-              onClick={onToggleAIChat}
-              data-cursor="AI CRAVE"
-              style={{
-                background: 'rgba(230, 57, 70, 0.15)',
-                border: '1.5px solid var(--crimson-accent)',
-                color: '#fff',
-                padding: '8px 14px',
-                borderRadius: '30px',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-                fontWeight: '700',
-                fontSize: '0.8rem'
-              }}
-            >
-              <Sparkles size={14} color="var(--gold-primary)" />
-              <span className="desktop-only">AI Assistant</span>
-            </button>
-
-            {/* Cart Icon */}
-            <button
-              onClick={onOpenCart}
-              data-cursor="CART"
-              style={{
-                position: 'relative',
-                background: 'rgba(255, 255, 255, 0.06)',
-                border: '1px solid var(--border-subtle)',
-                color: '#fff',
-                width: '38px',
-                height: '38px',
+                width: '18px',
+                height: '18px',
                 borderRadius: '50%',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0
-              }}
-            >
-              <ShoppingBag size={17} />
-              {cartCount > 0 && (
-                <span style={{
-                  position: 'absolute',
-                  top: '-4px',
-                  right: '-4px',
-                  background: 'var(--crimson-accent)',
-                  color: '#fff',
-                  fontSize: '0.68rem',
-                  fontWeight: '800',
-                  width: '18px',
-                  height: '18px',
-                  borderRadius: '50%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  border: '2px solid var(--bg-primary)'
-                }}>
-                  {cartCount}
-                </span>
-              )}
-            </button>
-
-            {/* Mobile Menu Toggle */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle Menu"
-              style={{
-                background: 'rgba(255,255,255,0.06)',
-                border: '1px solid var(--border-gold)',
-                color: 'var(--gold-primary)',
-                width: '38px',
-                height: '38px',
-                borderRadius: '50%',
-                cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center'
-              }}
-              className="mobile-menu-btn"
-            >
-              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
-          </div>
+              }}>
+                {cartCount}
+              </span>
+            )}
+          </button>
+
+          {/* Mobile Menu Btn */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle Menu"
+            style={{
+              background: 'none',
+              border: 'none',
+              color: '#fff',
+              cursor: 'pointer',
+              padding: '6px'
+            }}
+            className="mobile-menu-btn"
+          >
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
       </div>
 
-      {/* Mobile Menu Drawer */}
+      {/* Mobile Drawer */}
       {mobileMenuOpen && (
         <div style={{
           position: 'fixed',
@@ -238,18 +209,18 @@ export default function Navbar({ cartCount, onOpenCart, onOpenReserve, onToggleA
           left: 0,
           right: 0,
           height: 'calc(100vh - 60px)',
-          background: 'rgba(15, 17, 23, 0.98)',
-          backdropFilter: 'blur(25px)',
-          borderBottom: '2px solid var(--crimson-accent)',
-          padding: '24px 20px 40px',
+          background: 'rgba(9, 10, 15, 0.98)',
+          backdropFilter: 'blur(20px)',
+          borderBottom: '1px solid var(--border-subtle)',
+          padding: '28px 20px 40px',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
           overflowY: 'auto'
         }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-            <div style={{ fontSize: '0.72rem', color: 'var(--gold-primary)', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '8px', fontWeight: '800' }}>
-              BURGER & CRUNCH CO. MENU
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <div style={{ fontSize: '0.7rem', color: 'var(--gold-primary)', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '10px', fontWeight: '700' }}>
+              CRAVE & CO. NAVIGATION
             </div>
             {navLinks.map((link) => {
               const isActive = location.pathname === link.path;
@@ -261,12 +232,11 @@ export default function Navbar({ cartCount, onOpenCart, onOpenReserve, onToggleA
                   style={{
                     color: isActive ? 'var(--gold-primary)' : '#fff',
                     textDecoration: 'none',
-                    fontSize: '1.15rem',
-                    fontWeight: isActive ? '800' : '600',
+                    fontSize: '1.1rem',
+                    fontWeight: isActive ? '800' : '500',
                     padding: '12px 16px',
-                    borderRadius: '12px',
-                    background: isActive ? 'rgba(230, 57, 70, 0.15)' : 'rgba(255,255,255,0.02)',
-                    border: '1px solid ' + (isActive ? 'var(--crimson-accent)' : 'var(--border-subtle)'),
+                    borderRadius: 'var(--radius-sm)',
+                    background: isActive ? 'rgba(212, 175, 55, 0.08)' : 'rgba(255,255,255,0.02)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between'
@@ -279,28 +249,15 @@ export default function Navbar({ cartCount, onOpenCart, onOpenReserve, onToggleA
             })}
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '24px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '30px' }}>
             <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenSpinWheel();
-              }}
+              onClick={() => { setMobileMenuOpen(false); onOpenSpinWheel(); }}
               className="btn-gold"
-              style={{ width: '100%', padding: '14px', fontSize: '1rem' }}
-            >
-              <Gift size={18} />
-              <span>Spin & Win Coupons</span>
-            </button>
-
-            <Link
-              to="/combos"
-              onClick={() => setMobileMenuOpen(false)}
-              className="btn-crimson"
               style={{ width: '100%', padding: '14px', fontSize: '0.95rem' }}
             >
-              <Flame size={18} />
-              <span>Build Custom Crave Box</span>
-            </Link>
+              <Gift size={16} />
+              <span>Spin & Win Coupons</span>
+            </button>
           </div>
         </div>
       )}
