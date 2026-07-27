@@ -21,11 +21,12 @@ export default function Navbar({ cartCount, onOpenCart, onToggleAIChat }) {
   }, [location]);
 
   const navLinks = [
-    { label: 'HOME', path: '/' },
-    { label: 'MENU', path: '/menu' },
-    { label: 'BUILD COMBO', path: '/combos' },
-    { label: 'HOT DEALS', path: '/deals' },
-    { label: 'LOCATIONS', path: '/contact' },
+    { label: 'Home', path: '/' },
+    { label: 'Menu', path: '/menu' },
+    { label: 'Combos', path: '/combos' },
+    { label: 'Locations', path: '/contact' },
+    { label: 'Franchise', path: '/contact' },
+    { label: 'Contact', path: '/contact' }
   ];
 
   return (
@@ -37,7 +38,7 @@ export default function Navbar({ cartCount, onOpenCart, onToggleAIChat }) {
       zIndex: 100,
       padding: isScrolled ? '12px 4%' : '18px 4%',
       transition: 'all 0.25s ease',
-      background: isScrolled ? 'rgba(18, 20, 24, 0.96)' : 'linear-gradient(180deg, rgba(18, 20, 24, 0.95) 0%, transparent 100%)',
+      background: isScrolled ? 'rgba(24, 27, 34, 0.96)' : 'linear-gradient(180deg, rgba(24, 27, 34, 0.95) 0%, transparent 100%)',
       backdropFilter: isScrolled ? 'blur(16px)' : 'none',
       borderBottom: isScrolled ? '1px solid var(--border-subtle)' : 'none'
     }}>
@@ -48,66 +49,69 @@ export default function Navbar({ cartCount, onOpenCart, onToggleAIChat }) {
         alignItems: 'center',
         justifyContent: 'space-between'
       }}>
-        {/* Brand Logo */}
+        {/* Brand Logo (Matching Screenshot) */}
         <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px' }}>
           <div style={{
             width: '38px',
             height: '38px',
             borderRadius: '50%',
-            background: 'var(--brand-red)',
+            background: 'linear-gradient(135deg, #ff8533, #ff6b00)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: '#fff',
-            fontWeight: '900'
+            color: '#fff'
           }}>
-            <Flame size={20} fill="#fff" />
+            <Flame size={22} fill="#fff" />
           </div>
           <div>
-            <span className="font-serif" style={{ fontSize: '1.3rem', fontWeight: '900', letterSpacing: '0.5px', color: '#fff', display: 'block', lineHeight: 1.1 }}>
-              BURGER & CRUNCH CO.
+            <span className="font-serif" style={{ fontSize: '1.25rem', fontWeight: '900', color: '#ffffff', display: 'block', lineHeight: 1.1, letterSpacing: '0.5px' }}>
+              FLAMEBOX
             </span>
-            <span style={{ fontSize: '0.62rem', color: 'var(--brand-yellow)', letterSpacing: '1.5px', textTransform: 'uppercase', fontWeight: '800' }}>
-              FAST-CASUAL GOURMET
+            <span style={{ fontSize: '0.62rem', color: 'var(--text-muted)', letterSpacing: '2px', textTransform: 'uppercase', fontWeight: '700' }}>
+              KITCHEN
             </span>
           </div>
         </Link>
 
-        {/* Desktop Links */}
-        <nav style={{ display: 'flex', alignItems: 'center', gap: '24px' }} className="desktop-only">
-          {navLinks.map((link) => {
-            const isActive = location.pathname === link.path;
+        {/* Desktop Router Links */}
+        <nav style={{ display: 'flex', alignItems: 'center', gap: '22px' }} className="desktop-only">
+          {navLinks.map((link, idx) => {
+            const isActive = location.pathname === link.path && idx === 0;
             return (
               <Link
-                key={link.label}
+                key={idx}
                 to={link.path}
                 style={{
-                  color: isActive ? 'var(--brand-yellow)' : '#ffffff',
+                  color: isActive ? 'var(--flame-orange)' : '#cbd5e1',
                   textDecoration: 'none',
-                  fontSize: '0.82rem',
-                  fontWeight: isActive ? '800' : '600',
-                  letterSpacing: '1px',
-                  transition: 'color 0.2s ease',
-                  borderBottom: isActive ? '2px solid var(--brand-red)' : '2px solid transparent',
-                  paddingBottom: '4px'
+                  fontSize: '0.88rem',
+                  fontWeight: isActive ? '700' : '500',
+                  transition: 'color 0.2s ease'
                 }}
               >
                 {link.label}
               </Link>
             );
           })}
+
+          {/* Socials Text Badges */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginLeft: '10px', fontSize: '0.78rem', color: 'var(--text-muted)', fontWeight: '700' }}>
+            <span>FB</span>
+            <span>IG</span>
+            <span>TT</span>
+          </div>
         </nav>
 
         {/* Right Actions */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          {/* AI Crave */}
+          {/* AI Concierge */}
           <button
             onClick={onToggleAIChat}
             style={{
               background: 'rgba(255, 255, 255, 0.05)',
               border: '1px solid var(--border-subtle)',
               color: '#fff',
-              padding: '8px 16px',
+              padding: '8px 14px',
               borderRadius: '30px',
               cursor: 'pointer',
               display: 'flex',
@@ -117,7 +121,7 @@ export default function Navbar({ cartCount, onOpenCart, onToggleAIChat }) {
               fontSize: '0.78rem'
             }}
           >
-            <Sparkles size={14} color="var(--brand-yellow)" />
+            <Sparkles size={14} color="var(--flame-orange)" />
             <span className="desktop-only">AI Assistant</span>
           </button>
 
@@ -145,7 +149,7 @@ export default function Navbar({ cartCount, onOpenCart, onToggleAIChat }) {
                 position: 'absolute',
                 top: '-4px',
                 right: '-4px',
-                background: 'var(--brand-red)',
+                background: 'var(--flame-red)',
                 color: '#fff',
                 fontSize: '0.68rem',
                 fontWeight: '900',
@@ -161,15 +165,14 @@ export default function Navbar({ cartCount, onOpenCart, onToggleAIChat }) {
             )}
           </button>
 
-          {/* Combo Builder CTA (Desktop) */}
-          <Link
-            to="/combos"
-            className="btn-yellow desktop-only"
-            style={{ padding: '8px 18px', fontSize: '0.82rem' }}
+          {/* Order Now Red Button (Matching Screenshot) */}
+          <button
+            onClick={onOpenCart}
+            className="btn-red desktop-only"
+            style={{ padding: '9px 20px', fontSize: '0.82rem' }}
           >
-            <Flame size={14} />
-            <span>ORDER COMBO</span>
-          </Link>
+            <span>Order Now</span>
+          </button>
 
           {/* Mobile Menu Btn */}
           <button
@@ -197,7 +200,7 @@ export default function Navbar({ cartCount, onOpenCart, onToggleAIChat }) {
           left: 0,
           right: 0,
           height: 'calc(100vh - 60px)',
-          background: '#181b20',
+          background: '#181b22',
           borderBottom: '1px solid var(--border-subtle)',
           padding: '28px 20px 40px',
           display: 'flex',
@@ -206,54 +209,40 @@ export default function Navbar({ cartCount, onOpenCart, onToggleAIChat }) {
           overflowY: 'auto'
         }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            <div style={{ fontSize: '0.7rem', color: 'var(--brand-yellow)', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '10px', fontWeight: '800' }}>
-              BURGER & CRUNCH CO. MENU
+            <div style={{ fontSize: '0.7rem', color: 'var(--flame-orange)', letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '10px', fontWeight: '800' }}>
+              FLAMEBOX KITCHEN MENU
             </div>
-            {navLinks.map((link) => {
-              const isActive = location.pathname === link.path;
-              return (
-                <Link
-                  key={link.label}
-                  to={link.path}
-                  onClick={() => setMobileMenuOpen(false)}
-                  style={{
-                    color: isActive ? 'var(--brand-yellow)' : '#fff',
-                    textDecoration: 'none',
-                    fontSize: '1.1rem',
-                    fontWeight: isActive ? '800' : '600',
-                    padding: '12px 16px',
-                    borderRadius: 'var(--radius-sm)',
-                    background: isActive ? 'rgba(230, 57, 70, 0.15)' : 'rgba(255,255,255,0.02)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between'
-                  }}
-                >
-                  <span>{link.label}</span>
-                  <ArrowRight size={16} color={isActive ? 'var(--brand-yellow)' : 'var(--text-muted)'} />
-                </Link>
-              );
-            })}
+            {navLinks.map((link, idx) => (
+              <Link
+                key={idx}
+                to={link.path}
+                onClick={() => setMobileMenuOpen(false)}
+                style={{
+                  color: '#fff',
+                  textDecoration: 'none',
+                  fontSize: '1.1rem',
+                  fontWeight: '600',
+                  padding: '12px 16px',
+                  borderRadius: 'var(--radius-sm)',
+                  background: 'rgba(255,255,255,0.02)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between'
+                }}
+              >
+                <span>{link.label}</span>
+                <ArrowRight size={16} color="var(--text-muted)" />
+              </Link>
+            ))}
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginTop: '30px' }}>
-            <Link
-              to="/combos"
-              onClick={() => setMobileMenuOpen(false)}
-              className="btn-yellow"
+            <button
+              onClick={() => { setMobileMenuOpen(false); onOpenCart(); }}
+              className="btn-red"
               style={{ width: '100%', padding: '14px', fontSize: '1rem' }}
             >
-              <Flame size={18} />
-              <span>BUILD CUSTOM COMBO</span>
-            </Link>
-
-            <button
-              onClick={() => { setMobileMenuOpen(false); onToggleAIChat(); }}
-              className="btn-red"
-              style={{ width: '100%', padding: '14px', fontSize: '0.95rem' }}
-            >
-              <Sparkles size={18} />
-              <span>ASK AI ASSISTANT</span>
+              <span>Order Now</span>
             </button>
           </div>
         </div>

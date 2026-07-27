@@ -1,21 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@500;600;700;800;900&display=swap');
 
 :root {
-  --bg-primary: #121418;
-  --bg-secondary: #181b20;
-  --bg-card: #1e2229;
-  --bg-glass: rgba(24, 27, 32, 0.92);
-  --brand-red: #e63946;
-  --brand-yellow: #ffb703;
+  --bg-primary: #121419;
+  --bg-secondary: #181b22;
+  --bg-card: #20242d;
+  --flame-orange: #ff6b00;
+  --flame-orange-glow: rgba(255, 107, 0, 0.35);
+  --flame-red: #e63946;
   --text-main: #ffffff;
   --text-muted: #a0aec0;
-  --border-subtle: #2d3748;
-  --border-brand: rgba(230, 57, 70, 0.4);
+  --border-subtle: #2d323e;
+  --border-orange: rgba(255, 107, 0, 0.4);
   --font-heading: 'Outfit', sans-serif;
   --font-body: 'Plus Jakarta Sans', sans-serif;
   --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 18px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
   --transition-smooth: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -57,7 +57,7 @@ img, video, svg {
   background: var(--bg-primary);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--brand-red);
+  background: var(--flame-orange);
   border-radius: 4px;
 }
 
@@ -65,13 +65,13 @@ img, video, svg {
   font-family: var(--font-heading);
 }
 
-/* Crisp Clean Buttons */
-.btn-red {
-  background: var(--brand-red);
+/* Reference Matching Buttons */
+.btn-orange {
+  background: linear-gradient(135deg, #ff8533 0%, #ff6b00 100%);
   color: #ffffff;
-  font-weight: 700;
-  padding: 12px 26px;
-  border-radius: 30px;
+  font-weight: 800;
+  padding: 12px 28px;
+  border-radius: 50px;
   border: none;
   cursor: pointer;
   display: inline-flex;
@@ -79,50 +79,52 @@ img, video, svg {
   justify-content: center;
   gap: 8px;
   transition: var(--transition-smooth);
+  box-shadow: 0 6px 20px rgba(255, 107, 0, 0.35);
   text-decoration: none;
   font-size: 0.92rem;
-  letter-spacing: 0.3px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  touch-action: manipulation;
+}
+
+.btn-orange:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(255, 107, 0, 0.5);
+}
+
+.btn-red {
+  background: linear-gradient(135deg, #ff4d5a 0%, #e63946 100%);
+  color: #ffffff;
+  font-weight: 800;
+  padding: 12px 28px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: var(--transition-smooth);
+  box-shadow: 0 6px 20px rgba(230, 57, 70, 0.35);
+  text-decoration: none;
+  font-size: 0.92rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
   touch-action: manipulation;
 }
 
 .btn-red:hover {
-  background: #d62828;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(230, 57, 70, 0.35);
+  box-shadow: 0 10px 25px rgba(230, 57, 70, 0.5);
 }
 
-.btn-yellow {
-  background: var(--brand-yellow);
-  color: #121418;
-  font-weight: 800;
-  padding: 12px 26px;
-  border-radius: 30px;
-  border: none;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: var(--transition-smooth);
-  text-decoration: none;
-  font-size: 0.92rem;
-  letter-spacing: 0.3px;
-  touch-action: manipulation;
-}
-
-.btn-yellow:hover {
-  background: #fcbf49;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 183, 3, 0.35);
-}
-
-.btn-outline-clean {
+.btn-outline-red {
   background: transparent;
   color: #ffffff;
-  border: 1.5px solid var(--border-subtle);
-  font-weight: 600;
-  padding: 12px 26px;
-  border-radius: 30px;
+  border: 1.5px solid var(--flame-red);
+  font-weight: 700;
+  padding: 12px 28px;
+  border-radius: 50px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -131,26 +133,13 @@ img, video, svg {
   transition: var(--transition-smooth);
   text-decoration: none;
   font-size: 0.92rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
-.btn-outline-clean:hover {
+.btn-outline-red:hover {
+  background: rgba(230, 57, 70, 0.15);
   border-color: #ffffff;
-  background: rgba(255, 255, 255, 0.05);
-}
-
-/* Crisp Clean Product Cards */
-.card-clean {
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  transition: var(--transition-smooth);
-}
-
-.card-clean:hover {
-  border-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
 }
 
 /* Door Entrance Screen */
@@ -170,7 +159,7 @@ img, video, svg {
 .door-panel {
   width: 50%;
   height: 100%;
-  background: #181b20;
+  background: #15171e;
   position: relative;
   transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1);
   box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.95);
@@ -188,16 +177,16 @@ img, video, svg {
 .door-handle-right {
   position: absolute;
   top: 50%;
-  width: 14px;
-  height: 65px;
-  background: var(--brand-yellow);
-  border-radius: 6px;
-  box-shadow: 0 0 15px rgba(255, 183, 3, 0.4);
+  width: 16px;
+  height: 70px;
+  background: var(--flame-orange);
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(255, 107, 0, 0.5);
   z-index: 5;
 }
 
-.door-handle-left { right: 10px; transform: translateY(-50%); }
-.door-handle-right { left: 10px; transform: translateY(-50%); }
+.door-handle-left { right: 12px; transform: translateY(-50%); }
+.door-handle-right { left: 12px; transform: translateY(-50%); }
 
 .waiter-hand-left {
   position: absolute;
@@ -235,10 +224,10 @@ img, video, svg {
   z-index: 20;
   text-align: center;
   padding: 32px;
-  background: #181b20;
-  border: 1px solid var(--border-subtle);
+  background: #181b22;
+  border: 2px solid var(--flame-orange);
   border-radius: var(--radius-lg);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+  box-shadow: 0 0 50px rgba(255, 107, 0, 0.4);
   transition: opacity 0.8s ease, transform 0.8s ease;
   width: min(88vw, 380px);
 }
@@ -249,14 +238,15 @@ img, video, svg {
 }
 
 .door-crest {
-  width: 64px;
-  height: 64px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
-  background: var(--brand-red);
+  background: var(--flame-orange);
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto 16px;
+  box-shadow: 0 0 30px var(--flame-orange-glow);
 }
 
 /* Page Animations */
@@ -299,7 +289,7 @@ img, video, svg {
   }
   h1 { font-size: 2.2rem !important; }
   h2 { font-size: 1.8rem !important; }
-  .btn-red, .btn-yellow, .btn-outline-clean {
+  .btn-orange, .btn-red, .btn-outline-red {
     width: 100% !important;
     min-height: 48px;
   }
