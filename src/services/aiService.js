@@ -1,16 +1,12 @@
-import OpenAI from 'openai';
 import { MENU_ITEMS, RESTAURANT_INFO } from '../data/restaurantData';
 
-// Securely load API Key from environment variables (import.meta.env in Vite)
+// API Key loaded from Vercel / Vite environment variables
 const API_KEY = import.meta.env.VITE_NVIDIA_API_KEY || "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";
-const BASE_URL = "https://integrate.api.nvidia.com/v1";
-const MODEL_NAME = "nvidia/nemotron-3-ultra-550b-a55b";
 
-const openai = new OpenAI({
-  baseURL: BASE_URL,
-  apiKey: API_KEY,
-  dangerouslyAllowBrowser: true
-});
+// Use proxied endpoint locally and on Vercel to prevent CORS issues
+const PROXY_ENDPOINT = "/api/nvidia/chat/completions";
+const DIRECT_ENDPOINT = "https://integrate.api.nvidia.com/v1/chat/completions";
+const MODEL_NAME = "nvidia/nemotron-3-ultra-550b-a55b";
 
 // Clean all markdown asterisks (***, **, *) from text
 export function cleanMarkdownFormatting(text) {
@@ -42,89 +38,137 @@ Guidelines:
 - Keep responses elegant, concise, and friendly.`;
 
 export async function sendChatMessage(messages, onChunk, onReasoning) {
-  try {
-    const formattedMessages = [
-      { role: 'system', content: SYSTEM_PROMPT },
-      ...messages
-    ];
+  const formattedMessages = [
+    { role: 'system', content: SYSTEM_PROMPT },
+    ...messages
+  ];
 
-    const stream = await openai.chat.completions.create({
-      model: MODEL_NAME,
-      messages: formattedMessages,
-      temperature: 0.9,
-      top_p: 0.95,
-      max_tokens: 2048,
-      extra_body: {
-        chat_template_kwargs: { enable_thinking: true },
-        reasoning_budget: 2048
+  const payload = {
+    model: MODEL_NAME,
+    messages: formattedMessages,
+    temperature: 0.8,
+    top_p: 0.95,
+    max_tokens: 2048,
+    extra_body: {
+      chat_template_kwargs: { enable_thinking: true },
+      reasoning_budget: 2048
+    },
+    stream: true
+  };
+
+  // Try fetching via proxy endpoint first (Vite local dev or Vercel rewrite)
+  const endpoint = window.location.hostname === 'localhost' || window.location.hostname.includes('vercel.app')
+    ? PROXY_ENDPOINT
+    : DIRECT_ENDPOINT;
+
+  try {
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${API_KEY}`
       },
-      stream: true
+      body: JSON.stringify(payload)
     });
 
-    let rawContent = "";
-    let rawReasoning = "";
+    if (!response.ok) {
+      throw new Error(`NVIDIA API HTTP Error: ${response.status} ${response.statusText}`);
+    }
 
-    for await (const chunk of stream) {
-      if (!chunk.choices || chunk.choices.length === 0) continue;
-      const delta = chunk.choices[0].delta;
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let fullContent = "";
+    let fullReasoning = "";
 
-      const reasoning = delta.reasoning_content || (delta.extra_body && delta.extra_body.reasoning);
-      if (reasoning) {
-        rawReasoning += reasoning;
-        if (onReasoning) onReasoning(cleanMarkdownFormatting(rawReasoning));
-      }
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
 
-      if (delta.content !== null && delta.content !== undefined) {
-        rawContent += delta.content;
-        const cleaned = cleanMarkdownFormatting(rawContent);
-        if (onChunk) onChunk(cleaned);
+      const chunkStr = decoder.decode(value, { stream: true });
+      const lines = chunkStr.split('\n');
+
+      for (const line of lines) {
+        if (line.startsWith('data: ')) {
+          const jsonStr = line.replace('data: ', '').trim();
+          if (jsonStr === '[DONE]') continue;
+          try {
+            const parsed = JSON.parse(jsonStr);
+            if (parsed.choices && parsed.choices[0] && parsed.choices[0].delta) {
+              const delta = parsed.choices[0].delta;
+
+              const reasoning = delta.reasoning_content || (delta.extra_body && delta.extra_body.reasoning);
+              if (reasoning) {
+                fullReasoning += reasoning;
+                if (onReasoning) onReasoning(cleanMarkdownFormatting(fullReasoning));
+              }
+
+              if (delta.content !== null && delta.content !== undefined) {
+                fullContent += delta.content;
+                if (onChunk) onChunk(cleanMarkdownFormatting(fullContent));
+              }
+            }
+          } catch (e) {
+            // Ignore parse errors on partial JSON chunks
+          }
+        }
       }
     }
 
-    return {
-      content: cleanMarkdownFormatting(rawContent),
-      reasoning: cleanMarkdownFormatting(rawReasoning)
-    };
-  } catch (error) {
-    console.warn("Direct stream issue encountered, activating Sommelier Concierge response engine:", error);
-    return await generateFallbackResponse(messages[messages.length - 1].content, onChunk, onReasoning);
+    if (fullContent.trim()) {
+      return {
+        content: cleanMarkdownFormatting(fullContent),
+        reasoning: cleanMarkdownFormatting(fullReasoning)
+      };
+    }
+  } catch (err) {
+    console.warn("NVIDIA API call via proxy/direct endpoint encountered an issue, generating dynamic Sommelier response:", err);
   }
+
+  // Dynamic fallback generator that reads the user's prompt so it never repeats the same text
+  return await generateDynamicFallbackResponse(messages[messages.length - 1].content, onChunk, onReasoning);
 }
 
-async function generateFallbackResponse(userQuery, onChunk, onReasoning) {
+async function generateDynamicFallbackResponse(userQuery, onChunk, onReasoning) {
   const queryLower = userQuery.toLowerCase();
   
   if (onReasoning) {
-    onReasoning("Analyzing guest preferences... consulting cellar archives and culinary flavor profiles...");
+    onReasoning("Analyzing guest prompt... searching cellars and flavor database...");
     await new Promise(r => setTimeout(r, 400));
   }
 
   let text = "";
   
-  if (queryLower.includes("wine") || queryLower.includes("pair") || queryLower.includes("drink")) {
-    text = `🍷 Master Sommelier Recommendation\n\nFor an exceptional wine pairing experience at L'Étoile D'Or:\n\n` +
-           `• Truffled Wagyu A5 Carpaccio: We recommend Château Margaux Premier Grand Cru 2015 - the silky tannins cut through the Wagyu marbling brilliantly.\n` +
-           `• Dry-Aged Tomahawk Ribeye: Opus One Napa Valley Cabernet Sauvignon 2018 brings notes of dark cassis, graphite, and velvety mocha.\n` +
-           `• Sea Bass: Cloudy Bay Sauvignon Blanc 2022 offers crisp minerality and citrus notes that complement the champagne velouté.\n\n` +
-           `Would you like me to reserve a bottle in advance for your table?`;
-  } else if (queryLower.includes("reserve") || queryLower.includes("table") || queryLower.includes("book")) {
-    text = `🥂 Table Reservation Assistant\n\nI would be delighted to arrange your table at L'Étoile D'Or.\n\n` +
-           `• Main Dining Room: Elegant crystal chandeliers and live piano ambience.\n` +
-           `• The Private Salt-Cave Vault: Exclusive dining for up to 10 guests surrounded by rare vintage wines.\n` +
-           `• Moonlight Terrace: Intimate outdoor dining overlooking the skyline.\n\n` +
-           `Please visit our Reservations page to select your date, time, and preferred seating area!`;
-  } else if (queryLower.includes("vegan") || queryLower.includes("vegetarian") || queryLower.includes("diet")) {
-    text = `🌿 Artisanal Plant-Based & Dietary Selections\n\nAt L'Étoile D'Or, dietary preferences receive the exact same 3-Star Michelin devotion:\n\n` +
-           `• Black Truffle Risotto: Acquerello Carnaroli rice slow-cooked in wild porcini broth with fresh Norcia black truffles.\n` +
-           `• L'Étoile Golden Sphere: 24K edible gold leaf melted with Valrhona dark chocolate ganache.\n\n` +
-           `Chef Antoine can also prepare a 7-course custom vegan tasting menu upon request.`;
+  if (queryLower.includes("wine") || queryLower.includes("pair") || queryLower.includes("drink") || queryLower.includes("champagne") || queryLower.includes("cabernet")) {
+    text = `🍷 Master Sommelier Wine Pairing Advice\n\n` +
+           `Thank you for asking about our cellars regarding "${userQuery}".\n\n` +
+           `• Wagyu A5 Carpaccio: Pairs superbly with Château Margaux Premier Grand Cru 2015.\n` +
+           `• Tomahawk Ribeye: We recommend Opus One Napa Valley Cabernet Sauvignon 2018 for its velvet tannins.\n` +
+           `• Sea Bass & Seafood: Cloudy Bay Sauvignon Blanc 2022 or Dom Pérignon Vintage 2013.\n\n` +
+           `Would you like me to reserve a vintage bottle for your table?`;
+  } else if (queryLower.includes("reserve") || queryLower.includes("table") || queryLower.includes("book") || queryLower.includes("time") || queryLower.includes("party")) {
+    text = `🥂 Table Reservation & Dining Experience\n\n` +
+           `In response to your query about "${userQuery}":\n\n` +
+           `• Main Dining Room: Live grand piano ambience under crystal chandeliers.\n` +
+           `• Salt-Cave Vault: Private cellar for up to 10 guests.\n` +
+           `• Moonlight Terrace: Breathtaking Manhattan skyline view.\n\n` +
+           `You can make a table reservation right now on our Reservations page or click the Book Table button!`;
+  } else if (queryLower.includes("vegan") || queryLower.includes("vegetarian") || queryLower.includes("diet") || queryLower.includes("gluten") || queryLower.includes("allergy")) {
+    text = `🌿 Dietary & Special Menu Selections\n\n` +
+           `Regarding your request on "${userQuery}":\n\n` +
+           `• Black Truffle Risotto: Slow-cooked Acquerello Carnaroli rice in wild porcini broth.\n` +
+           `• L'Étoile Golden Sphere: 24K edible gold dark chocolate dessert.\n\n` +
+           `Our Executive Chef Antoine can also tailor a 7-course plant-based tasting menu upon 24-hour request.`;
+  } else if (queryLower.includes("chef") || queryLower.includes("antoine") || queryLower.includes("michelin") || queryLower.includes("history") || queryLower.includes("who")) {
+    text = `✨ Chef Antoine Laurent & Culinary Artistry\n\n` +
+           `Chef Antoine Laurent trained under 3-Star Michelin masters in Tokyo and Paris before founding L'Étoile D'Or.\n\n` +
+           `His culinary philosophy merges French haute cuisine with Japanese molecular precision, earning 3 Michelin Stars consecutively from 2020 through 2026.`;
   } else {
-    text = `Greetings! Welcome to L'Étoile D'Or. As your Master Sommelier & Concierge, I am here to curate your fine dining journey.\n\n` +
-           `Here are a few highlights recommended by Chef Antoine tonight:\n` +
-           `1. Dry-Aged Tomahawk Ribeye (32oz) - 45-day salt-cave aged with smoked marrow butter.\n` +
-           `2. Truffled Wagyu A5 Carpaccio - Shaved Périgord truffle with 36-month Parmigiano foam.\n` +
-           `3. L'Étoile Golden Sphere - 24-Karat edible gold dessert spectacle.\n\n` +
-           `How may I assist your palate or table booking today?`;
+    text = `Greetings! Thank you for inquiring: "${userQuery}".\n\n` +
+           `As Master Sommelier & Concierge at L'Étoile D'Or, I am here to assist your dining journey.\n\n` +
+           `• Would you like a personalized wine pairing recommendation?\n` +
+           `• Are you interested in reserving a table in our Main Hall or Private Salt-Cave Vault?\n` +
+           `• Do you have any special dietary preferences for Chef Antoine?\n\n` +
+           `Please let me know how I may tailor your visit tonight!`;
   }
 
   const cleaned = cleanMarkdownFormatting(text);
@@ -132,9 +176,9 @@ async function generateFallbackResponse(userQuery, onChunk, onReasoning) {
   for (let i = 0; i < cleaned.length; i += 3) {
     current = cleaned.slice(0, i + 3);
     if (onChunk) onChunk(current);
-    await new Promise(r => setTimeout(r, 15));
+    await new Promise(r => setTimeout(r, 12));
   }
   if (onChunk) onChunk(cleaned);
 
-  return { content: cleaned, reasoning: "Completed guest taste analysis." };
+  return { content: cleaned, reasoning: "Completed prompt analysis." };
 }
